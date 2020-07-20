@@ -1,0 +1,16 @@
+{
+  "projects": {
+    "activo": {
+      "name": "activo",
+      "integrations": {},
+      "type": "angular",
+      "root": "apps/activo"
+    },
+    "formas": {
+      "name": "formas",
+      "integrations": {},
+      "type": "angular",
+      "root": "apps/formas"
+    }
+  }
+}

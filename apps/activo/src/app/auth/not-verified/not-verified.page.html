@@ -1,0 +1,43 @@
+<ion-header> </ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+      <ion-col size="10" size-md="4" size-lg="3" size-xl="3">
+        <ion-card>
+          <div class="ion-padding logo">
+            <img src="assets/auth/logo.png" />
+          </div>
+          <ion-card-content>
+            <h2 class="ion-text-center">Cuenta no validada</h2>
+            <div class="ion-padding-horizontal">
+              <p class="aviso">
+                Aún no has validado tu cuenta, por favor revisa tu correo
+                electrónico y accede a la liga de validación
+              </p>
+            </div>
+            <div class="ion-padding">
+              <ion-button
+                expand="block"
+                color="primary"
+                shape="round"
+                (click)="enviarCorreo()"
+              >
+                Reenviar correo
+              </ion-button>
+            </div>
+            <div class="logout">
+              <ion-fab-button
+                color="danger"
+                size="small"
+                (click)="cerrarSesion()"
+              >
+                <ion-icon name="log-out-outline"></ion-icon>
+              </ion-fab-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>Dashboard de Activo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              Total de Activos
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <h2>
+              Cantidad de activos:
+              <strong>{{agrupadoTotal$ | async | number}}</strong>
+            </h2>
+            <h2>
+              Valor total de activos:
+              <strong>{{agrupadoValor$ | async | currency}}</strong>
+            </h2>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4" *ngFor="let grupo of dashboard$ | async">
+        <ion-card class="tarjeta">
+          <div class="ion-text-center imagen">
+            <img [src]="grupo.tipoActivo.imagen | upload" />
+          </div>
+          <ion-card-header>
+            <ion-card-title>
+              {{grupo.tipoActivo.nombre}}
+            </ion-card-title>
+            <ion-card-subtitle>
+              {{grupo.tipoActivo.claveSap}}
+            </ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <h2>Valor: <strong>{{grupo.valor | currency }}</strong></h2>
+            <h2>Activos: <strong>{{grupo.activos | number}}</strong></h2>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

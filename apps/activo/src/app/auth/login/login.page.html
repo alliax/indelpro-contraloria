@@ -1,0 +1,55 @@
+<ion-header> </ion-header>
+
+<ion-content scroll-y="false">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+      <ion-col size="10" size-md="4" size-lg="3" size-xl="3">
+        <ion-card>
+          <div class="ion-padding logo">
+            <img src="assets/auth/logo.png" />
+          </div>
+          <ion-card-content>
+            <h2 class="ion-text-center">Iniciar sesión</h2>
+            <ion-list lines="none" class="padding">
+              <ion-item>
+                <ion-label position="stacked">Correo electrónico</ion-label>
+                <ion-input type="email" [(ngModel)]="email"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="stacked">Contraseña</ion-label>
+                <ion-input
+                  [type]="isVisible ? 'text' : 'password'"
+                  [(ngModel)]="password"
+                ></ion-input>
+                <ion-button
+                  size="small"
+                  slot="end"
+                  fill="clear"
+                  (click)="isVisible = !isVisible"
+                  shape="round"
+                  class="ion-align-self-end"
+                >
+                  <ion-icon
+                    [name]="isVisible ? 'eye-off-outline' : 'eye-outline'"
+                    slot="icon-only"
+                    (click)="isVisible = !isVisible"
+                  ></ion-icon>
+                </ion-button>
+              </ion-item>
+            </ion-list>
+            <div class="ion-padding">
+              <ion-text color="medium">
+                <a routerLink="/auth/forgot-password">
+                  ¿Olvidaste tu contraseña?
+                </a>
+              </ion-text>
+            </div>
+            <div class="ion-padding-top ion-text-end">
+              <ion-button (click)="iniciarSesion()">Iniciar sesión</ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

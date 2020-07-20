@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>Búsqueda de expedientes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col size="4">
+        <div class="ion-padding">
+          <h2>
+            Búsqueda por datos generales
+          </h2>
+          <ion-item>
+            <ion-label position="stacked">
+              Número de activo SAP
+            </ion-label>
+            <ion-input
+              type="text"
+              placeholder="Ingrese el número de activo SAP"
+            ></ion-input>
+            <ion-button slot="end" color="primary">
+              <ion-icon name="search-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">
+              Número de SAI
+            </ion-label>
+            <ion-input
+              type="text"
+              placeholder="Ingrese el número de SAI"
+            ></ion-input>
+            <ion-button slot="end" color="primary">
+              <ion-icon name="search-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-item>
+          <h2>
+            Búsqueda por fecha de capitalización
+          </h2>
+          <ion-item>
+            <ion-label>
+              Desde
+            </ion-label>
+            <ion-datetime
+              placeholder="dd/mm/yyyy"
+              pickerFormat="DD/MMM/YYYY"
+              displayFormat="DD/MM/YYYY"
+            ></ion-datetime>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              Hasta
+            </ion-label>
+            <ion-datetime
+              placeholder="dd/mm/yyyy"
+              pickerFormat="DD/MMM/YYYY"
+              displayFormat="DD/MM/YYYY"
+            ></ion-datetime>
+          </ion-item>
+          <h2>
+            Búsqueda por tipo de activo
+          </h2>
+          <ion-grid>
+            <ion-row class="ion-justify-content-start ion-align-items-center">
+              <ion-col size="12" *ngFor="let tipo of tipos$ | async">
+                <ion-card>
+                  <ion-item
+                    lines="none"
+                    button
+                    routerLink="/herramientas/busqueda/resultados"
+                  >
+                    <ion-thumbnail slot="start">
+                      <img [src]="tipo.imagen | upload" />
+                    </ion-thumbnail>
+                    <ion-label>
+                      <h2>
+                        {{tipo.nombre}}
+                      </h2>
+                      <p>
+                        {{tipo.claveSap}}
+                      </p>
+                    </ion-label>
+                    <ion-ripple-effect></ion-ripple-effect>
+                  </ion-item>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </ion-col>
+      <ion-col size="8">
+        <ion-toolbar color="primary">
+          <ion-title>Resultados de la búsqueda</ion-title>
+        </ion-toolbar>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>
+              No hay registros que cumplan con los criterios de búsqueda
+              seleccionados
+            </ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

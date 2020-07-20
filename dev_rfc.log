@@ -1,0 +1,1162 @@
+
+**** Log file opened at 2020-03-22 21:43:35.226938 UTC-06:00 (UTC), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 6, Compiled on Feb 13 2020 17:03:56
+ CPIC library: 753.2019.10.14 version 3, NI library: 40, Kernel Release: 753 Patch Level 525
+ Current working directory: /Users/eduardoroth/trabajo/projects/apps/indelpro-contraloria, Program: node
+ Hardware: Apple Macintosh with Mac OS X (Darwin) INTEL x86_64 x86_64, Operating_system: Darwin 19.3.0
+ Hostname: roth-mbp.local, IP address: 127.0.0.1, IPv6 address: 
+
+2020-03-22 21:43:35.227469 [4445457856] >> Info entry
+	Did not find config file /Users/eduardoroth/trabajo/projects/apps/indelpro-contraloria/sapnwrfc.ini.
+2020-03-22 21:43:49.707068 [123145555214336] >> Error entry
+	[Handle: 4353726976	ConvID: 38498716	Target: 10.128.160.40	SysID: 	SysNr: 00	User: EFRFC005	Mandant: 100	Language: S	Codepage: 4103]
+	RfcABAPMessageException: Key: , Code: RFC_ABAP_MESSAGE, Message: Enter one of the installed languages
+
+**** Log file opened at 2020-03-22 21:44:07.735160 UTC-06:00 (UTC), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 6, Compiled on Feb 13 2020 17:03:56
+ CPIC library: 753.2019.10.14 version 3, NI library: 40, Kernel Release: 753 Patch Level 525
+ Current working directory: /Users/eduardoroth/trabajo/projects/apps/indelpro-contraloria, Program: node
+ Hardware: Apple Macintosh with Mac OS X (Darwin) INTEL x86_64 x86_64, Operating_system: Darwin 19.3.0
+ Hostname: roth-mbp.local, IP address: 127.0.0.1, IPv6 address: 
+
+2020-03-22 21:44:07.735476 [123145436700672] >> Error entry
+	[Handle: 4396490240	ConvID: 38518013	Target: alxwasap01	SysID: WPA	SysNr: 00	User: EFRFC005	Mandant: 100	Language: E	Codepage: 4103]
+	RfcABAPException: Key: FU_NOT_FOUND, Code: RFC_ABAP_EXCEPTION, Message: ID:FL Type:E Number:046
+
+**** Log file opened at 2020-03-22 21:44:39.612510 UTC-06:00 (UTC), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 6, Compiled on Feb 13 2020 17:03:56
+ CPIC library: 753.2019.10.14 version 3, NI library: 40, Kernel Release: 753 Patch Level 525
+ Current working directory: /Users/eduardoroth/trabajo/projects/apps/indelpro-contraloria, Program: node
+ Hardware: Apple Macintosh with Mac OS X (Darwin) INTEL x86_64 x86_64, Operating_system: Darwin 19.3.0
+ Hostname: roth-mbp.local, IP address: 127.0.0.1, IPv6 address: 
+
+2020-03-22 21:44:39.613368 [123145543426048] >> Error entry
+	[Handle: 4355330048	ConvID: 38550919	Target: alxwasap01	SysID: WPA	SysNr: 00	User: EFRFC005	Mandant: 100	Language: E	Codepage: 4103]
+	RfcABAPException: Key: FU_NOT_FOUND, Code: RFC_ABAP_EXCEPTION, Message: ID:FL Type:E Number:046
+
+**** Log file opened at 2020-03-22 21:45:10.867927 UTC-06:00 (UTC), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 6, Compiled on Feb 13 2020 17:03:56
+ CPIC library: 753.2019.10.14 version 3, NI library: 40, Kernel Release: 753 Patch Level 525
+ Current working directory: /Users/eduardoroth/trabajo/projects/apps/indelpro-contraloria, Program: node
+ Hardware: Apple Macintosh with Mac OS X (Darwin) INTEL x86_64 x86_64, Operating_system: Darwin 19.3.0
+ Hostname: roth-mbp.local, IP address: 127.0.0.1, IPv6 address: 
+
+2020-03-22 21:45:10.869271 [123145599520768] >> Error entry
+	[Handle: 4379462656	ConvID: 38583216	Target: alxwasap01	SysID: WPA	SysNr: 00	User: efrfc002	Mandant: 100	Language: E	Codepage: 4103]
+	RfcABAPException: Key: FU_NOT_FOUND, Code: RFC_ABAP_EXCEPTION, Message: ID:FL Type:E Number:046
+2020-03-22 21:45:43.597392 [123145599520768] >> Error entry
+	[Handle: 4345598464	ConvID: 38616966	Target: alxwasap01	SysID: WPA	SysNr: 00	User: efrfc002	Mandant: 100	Language: E	Codepage: 4103]
+	RfcABAPException: Key: FU_NOT_FOUND, Code: RFC_ABAP_EXCEPTION, Message: ID:FL Type:E Number:046
+
+**** Log file opened at 2020-03-22 21:46:51.562355 UTC-06:00 (UTC), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 6, Compiled on Feb 13 2020 17:03:56
+ CPIC library: 753.2019.10.14 version 3, NI library: 40, Kernel Release: 753 Patch Level 525
+ Current working directory: /Users/eduardoroth/trabajo/projects/apps/indelpro-contraloria, Program: node
+ Hardware: Apple Macintosh with Mac OS X (Darwin) INTEL x86_64 x86_64, Operating_system: Darwin 19.3.0
+ Hostname: roth-mbp.local, IP address: 127.0.0.1, IPv6 address: 
+
+2020-03-22 21:46:51.562591 [123145604030464] >> Error entry
+	[Handle: 4355173888	ConvID: 38685872	Target: alxwasap01	SysID: WPA	SysNr: 00	User: efrfc002	Mandant: 100	Language: E	Codepage: 4103]
+	RfcABAPException: Key: FU_NOT_FOUND, Code: RFC_ABAP_EXCEPTION, Message: ID:FL Type:E Number:046
+
+**** Log file opened at 2020-03-22 23:36:10.992709 UTC-06:00 (UTC), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 6, Compiled on Feb 13 2020 17:03:56
+ CPIC library: 753.2019.10.14 version 3, NI library: 40, Kernel Release: 753 Patch Level 525
+ Current working directory: /Users/eduardoroth/trabajo/projects/apps/indelpro-contraloria, Program: node
+ Hardware: Apple Macintosh with Mac OS X (Darwin) INTEL x86_64 x86_64, Operating_system: Darwin 19.3.0
+ Hostname: roth-mbp.local, IP address: 127.0.0.1, IPv6 address: 
+
+2020-03-22 23:36:10.993623 [123145514405888] >> Error entry
+	[Handle: 4362422272	ConvID: 45307563	Target: alxwasap01	SysID: WPA	SysNr: 00	User: EFRFC005	Mandant: 100	Language: E	Codepage: 4103]
+	RfcABAPException: Key: FU_NOT_FOUND, Code: RFC_ABAP_EXCEPTION, Message: ID:FL Type:E Number:046
+
+**** Log file opened at 2020-03-23 11:12:24.346026 UTC-06:00 (UTC), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 6, Compiled on Feb 13 2020 17:03:56
+ CPIC library: 753.2019.10.14 version 3, NI library: 40, Kernel Release: 753 Patch Level 525
+ Current working directory: /Users/eduardoroth/trabajo/projects/apps/indelpro-contraloria, Program: node
+ Hardware: Apple Macintosh with Mac OS X (Darwin) INTEL x86_64 x86_64, Operating_system: Darwin 19.3.0
+ Hostname: roth-mbp, IP address: 192.168.43.106, IPv6 address: 
+
+2020-03-23 11:12:24.347250 [123145630531584] >> Error entry
+	[Handle: 4362773504	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host roth-mbp with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Mon Mar 23 11:12:24 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nibuf.cpp
+LINE        4568
+DETAIL      NiBufIConnect: connection pending after 60000ms
+SYSTEM CALL connect
+ERRNO       36
+ERRNO TEXT  Operation now in progress
+COUNTER     3
+
+
+**** Log file opened at 2020-03-23 11:14:45.668705 UTC-06:00 (UTC), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 6, Compiled on Feb 13 2020 17:03:56
+ CPIC library: 753.2019.10.14 version 3, NI library: 40, Kernel Release: 753 Patch Level 525
+ Current working directory: /Users/eduardoroth/trabajo/projects/apps/indelpro-contraloria, Program: node
+ Hardware: Apple Macintosh with Mac OS X (Darwin) INTEL x86_64 x86_64, Operating_system: Darwin 19.3.0
+ Hostname: roth-mbp.local, IP address: 127.0.0.1, IPv6 address: 
+
+2020-03-23 11:14:45.669177 [123145585233920] >> Error entry
+	[Handle: 4353904128	ConvID: 86718306	Target: alxwasap01	SysID: WPA	SysNr: 00	User: EFRFC005	Mandant: 100	Language: E	Codepage: 4103]
+	RfcABAPException: Key: FU_NOT_FOUND, Code: RFC_ABAP_EXCEPTION, Message: ID:FL Type:E Number:046
+
+**** Log file opened at 2020-03-25 01:41:37.579385 UTC-06:00 (UTC), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 6, Compiled on Feb 13 2020 17:03:56
+ CPIC library: 753.2019.10.14 version 3, NI library: 40, Kernel Release: 753 Patch Level 525
+ Current working directory: /Users/eduardoroth/trabajo/projects/apps/indelpro-contraloria, Program: node
+ Hardware: Apple Macintosh with Mac OS X (Darwin) INTEL x86_64 x86_64, Operating_system: Darwin 19.3.0
+ Hostname: roth-mbp.local, IP address: 127.0.0.1, IPv6 address: 
+
+2020-03-25 01:41:37.580538 [123145531858944] >> Error entry
+	[Handle: 4370981888	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Wed Mar 25 01:41:37 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nibuf.cpp
+LINE        4568
+DETAIL      NiBufIConnect: connection pending after 60000ms
+SYSTEM CALL connect
+ERRNO       36
+ERRNO TEXT  Operation now in progress
+COUNTER     2
+
+2020-03-25 01:41:37.580952 [123145515057152] >> Error entry
+	[Handle: 4370974208	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host roth-mbp.local with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Wed Mar 25 01:41:37 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nibuf.cpp
+LINE        4568
+DETAIL      NiBufIConnect: connection pending after 60000ms
+SYSTEM CALL connect
+ERRNO       36
+ERRNO TEXT  Operation now in progress
+COUNTER     4
+
+
+**** Log file opened at 2020-03-25 02:06:03.365068 UTC-06:00 (UTC), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 6, Compiled on Feb 13 2020 17:03:56
+ CPIC library: 753.2019.10.14 version 3, NI library: 40, Kernel Release: 753 Patch Level 525
+ Current working directory: /Users/eduardoroth/trabajo/projects/apps/indelpro-contraloria, Program: node
+ Hardware: Apple Macintosh with Mac OS X (Darwin) INTEL x86_64 x86_64, Operating_system: Darwin 19.3.0
+ Hostname: roth-mbp.local, IP address: 127.0.0.1, IPv6 address: 
+
+2020-03-25 02:06:03.366228 [123145501691904] >> Error entry
+	[Handle: 4353954304	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Wed Mar 25 02:06:03 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nibuf.cpp
+LINE        4568
+DETAIL      NiBufIConnect: connection pending after 60000ms
+SYSTEM CALL connect
+ERRNO       36
+ERRNO TEXT  Operation now in progress
+COUNTER     2
+
+2020-03-25 02:06:59.364314 [123145476489216] >> Error entry
+	[Handle: 4371359232	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Wed Mar 25 02:06:59 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nibuf.cpp
+LINE        4568
+DETAIL      NiBufIConnect: connection pending after 60000ms
+SYSTEM CALL connect
+ERRNO       36
+ERRNO TEXT  Operation now in progress
+COUNTER     6
+
+2020-03-25 02:07:08.399734 [123145501691904] >> Error entry
+	[Handle: 4371464192	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Wed Mar 25 02:07:08 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nibuf.cpp
+LINE        4568
+DETAIL      NiBufIConnect: connection pending after 60000ms
+SYSTEM CALL connect
+ERRNO       36
+ERRNO TEXT  Operation now in progress
+COUNTER     4
+
+2020-03-25 10:09:26.493893 [123145501691904] >> Error entry
+	[Handle: 4354254336	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Wed Mar 25 10:09:26 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nibuf.cpp
+LINE        4568
+DETAIL      NiBufIConnect: connection pending after 60000ms
+SYSTEM CALL connect
+ERRNO       36
+ERRNO TEXT  Operation now in progress
+COUNTER     14
+
+2020-03-25 12:27:59.602463 [123145501691904] >> Error entry
+	[Handle: 4371746304	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Wed Mar 25 12:27:59 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nibuf.cpp
+LINE        4568
+DETAIL      NiBufIConnect: connection pending after 60000ms
+SYSTEM CALL connect
+ERRNO       36
+ERRNO TEXT  Operation now in progress
+COUNTER     16
+
+
+**** Log file opened at 2020-03-25 13:40:04.640746 UTC-06:00 (UTC), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 6, Compiled on Feb 13 2020 17:03:56
+ CPIC library: 753.2019.10.14 version 3, NI library: 40, Kernel Release: 753 Patch Level 525
+ Current working directory: /Users/eduardoroth/trabajo/projects/apps/indelpro-contraloria, Program: node
+ Hardware: Apple Macintosh with Mac OS X (Darwin) INTEL x86_64 x86_64, Operating_system: Darwin 19.4.0
+ Hostname: roth-mbp.local, IP address: 127.0.0.1, IPv6 address: 
+
+2020-03-25 13:40:04.642137 [123145503416320] >> Error entry
+	[Handle: 4345853952	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host roth-mbp.local with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Wed Mar 25 13:40:04 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nibuf.cpp
+LINE        4568
+DETAIL      NiBufIConnect: connection pending after 60000ms
+SYSTEM CALL connect
+ERRNO       36
+ERRNO TEXT  Operation now in progress
+COUNTER     4
+
+
+**** Log file opened at 2020-03-26 00:18:53.047587 UTC-06:00 (UTC), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 6, Compiled on Feb 13 2020 17:03:56
+ CPIC library: 753.2019.10.14 version 3, NI library: 40, Kernel Release: 753 Patch Level 525
+ Current working directory: /Users/eduardoroth/trabajo/projects/apps/indelpro-contraloria, Program: node
+ Hardware: Apple Macintosh with Mac OS X (Darwin) INTEL x86_64 x86_64, Operating_system: Darwin 19.4.0
+ Hostname: roth-mbp.local, IP address: 127.0.0.1, IPv6 address: 
+
+2020-03-26 00:18:53.048376 [123145528819712] >> Error entry
+	[Handle: 4345543680	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host roth-mbp.local with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Thu Mar 26 00:18:53 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nibuf.cpp
+LINE        4568
+DETAIL      NiBufIConnect: connection pending after 60000ms
+SYSTEM CALL connect
+ERRNO       36
+ERRNO TEXT  Operation now in progress
+COUNTER     4
+
+2020-03-26 00:19:18.643694 [123145545621504] >> Error entry
+	[Handle: 4370711040	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Thu Mar 26 00:19:18 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nibuf.cpp
+LINE        4568
+DETAIL      NiBufIConnect: connection pending after 60000ms
+SYSTEM CALL connect
+ERRNO       36
+ERRNO TEXT  Operation now in progress
+COUNTER     2
+
+
+**** Log file opened at 2020-03-27 20:44:24.071642 UTC-06:00 (UTC), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 6, Compiled on Feb 13 2020 17:03:56
+ CPIC library: 753.2019.10.14 version 3, NI library: 40, Kernel Release: 753 Patch Level 525
+ Current working directory: /Users/eduardoroth/trabajo/projects/apps/indelpro-contraloria, Program: node
+ Hardware: Apple Macintosh with Mac OS X (Darwin) INTEL x86_64 x86_64, Operating_system: Darwin 19.4.0
+ Hostname: roth-mbp.local, IP address: 127.0.0.1, IPv6 address: 
+
+2020-03-27 20:44:24.077638 [123145412833280] >> Error entry
+	[Handle: 4371164160	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Fri Mar 27 20:44:24 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 10.128.160.49:3300
+SYSTEM CALL connect
+ERRNO       60
+ERRNO TEXT  Operation timed out
+COUNTER     6
+
+2020-03-28 16:07:42.381326 [123145412833280] >> Error entry
+	[Handle: 4346196480	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Sat Mar 28 16:07:42 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 10.128.160.49:3300
+SYSTEM CALL connect
+ERRNO       60
+ERRNO TEXT  Operation timed out
+COUNTER     8
+
+2020-03-28 16:07:53.282396 [123145438035968] >> Error entry
+	[Handle: 4370536960	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Sat Mar 28 16:07:53 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nibuf.cpp
+LINE        4568
+DETAIL      NiBufIConnect: connection pending after 60000ms
+SYSTEM CALL connect
+ERRNO       36
+ERRNO TEXT  Operation now in progress
+COUNTER     2
+
+2020-03-29 02:32:39.916169 [123145421234176] >> Error entry
+	[Handle: 4353953792	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Sun Mar 29 02:32:39 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3062
+DETAIL      NiPConnect: 10.128.160.49:3300
+SYSTEM CALL connect
+ERRNO       51
+ERRNO TEXT  Network is unreachable
+COUNTER     2
+
+2020-03-29 06:14:08.179216 [123145438035968] >> Error entry
+	[Handle: 4371693056	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Sun Mar 29 06:14:08 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 10.128.160.49:3300
+SYSTEM CALL connect
+ERRNO       60
+ERRNO TEXT  Operation timed out
+COUNTER     4
+
+2020-03-29 06:14:23.955248 [123145429635072] >> Error entry
+	[Handle: 4346196480	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Sun Mar 29 06:14:23 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nibuf.cpp
+LINE        4568
+DETAIL      NiBufIConnect: connection pending after 60000ms
+SYSTEM CALL connect
+ERRNO       36
+ERRNO TEXT  Operation now in progress
+COUNTER     3
+
+2020-03-29 06:39:18.385623 [123145412833280] >> Error entry
+	[Handle: 4345935872	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Sun Mar 29 06:39:18 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 10.128.160.49:3300
+SYSTEM CALL connect
+ERRNO       60
+ERRNO TEXT  Operation timed out
+COUNTER     10
+
+2020-03-29 08:39:39.726273 [123145429635072] >> Error entry
+	[Handle: 4346196480	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Sun Mar 29 08:39:39 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 10.128.160.49:3300
+SYSTEM CALL connect
+ERRNO       60
+ERRNO TEXT  Operation timed out
+COUNTER     5
+
+
+**** Log file opened at 2020-03-30 02:21:55.927120 UTC-06:00 (UTC), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 6, Compiled on Feb 13 2020 17:03:56
+ CPIC library: 753.2019.10.14 version 3, NI library: 40, Kernel Release: 753 Patch Level 525
+ Current working directory: /Users/eduardoroth/trabajo/projects/apps/indelpro-contraloria, Program: node
+ Hardware: Apple Macintosh with Mac OS X (Darwin) INTEL x86_64 x86_64, Operating_system: Darwin 19.4.0
+ Hostname: roth-mbp.local, IP address: 127.0.0.1, IPv6 address: 
+
+2020-03-30 02:21:55.929842 [123145444704256] >> Error entry
+	[Handle: 4346316800	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Mon Mar 30 02:21:55 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 10.128.160.49:3300
+SYSTEM CALL connect
+ERRNO       60
+ERRNO TEXT  Operation timed out
+COUNTER     5
+
+2020-03-30 10:15:57.523515 [123145436303360] >> Error entry
+	[Handle: 4346316800	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Mon Mar 30 10:15:57 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nibuf.cpp
+LINE        4568
+DETAIL      NiBufIConnect: connection pending after 60000ms
+SYSTEM CALL connect
+ERRNO       36
+ERRNO TEXT  Operation now in progress
+COUNTER     6
+
+
+**** Log file opened at 2020-03-31 10:28:18.841819 UTC-06:00 (UTC), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 6, Compiled on Feb 13 2020 17:03:56
+ CPIC library: 753.2019.10.14 version 3, NI library: 40, Kernel Release: 753 Patch Level 525
+ Current working directory: /Users/eduardoroth/trabajo/projects/apps/indelpro-contraloria, Program: node
+ Hardware: Apple Macintosh with Mac OS X (Darwin) INTEL x86_64 x86_64, Operating_system: Darwin 19.4.0
+ Hostname: roth-mbp.local, IP address: 127.0.0.1, IPv6 address: 
+
+2020-03-31 10:28:18.843550 [123145472884736] >> Error entry
+	[Handle: 4370847744	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Tue Mar 31 10:28:18 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nibuf.cpp
+LINE        4568
+DETAIL      NiBufIConnect: connection pending after 60000ms
+SYSTEM CALL connect
+ERRNO       36
+ERRNO TEXT  Operation now in progress
+COUNTER     45
+
+2020-03-31 10:28:22.677147 [123145481285632] >> Error entry
+	[Handle: 4346604032	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Tue Mar 31 10:28:22 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nibuf.cpp
+LINE        4568
+DETAIL      NiBufIConnect: connection pending after 60000ms
+SYSTEM CALL connect
+ERRNO       36
+ERRNO TEXT  Operation now in progress
+COUNTER     46
+
+2020-03-31 10:28:48.376848 [123145456082944] >> Error entry
+	[Handle: 4346999808	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Tue Mar 31 10:28:48 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nibuf.cpp
+LINE        4568
+DETAIL      NiBufIConnect: connection pending after 60000ms
+SYSTEM CALL connect
+ERRNO       36
+ERRNO TEXT  Operation now in progress
+COUNTER     49
+
+2020-03-31 12:02:19.806909 [123145456082944] >> Error entry
+	[Handle: 4364308992	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Tue Mar 31 12:02:19 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 10.128.160.49:3300
+SYSTEM CALL connect
+ERRNO       61
+ERRNO TEXT  Connection refused
+COUNTER     54
+
+2020-03-31 12:22:22.907154 [123145472884736] >> Error entry
+	[Handle: 4347076096	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Tue Mar 31 12:22:22 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 10.128.160.49:3300
+SYSTEM CALL connect
+ERRNO       61
+ERRNO TEXT  Connection refused
+COUNTER     49
+
+2020-03-31 12:22:32.817664 [123145464483840] >> Error entry
+	[Handle: 4412520448	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Tue Mar 31 12:22:32 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 10.128.160.49:3300
+SYSTEM CALL connect
+ERRNO       61
+ERRNO TEXT  Connection refused
+COUNTER     46
+
+2020-03-31 12:22:48.118257 [123145481285632] >> Error entry
+	[Handle: 4379037184	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Tue Mar 31 12:22:48 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 10.128.160.49:3300
+SYSTEM CALL connect
+ERRNO       61
+ERRNO TEXT  Connection refused
+COUNTER     50
+
+2020-03-31 12:25:47.465619 [123145481285632] >> Error entry
+	[Handle: 4354231296	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Tue Mar 31 12:25:47 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 10.128.160.49:3300
+SYSTEM CALL connect
+ERRNO       61
+ERRNO TEXT  Connection refused
+COUNTER     52
+
+2020-03-31 12:26:39.722415 [123145481285632] >> Error entry
+	[Handle: 4370507264	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Tue Mar 31 12:26:39 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 10.128.160.49:3300
+SYSTEM CALL connect
+ERRNO       61
+ERRNO TEXT  Connection refused
+COUNTER     54
+
+2020-03-31 12:26:59.063695 [123145464483840] >> Error entry
+	[Handle: 4387325952	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Tue Mar 31 12:26:59 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 10.128.160.49:3300
+SYSTEM CALL connect
+ERRNO       61
+ERRNO TEXT  Connection refused
+COUNTER     48
+
+2020-03-31 12:27:36.778263 [123145472884736] >> Error entry
+	[Handle: 4354231296	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Tue Mar 31 12:27:36 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 10.128.160.49:3300
+SYSTEM CALL connect
+ERRNO       61
+ERRNO TEXT  Connection refused
+COUNTER     51
+
+
+**** Log file opened at 2020-04-01 11:21:14.083337 UTC-06:00 (UTC), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 6, Compiled on Feb 13 2020 17:03:56
+ CPIC library: 753.2019.10.14 version 3, NI library: 40, Kernel Release: 753 Patch Level 525
+ Current working directory: /Users/eduardoroth/trabajo/projects/apps/indelpro-contraloria, Program: node
+ Hardware: Apple Macintosh with Mac OS X (Darwin) INTEL x86_64 x86_64, Operating_system: Darwin 19.4.0
+ Hostname: roth-mbp.local, IP address: 127.0.0.1, IPv6 address: 
+
+2020-04-01 11:21:14.084502 [123145508098048] >> Error entry
+	[Handle: 4362559488	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Wed Apr  1 11:21:14 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nibuf.cpp
+LINE        4568
+DETAIL      NiBufIConnect: connection pending after 60000ms
+SYSTEM CALL connect
+ERRNO       36
+ERRNO TEXT  Operation now in progress
+COUNTER     2
+
+2020-04-01 11:21:14.236271 [123145499697152] >> Error entry
+	[Handle: 4395698176	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Wed Apr  1 11:21:14 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nibuf.cpp
+LINE        4568
+DETAIL      NiBufIConnect: connection pending after 60000ms
+SYSTEM CALL connect
+ERRNO       36
+ERRNO TEXT  Operation now in progress
+COUNTER     2
+
+
+**** Log file opened at 2020-04-01 18:27:14.102472 UTC-06:00 (UTC), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 6, Compiled on Feb 13 2020 17:03:56
+ CPIC library: 753.2019.10.14 version 3, NI library: 40, Kernel Release: 753 Patch Level 525
+ Current working directory: /Users/eduardoroth/trabajo/projects/apps/indelpro-contraloria, Program: node
+ Hardware: Apple Macintosh with Mac OS X (Darwin) INTEL x86_64 x86_64, Operating_system: Darwin 19.4.0
+ Hostname: roth-mbp.local, IP address: 127.0.0.1, IPv6 address: 
+
+2020-04-01 18:27:14.105877 [123145625870336] >> Error entry
+	[Handle: 4395676160	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host roth-mbp.local with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Wed Apr  1 18:27:14 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nibuf.cpp
+LINE        4568
+DETAIL      NiBufIConnect: connection pending after 60000ms
+SYSTEM CALL connect
+ERRNO       36
+ERRNO TEXT  Operation now in progress
+COUNTER     4
+
+
+**** Log file opened at 2020-04-15 03:24:38.242122 UTC-05:00 (UTC), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 6, Compiled on Feb 13 2020 17:03:56
+ CPIC library: 753.2019.10.14 version 3, NI library: 40, Kernel Release: 753 Patch Level 525
+ Current working directory: /Users/eduardoroth/trabajo/projects/apps/indelpro-contraloria, Program: node
+ Hardware: Apple Macintosh with Mac OS X (Darwin) INTEL x86_64 x86_64, Operating_system: Darwin 19.4.0
+ Hostname: roth-mbp.local, IP address: 127.0.0.1, IPv6 address: 
+
+2020-04-15 03:24:38.244924 [123145369694208] >> Error entry
+	[Handle: 4404052480	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host roth-mbp.local with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Wed Apr 15 03:24:33 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 10.128.160.49:3300
+SYSTEM CALL connect
+ERRNO       60
+ERRNO TEXT  Operation timed out
+COUNTER     4
+
+2020-04-15 03:24:40.713836 [123145378095104] >> Error entry
+	[Handle: 4371232256	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Wed Apr 15 03:24:40 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 10.128.160.49:3300
+SYSTEM CALL connect
+ERRNO       60
+ERRNO TEXT  Operation timed out
+COUNTER     2
+
+2020-04-15 13:15:35.307872 [123145369694208] >> Error entry
+	[Handle: 4362119168	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Wed Apr 15 13:15:35 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nibuf.cpp
+LINE        4568
+DETAIL      NiBufIConnect: connection pending after 60000ms
+SYSTEM CALL connect
+ERRNO       36
+ERRNO TEXT  Operation now in progress
+COUNTER     7
+
+
+**** Log file opened at 2020-05-12 18:58:50.433777 UTC-05:00 (UTC), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 6, Compiled on Feb 13 2020 17:03:56
+ CPIC library: 753.2019.10.14 version 3, NI library: 40, Kernel Release: 753 Patch Level 525
+ Current working directory: /Users/eduardoroth/trabajo/projects/apps/indelpro-contraloria, Program: node
+ Hardware: Apple Macintosh with Mac OS X (Darwin) INTEL x86_64 x86_64, Operating_system: Darwin 19.4.0
+ Hostname: roth-mbp.local, IP address: 127.0.0.1, IPv6 address: 
+
+2020-05-12 18:58:50.434696 [123145407315968] >> Error entry
+	[Handle: 4379164160	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host roth-mbp.local with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Tue May 12 18:58:50 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nibuf.cpp
+LINE        4568
+DETAIL      NiBufIConnect: connection pending after 60000ms
+SYSTEM CALL connect
+ERRNO       36
+ERRNO TEXT  Operation now in progress
+COUNTER     4
+
+
+**** Log file opened at 2020-06-29 12:30:48.326096 UTC-05:00 (UTC), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 6, Compiled on Feb 13 2020 17:03:56
+ CPIC library: 753.2019.10.14 version 3, NI library: 40, Kernel Release: 753 Patch Level 525
+ Current working directory: /Users/eduardoroth/trabajo/projects/apps/indelpro-contraloria, Program: node
+ Hardware: Apple Macintosh with Mac OS X (Darwin) INTEL x86_64 x86_64, Operating_system: Darwin 19.5.0
+ Hostname: roth-mbp.local, IP address: 127.0.0.1, IPv6 address: 
+
+2020-06-29 12:30:48.327114 [123145598414848] >> Error entry
+	[Handle: 4370715136	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host roth-mbp.local with Unicode
+ERROR       connection to partner '10.241.0.9:3300' broken
+TIME        Mon Jun 29 12:30:48 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -6
+MODULE      /bas/753_REL/src/krn/si/gw/gwxx.c
+LINE        1147
+DETAIL      NiIRead: P=10.241.0.9:3300; L=192.168.68.108:50328
+SYSTEM CALL GwRead
+ERRNO       54
+ERRNO TEXT  Connection reset by peer
+COUNTER     4
+
+2020-06-29 12:31:12.050583 [123145598414848] >> Error entry
+	[Handle: 4371614720	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       connection to partner '10.241.0.9:3300' broken
+TIME        Mon Jun 29 12:31:12 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -6
+MODULE      /bas/753_REL/src/krn/si/gw/gwxx.c
+LINE        1147
+DETAIL      NiIRead: P=10.241.0.9:3300; L=192.168.68.108:50451
+SYSTEM CALL GwRead
+ERRNO       54
+ERRNO TEXT  Connection reset by peer
+COUNTER     7
+
+
+**** Log file opened at 2020-07-06 16:07:33.900045 UTC-05:00 (UTC), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 6, Compiled on Feb 13 2020 17:03:56
+ CPIC library: 753.2019.10.14 version 3, NI library: 40, Kernel Release: 753 Patch Level 525
+ Current working directory: /Users/eduardoroth/trabajo/projects/apps/indelpro-contraloria, Program: node
+ Hardware: Apple Macintosh with Mac OS X (Darwin) INTEL x86_64 x86_64, Operating_system: Darwin 19.5.0
+ Hostname: roth-mbp.local, IP address: 127.0.0.1, IPv6 address: 
+
+2020-07-06 16:07:33.902622 [123145533566976] >> Error entry
+	[Handle: 4363021824	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host roth-mbp.local with Unicode
+ERROR       connection to partner '10.128.160.49:3300' broken
+TIME        Mon Jul  6 16:07:33 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -6
+MODULE      /bas/753_REL/src/krn/si/gw/gwxx.c
+LINE        1147
+DETAIL      NiIRead: P=10.128.160.49:3300; L=192.168.68.108:52156
+SYSTEM CALL GwRead
+ERRNO       54
+ERRNO TEXT  Connection reset by peer
+COUNTER     4
+
+
+**** Log file opened at 2020-07-08 11:36:06.060883 UTC-05:00 (UTC), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 6, Compiled on Feb 13 2020 17:03:56
+ CPIC library: 753.2019.10.14 version 3, NI library: 40, Kernel Release: 753 Patch Level 525
+ Current working directory: /Users/eduardoroth/trabajo/projects/apps/indelpro-contraloria, Program: node
+ Hardware: Apple Macintosh with Mac OS X (Darwin) INTEL x86_64 x86_64, Operating_system: Darwin 19.5.0
+ Hostname: roth-mbp.local, IP address: 127.0.0.1, IPv6 address: 
+
+2020-07-08 11:36:06.062311 [123145390678016] >> Error entry
+	[Handle: 4371040768	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host roth-mbp.local with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Wed Jul  8 11:36:06 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 10.128.160.49:3300
+SYSTEM CALL connect
+ERRNO       61
+ERRNO TEXT  Connection refused
+COUNTER     4
+
+2020-07-08 11:37:31.231684 [123145390678016] >> Error entry
+	[Handle: 4379904512	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Wed Jul  8 11:37:31 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 10.128.160.49:3300
+SYSTEM CALL connect
+ERRNO       61
+ERRNO TEXT  Connection refused
+COUNTER     7
+
+2020-07-08 11:37:45.643866 [123145399078912] >> Error entry
+	[Handle: 4345531392	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Wed Jul  8 11:37:45 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 10.128.160.49:3300
+SYSTEM CALL connect
+ERRNO       61
+ERRNO TEXT  Connection refused
+COUNTER     2
+
+2020-07-08 11:38:31.562321 [123145399078912] >> Error entry
+	[Handle: 4379150848	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Wed Jul  8 11:38:31 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nixxi.cpp
+LINE        3449
+DETAIL      NiPConnect2: 10.128.160.49:3300
+SYSTEM CALL connect
+ERRNO       61
+ERRNO TEXT  Connection refused
+COUNTER     4
+
+2020-07-08 11:39:21.729116 [123145415880704] >> Error entry
+	[Handle: 4395699200	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.128.160.49:3300' not reached
+TIME        Wed Jul  8 11:39:21 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nibuf.cpp
+LINE        4568
+DETAIL      NiBufIConnect: connection pending after 60000ms
+SYSTEM CALL connect
+ERRNO       36
+ERRNO TEXT  Operation now in progress
+COUNTER     2
+
+
+**** Log file opened at 2020-07-08 13:06:42.196361 UTC-05:00 (UTC), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 6, Compiled on Feb 13 2020 17:03:56
+ CPIC library: 753.2019.10.14 version 3, NI library: 40, Kernel Release: 753 Patch Level 525
+ Current working directory: /Users/eduardoroth/trabajo/projects/apps/indelpro-contraloria, Program: node
+ Hardware: Apple Macintosh with Mac OS X (Darwin) INTEL x86_64 x86_64, Operating_system: Darwin 19.5.0
+ Hostname: roth-mbp.local, IP address: 127.0.0.1, IPv6 address: 
+
+2020-07-08 13:06:42.198068 [123145517002752] >> Error entry
+	[Handle: 4355010048	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host roth-mbp.local with Unicode
+ERROR       partner '10.241.0.9:3300' not reached
+TIME        Wed Jul  8 13:06:42 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nibuf.cpp
+LINE        4568
+DETAIL      NiBufIConnect: connection pending after 60000ms
+SYSTEM CALL connect
+ERRNO       36
+ERRNO TEXT  Operation now in progress
+COUNTER     4
+
+2020-07-08 13:07:40.086922 [123145525403648] >> Error entry
+	[Handle: 4404106752	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.241.0.9:3300' not reached
+TIME        Wed Jul  8 13:07:40 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nibuf.cpp
+LINE        4568
+DETAIL      NiBufIConnect: connection pending after 60000ms
+SYSTEM CALL connect
+ERRNO       36
+ERRNO TEXT  Operation now in progress
+COUNTER     2
+
+
+**** Log file opened at 2020-07-10 19:48:09.951771 UTC-05:00 (UTC), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 6, Compiled on Feb 13 2020 17:03:56
+ CPIC library: 753.2019.10.14 version 3, NI library: 40, Kernel Release: 753 Patch Level 525
+ Current working directory: /Users/eduardoroth/trabajo/projects/apps/indelpro-contraloria, Program: node
+ Hardware: Apple Macintosh with Mac OS X (Darwin) INTEL x86_64 x86_64, Operating_system: Darwin 19.5.0
+ Hostname: roth-mbp.local, IP address: 127.0.0.1, IPv6 address: 
+
+2020-07-10 19:48:09.952768 [123145519853568] >> Error entry
+	[Handle: 4354616320	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host roth-mbp.local with Unicode
+ERROR       partner '10.241.0.9:3300' not reached
+TIME        Fri Jul 10 19:48:09 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nibuf.cpp
+LINE        4568
+DETAIL      NiBufIConnect: connection pending after 60000ms
+SYSTEM CALL connect
+ERRNO       36
+ERRNO TEXT  Operation now in progress
+COUNTER     4
+
+2020-07-10 19:48:19.559515 [123145545056256] >> Error entry
+	[Handle: 4370672128	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.241.0.9:3300' not reached
+TIME        Fri Jul 10 19:48:19 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nibuf.cpp
+LINE        4568
+DETAIL      NiBufIConnect: connection pending after 60000ms
+SYSTEM CALL connect
+ERRNO       36
+ERRNO TEXT  Operation now in progress
+COUNTER     2
+
+
+**** Log file opened at 2020-07-13 20:56:03.065938 UTC-05:00 (UTC), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 6, Compiled on Feb 13 2020 17:03:56
+ CPIC library: 753.2019.10.14 version 3, NI library: 40, Kernel Release: 753 Patch Level 525
+ Current working directory: /Users/eduardoroth/trabajo/projects/apps/indelpro-contraloria, Program: node
+ Hardware: Apple Macintosh with Mac OS X (Darwin) INTEL x86_64 x86_64, Operating_system: Darwin 19.5.0
+ Hostname: roth-mbp.local, IP address: 127.0.0.1, IPv6 address: 
+
+2020-07-13 20:56:03.067411 [123145479802880] >> Error entry
+	[Handle: 4346110976	ConvID: 	Target: 	SysID: 	SysNr: 	User: 	Codepage: 4103]
+	RfcCommunicationException: Return Value: 20, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host roth-mbp.local with Unicode
+ERROR       partner '10.241.0.9:3300' not reached
+TIME        Mon Jul 13 20:56:03 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      /bas/753_REL/src/base/ni/nibuf.cpp
+LINE        4568
+DETAIL      NiBufIConnect: connection pending after 60000ms
+SYSTEM CALL connect
+ERRNO       36
+ERRNO TEXT  Operation now in progress
+COUNTER     4
+

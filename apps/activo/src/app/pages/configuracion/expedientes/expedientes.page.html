@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>Expedientes de Activo Fijo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title color="primary">
+              Actualización de folios
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>
+              Los expedientes de activo fijo se actualizan diariamente a través
+              de un proceso automático, sin embargo puedes solicitar una
+              actualización manual a través del siguiente botón
+            </p>
+            <div class="ion-text-end">
+              <ion-button color="primary" (click)="actualizar()">
+                Actualizar
+                <ion-icon name="refresh-outline" slot="end"></ion-icon>
+              </ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="4">
+        <ion-card>
+          <ion-card-header class="ion-text-center">
+            <ion-card-subtitle
+              >Elementos PEP en última actualización</ion-card-subtitle
+            >
+            <ion-card-title>{{expedientesUltima$ | async}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="4">
+        <ion-card>
+          <ion-card-header class="ion-text-center">
+            <ion-card-subtitle
+              >Total de elementos PEP en el sistema</ion-card-subtitle
+            >
+            <ion-card-title>{{expedientesTotal$ | async}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="4">
+        <ion-card>
+          <ion-card-header class="ion-text-center">
+            <ion-card-subtitle
+              >Número de activos en última actualización</ion-card-subtitle
+            >
+            <ion-card-title>{{activosUltima$ | async}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="4">
+        <ion-card>
+          <ion-card-header class="ion-text-center">
+            <ion-card-subtitle
+              >Total de activos en el sistema</ion-card-subtitle
+            >
+            <ion-card-title>{{activosTotal$ | async}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

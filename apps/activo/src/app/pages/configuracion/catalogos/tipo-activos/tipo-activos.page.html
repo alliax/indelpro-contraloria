@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>Tipos de activos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col size="4">
+        <ion-toolbar color="primary">
+          <ion-title>
+            Nuevo registro
+          </ion-title>
+        </ion-toolbar>
+        <form>
+          <ion-list lines="inset">
+            <ion-item color="light">
+              <ion-label position="stacked">
+                Nombre
+              </ion-label>
+              <ion-input type="text" [(ngModel)]="nuevo.nombre" name="nombre"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-thumbnail slot="end" *ngIf="imagen">
+                <img [src]="imagen" />
+              </ion-thumbnail>
+              <ion-button color="primary" (click)="cargarImagen($event)">
+                Selecciona una imagen
+                <ion-icon name="image-outline" slot="end"></ion-icon>
+              </ion-button>
+              <ion-input
+                type="file"
+                #foto
+                [hidden]="true"
+                (ionChange)="imagenSeleccionada($event)"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">
+                Clave SAP
+              </ion-label>
+              <ion-input type="text" [(ngModel)]="nuevo.claveSap" name="clave-sap"></ion-input>
+            </ion-item>
+          </ion-list>
+          <div class="ion-padding-vertical">
+            <ion-button expand="block" color="success" (click)="crear()">
+              Crear registro
+            </ion-button>
+          </div>
+        </form>
+      </ion-col>
+      <ion-col size="8">
+        <ion-toolbar color="light">
+          <ion-title>Registros actuales</ion-title>
+        </ion-toolbar>
+        <ion-list>
+          <ion-item *ngFor="let registro of (registros$ | async)">
+            <ion-thumbnail slot="start">
+              <img [src]="registro.imagen | upload" />
+            </ion-thumbnail>
+            <ion-label>
+              <h2>
+                {{registro.nombre}}
+              </h2>
+              <p>
+                {{registro.claveSap}}
+              </p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

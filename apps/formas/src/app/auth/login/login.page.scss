@@ -1,0 +1,14 @@
+ion-content {
+  --background: url('~/assets/auth/bg.jpg') no-repeat center center / cover;
+  height: 100%;
+
+  ion-grid,
+  ion-row {
+    height: 100%;
+  }
+
+  .logo {
+    width: 50%;
+    margin: 0 auto;
+  }
+}

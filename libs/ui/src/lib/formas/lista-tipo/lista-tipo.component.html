@@ -1,0 +1,16 @@
+<ion-item
+  [lines]="tipo.total === 0 ? 'none' : 'inset'"
+  detail
+  button
+  [disabled]="tipo.total === 0"
+  [routerLink]="'/herramientas/solicitudes/' + tipo.grupo + '/' + tipo.clave"
+>
+  <ion-chip slot="start" [color]="tipo.total === 0 ? 'medium' : 'primary'">
+    {{ tipo.total }}
+  </ion-chip>
+  <ion-label [color]="tipo.total === 0 ? 'medium' : 'primary'">
+    <p>
+      {{ tipo.nombre }}
+    </p>
+  </ion-label>
+</ion-item>

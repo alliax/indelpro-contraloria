@@ -1,0 +1,13 @@
+<ion-item button color="light" lines="none" detail="false">
+  <ion-icon
+    slot="start"
+    [color]="colorIcono"
+    [name]="icono"
+  ></ion-icon>
+  <ion-label class="ion-padding-vertical ion-text-wrap">
+    <p>{{ titulo }}</p>
+  </ion-label>
+  <ion-chip color="dark" slot="end">
+    <strong>{{ total }}</strong>
+  </ion-chip>
+</ion-item>

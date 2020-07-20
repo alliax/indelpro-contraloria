@@ -1,0 +1,38 @@
+{
+  "host": "apps.alliax.com",
+  "port": "PORT",
+  "public": "public/",
+  "path": "indelpro/api/",
+  "templates": "templates/",
+  "uploads": "public/uploads/",
+  "authentication": {
+    "path": "/indelpro/api/authentication",
+    "service": "/indelpro/api/users",
+    "jwtOptions": {
+      "audience": "https://apps.alliax.com/indelpro/activo",
+      "expiresIn": "5d"
+    }
+  },
+  "authManagement": {
+    "path": "/indelpro/api/authManagement",
+    "service": "/indelpro/api/users",
+    "mailUrl": "https://apps.alliax.com/indelpro/activo",
+    "authUrl": "https://apps.alliax.com/indelpro/activo/auth",
+    "apiUrl": "https://servicios.alliax.com/indelpro/api"
+  },
+  "socket": {
+    "path": "/indelpro/api/socket.io",
+    "transports": ["polling"]
+  },
+  "smtp": {
+    "host": "140.140.61.94",
+    "from": {
+      "name": "Do not reply",
+      "address": "not-reply@alliax.com"
+    },
+    "port": "25",
+    "maxConnections": 3,
+    "maxMessages": 20,
+    "rateLimit": 50
+  }
+}

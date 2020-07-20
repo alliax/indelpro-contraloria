@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>Administración de usuarios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <ion-grid *ngIf="usuarios$ | async as usuarios" fixed>
+    <ion-row>
+      <ion-col>
+        <ion-item *ngFor="let usuario of usuarios">
+          <ion-label>
+            {{usuario.nombre}}
+          </ion-label>
+          <ion-button slot="end" color="warning" fill="clear">
+            <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+          <ion-button slot="end" color="danger" fill="clear">
+            <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

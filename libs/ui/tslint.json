@@ -1,0 +1,17 @@
+{
+  "extends": "../../tslint.json",
+  "rules": {
+    "directive-selector": [
+      true,
+      "attribute",
+      "indelproContraloria",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      "indelpro-contraloria",
+      "kebab-case"
+    ]
+  }
+}

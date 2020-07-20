@@ -1,0 +1,97 @@
+<ion-app darkMode>
+  <ion-split-pane
+    contentId="main"
+    [disabled]="!(user$ | async) || (user$ | async).isVerified !== true"
+  >
+    <ion-menu contentId="main">
+      <ion-header class="ion-no-border">
+        <ion-toolbar color="secondary">
+          <ion-grid class="ion-no-padding">
+            <ion-row class="ion-justify-content-center">
+              <ion-col
+                size="5"
+                size-md="5"
+                class="ion-padding-vertical ion-margin-vertical ion-text-center"
+              >
+                <img src="assets/auth/logo-white.png" />
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-toolbar>
+        <ion-item lines="none" *ngIf="user$ | async as user" color="secondary">
+          <ion-avatar slot="start">
+            <img
+              [src]="
+                user.foto ? (user.foto | upload) : 'assets/img/no-profile.jpg'
+              "
+            />
+          </ion-avatar>
+          <ion-label class="ion-text-wrap">
+            <h2>{{ user.nombre }}</h2>
+            <p>{{ user.email }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-header>
+      <ion-content color="light">
+        <div class="ion-padding-top" *ngFor="let categoria of menu">
+          <ion-item-divider color="light">
+            <ion-label color="secondary">
+              {{ categoria.title }}
+            </ion-label>
+          </ion-item-divider>
+          <ion-menu-toggle *ngFor="let opcion of categoria.children">
+            <ion-item
+              detail
+              lines="none"
+              button
+              [routerLink]="opcion.url"
+              #rla="routerLinkActive"
+              routerLinkActive
+              [routerLinkActiveOptions]="{ exact: opcion.exacto || false }"
+              color="light"
+            >
+              <ion-icon
+                size="small"
+                [name]="opcion.icon"
+                [color]="rla.isActive ? 'tertiary' : 'medium'"
+                slot="start"
+              ></ion-icon>
+              <ion-label
+                [color]="rla.isActive ? 'tertiary' : 'medium'"
+                class="ion-text-wrap"
+              >
+                {{ opcion.title }}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </div>
+      </ion-content>
+      <ion-footer class="ion-no-border">
+        <ion-toolbar color="light">
+          <ion-grid class="ion-no-padding">
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="auto">
+                <ion-fab-button
+                  color="danger"
+                  (click)="cerrarSesion()"
+                  size="small"
+                >
+                  <ion-icon name="log-out"> </ion-icon>
+                </ion-fab-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-toolbar>
+        <ion-toolbar color="light">
+          <ion-title size="small" class="ion-text-center">
+            <small>
+              Made with
+              <ion-icon name="heart-sharp" color="danger"></ion-icon> by Alliax
+            </small>
+          </ion-title>
+        </ion-toolbar>
+      </ion-footer>
+    </ion-menu>
+    <ion-router-outlet id="main"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

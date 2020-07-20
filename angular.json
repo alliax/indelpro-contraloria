@@ -1,7 +1,471 @@
 {
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "projects": {},
+  "defaultProject": "activo",
+  "newProjectRoot": "apps",
+  "projects": {
+    "activo": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/activo",
+      "sourceRoot": "apps/activo/src",
+      "prefix": "indelpro-contraloria",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/activo",
+            "index": "apps/activo/src/index.html",
+            "main": "apps/activo/src/main.ts",
+            "polyfills": "apps/activo/src/polyfills.ts",
+            "tsConfig": "apps/activo/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/activo/src/favicon.ico",
+              {
+                "glob": "**/*",
+                "input": "apps/activo/src/assets",
+                "output": "assets"
+              },
+              {
+                "glob": "**/*.svg",
+                "input": "node_modules/ionicons/dist/ionicons/svg",
+                "output": "./svg"
+              }
+            ],
+            "styles": [
+              {
+                "input": "apps/activo/src/theme/variables.css"
+              },
+              {
+                "input": "apps/activo/src/global.scss"
+              }
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/activo/src/environments/environment.ts",
+                  "with": "apps/activo/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "activo:build",
+            "proxyConfig": "apps/activo/proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "activo:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "activo:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/activo/tsconfig.app.json",
+              "apps/activo/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/activo/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/activo/jest.config.js",
+            "tsConfig": "apps/activo/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/activo/src/test-setup.ts"
+          }
+        },
+        "ionic-cordova-serve": {
+          "builder": "@ionic/angular-toolkit:cordova-serve",
+          "options": {
+            "cordovaBuildTarget": "formas:ionic-cordova-build",
+            "devServerTarget": "formas:serve"
+          },
+          "configurations": {
+            "production": {
+              "cordovaBuildTarget": "formas:ionic-cordova-build:production",
+              "devServerTarget": "formas:serve:production"
+            }
+          }
+        },
+        "ionic-cordova-build": {
+          "builder": "@ionic/angular-toolkit:cordova-build",
+          "options": {
+            "browserTarget": "formas:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "formas:build:production"
+            }
+          }
+        }
+      }
+    },
+    "activo-e2e": {
+      "root": "apps/activo-e2e",
+      "sourceRoot": "apps/activo-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/activo-e2e/cypress.json",
+            "tsConfig": "apps/activo-e2e/tsconfig.e2e.json",
+            "devServerTarget": "activo:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "activo:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/activo-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/activo-e2e/**"]
+          }
+        }
+      }
+    },
+    "api": {
+      "root": "apps/api",
+      "sourceRoot": "apps/api/src",
+      "projectType": "application",
+      "prefix": "api",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/api",
+            "main": "apps/api/src/main.ts",
+            "tsConfig": "apps/api/tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*.json",
+                "input": "apps/api/config",
+                "output": "./config"
+              },
+              {
+                "glob": "**/*.*",
+                "input": "apps/api/public",
+                "output": "./public"
+              },
+              {
+                "glob": "**/*.*",
+                "input": "apps/api/templates",
+                "output": "./templates"
+              }
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/api/src/environments/environment.ts",
+                  "with": "apps/api/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "api:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/api/tsconfig.app.json",
+              "apps/api/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/api/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/api/jest.config.js",
+            "tsConfig": "apps/api/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "data": {
+      "projectType": "library",
+      "root": "libs/data",
+      "sourceRoot": "libs/data/src",
+      "prefix": "indelpro-contraloria",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/data/tsconfig.lib.json",
+              "libs/data/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/data/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/data/jest.config.js",
+            "tsConfig": "libs/data/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/data/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "ui": {
+      "projectType": "library",
+      "root": "libs/ui",
+      "sourceRoot": "libs/ui/src",
+      "prefix": "indelpro-contraloria",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui/tsconfig.lib.json",
+              "libs/ui/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ui/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/jest.config.js",
+            "tsConfig": "libs/ui/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/ui/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "formas": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/formas",
+      "sourceRoot": "apps/formas/src",
+      "prefix": "indelpro-contraloria",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/formas",
+            "index": "apps/formas/src/index.html",
+            "main": "apps/formas/src/main.ts",
+            "polyfills": "apps/formas/src/polyfills.ts",
+            "tsConfig": "apps/formas/tsconfig.app.json",
+            "assets": [
+              "apps/formas/src/favicon.ico",
+              {
+                "glob": "**/*",
+                "input": "apps/formas/src/assets",
+                "output": "assets"
+              },
+              {
+                "glob": "**/*.svg",
+                "input": "node_modules/ionicons/dist/ionicons/svg",
+                "output": "./svg"
+              },
+              "apps/formas/src/manifest.webmanifest"
+            ],
+            "styles": [
+              {
+                "input": "apps/formas/src/theme/variables.scss"
+              },
+              {
+                "input": "apps/formas/src/global.scss"
+              }
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/formas/src/environments/environment.ts",
+                  "with": "apps/formas/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "apps/formas/ngsw-config.json"
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "formas:build",
+            "proxyConfig": "apps/formas/proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "formas:build:production"
+            },
+            "ci": {
+              "progress": false
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "formas:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/formas/tsconfig.app.json",
+              "apps/formas/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/formas/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/formas/jest.config.js",
+            "tsConfig": "apps/formas/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/formas/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "formas-e2e": {
+      "root": "apps/formas-e2e",
+      "sourceRoot": "apps/formas-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/formas-e2e/cypress.json",
+            "tsConfig": "apps/formas-e2e/tsconfig.e2e.json",
+            "devServerTarget": "formas:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "formas:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/formas-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/formas-e2e/**"]
+          }
+        }
+      }
+    }
+  },
   "cli": {
-    "defaultCollection": "@nrwl/workspace"
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    },
+    "@ionic/angular-toolkit:component": {
+      "styleext": "scss"
+    },
+    "@ionic/angular-toolkit:page": {
+      "styleext": "scss"
+    }
   }
 }

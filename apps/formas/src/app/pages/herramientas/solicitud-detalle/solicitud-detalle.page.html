@@ -1,0 +1,120 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-grid *ngIf="user$ | async as user">
+      <ion-row class="ion-justify-content-between ion-align-items-center">
+        <ion-col size="auto">
+          <ion-back-button
+            color="light"
+            defaultHref="/herramientas/dashboard"
+          ></ion-back-button>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-avatar class="user">
+            <img
+              [src]="(user.foto) ? (user.foto | upload) : 'assets/img/no-profile.jpg'"
+            />
+          </ion-avatar>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item *ngIf="solicitud">
+    <ion-label class="ion-text-wrap">
+      <h1 class="ion-padding-bottom">{{solicitud.title}}</h1>
+      <p>Creado el {{solicitud.createDate}}</p>
+      <h4>Monto: {{solicitud.totalAmount | currency}} {{solicitud?.currency?.description}}</h4>
+    </ion-label>
+  </ion-item>
+  <ion-list *ngIf="solicitud?.supplier">
+    <ion-list-header>
+      Proveedor
+    </ion-list-header>
+    <ion-item lines="none">
+      <ion-icon name="business-outline" slot="start"></ion-icon>
+      <ion-label class="ion-text-wrap">
+        <p>
+          {{solicitud.supplier.description}}
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list *ngIf="solicitud?.requester">
+    <ion-list-header>
+      Solicitante
+    </ion-list-header>
+    <ion-item lines="none">
+      <ion-icon name="create-outline" slot="start"></ion-icon>
+      <ion-label class="ion-text-wrap">
+        <p>
+          {{solicitud.requester.description}}
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list *ngIf="solicitud?.comments && false">
+    <ion-list-header>
+      Comentarios
+    </ion-list-header>
+    <ion-item lines="none" *ngFor="let comentario of solicitud.comments">
+      <ion-icon name="chat-bubble-outline" slot="end"> </ion-icon>
+      <ion-label class="ion-text-wrap">
+        <p>
+          <ion-text color="primary">
+            <strong>{{comentario.user}}</strong>
+          </ion-text>
+          : {{comentario.text}}
+        </p>
+        <div>
+          <small
+            >Registrado el {{comentario.date}} a las {{comentario.time}}</small
+          >
+        </div>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list *ngIf="solicitud && solicitud.approvalFlow">
+    <ion-list-header>
+      Flujo de aprobación
+    </ion-list-header>
+    <ion-item *ngFor="let aprobador of solicitud.approvalFlow" lines="none">
+      <ion-chip color="secondary" slot="start">
+        {{aprobador.step}}
+      </ion-chip>
+      <ion-icon
+        slot="start"
+        size="small"
+        name="people-outline"
+        [hidden]="!aprobador.isRol"
+      ></ion-icon>
+      <ion-label class="ion-text-wrap">
+        <p>{{aprobador.userName}}</p>
+      </ion-label>
+      <ion-icon
+        slot="end"
+        [name]="aprobador.approvalStatus === 'P' ? 'radio-button-on-outline' : (aprobador.approvalStatus === 'A' ? 'checkmark-circle-outline' : 'radio-button-off-outline')"
+        color="secondary"
+      ></ion-icon>
+      <!-- {{aprovador | json}} -->
+    </ion-item>
+  </ion-list>
+
+  <!-- {{solicitud | json}} -->
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar *ngIf="solicitud">
+    <div class="ion-text-end">
+      <ion-button color="danger" class="ion-margin-end" (click)="rechazar()">
+        <ion-icon name="close-circle-outline" slot="start"></ion-icon>
+        Rechazar
+      </ion-button>
+      <ion-button color="success" class="ion-margin-end" (click)="aprobar()">
+        <ion-icon name="checkmark-circle-outline" slot="start"></ion-icon>
+        Aprobar
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

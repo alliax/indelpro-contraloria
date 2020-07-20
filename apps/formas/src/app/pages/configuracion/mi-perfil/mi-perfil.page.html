@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-grid *ngIf="user$ | async as user">
+      <ion-row class="ion-justify-content-between ion-align-items-center">
+        <ion-col size="auto">
+          <ion-menu-button color="light"></ion-menu-button>
+        </ion-col>
+        <ion-col size="auto">
+          Mi Perfil
+        </ion-col>
+        <ion-col size="auto">
+          <ion-avatar class="user">
+            <img
+              [src]="(user.foto) ? (user.foto | upload) : 'assets/img/no-profile.jpg'"
+            />
+          </ion-avatar>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid *ngIf="user$ | async as user">
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+      <ion-col size="8" size-md="3">
+        <ion-card>
+          <img
+            [src]="(user.foto) ? (user.foto | upload) : 'assets/img/no-profile.jpg'"
+          />
+          <ion-item>
+            <ion-label>
+              <h2>{{user.nombre}}</h2>
+              <p>{{user.email}}</p>
+            </ion-label>
+          </ion-item>
+          <alx-dark-mode-toggle></alx-dark-mode-toggle>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

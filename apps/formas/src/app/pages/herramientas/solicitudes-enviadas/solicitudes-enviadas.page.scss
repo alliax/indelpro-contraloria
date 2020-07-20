@@ -1,0 +1,23 @@
+.user {
+  border: 1px solid var(--ion-color-light-shade);
+  height: 30px;
+  width: 30px;
+}
+.solicitud {
+  .tipo {
+    height: 60px;
+    width: 60px;
+    margin: 10px 15px 10px 0;
+    border-radius: 50%;
+    border: 1px solid var(--ion-color-light-shade);
+    background: var(--ion-color-secondary);
+    p {
+      width: 100%;
+      color: var(--ion-color-secondary-contrast);
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+  }
+}

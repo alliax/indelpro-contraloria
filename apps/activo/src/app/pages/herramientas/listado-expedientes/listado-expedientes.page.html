@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>Listado de Expedientes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <ion-grid *ngIf="expedientes$ | async as expedientes" fixed>
+    <ion-row *ngIf="expedientes.length === 0">
+      <ion-col>
+        <ion-item lines="none">
+          <ion-icon
+            name="alert-circle-outline"
+            color="danger"
+            slot="start"
+          ></ion-icon>
+          <ion-label>
+            <strong>No hay expedientes registrados en el sistema</strong>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="auto">
+        <ion-list-header>
+          <ion-label class="ion-text-center" color="secondary">
+            <h2>Listado de Expedientes</h2>
+          </ion-label>
+        </ion-list-header>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-end ion-align-items-center">
+      <ion-col size="auto" *ngIf="(paginaActual$ | async) > 1">
+        <ion-button (click)="regresarPagina()" shape="round" size="small">
+          <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="auto">
+        <ion-chip>
+          {{(paginaActual$ | async)}} / {{(totalExpedientes$ | async) |
+          number:'1.0-0'}}
+        </ion-chip>
+      </ion-col>
+      <ion-col
+        size="auto"
+        *ngIf="(paginaActual$ | async) < (totalExpedientes$ | async)"
+      >
+        <ion-button (click)="avanzarPagina()" shape="round" size="small">
+          <ion-icon name="chevron-forward-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item
+          button
+          lines="full"
+          *ngFor="let expediente of expedientes"
+          [routerLink]="'/herramientas/listado-expedientes/' + expediente._id"
+        >
+          <ion-chip color="secondary" slot="start" *ngIf="expediente.AKTIV">
+            {{expediente.AKTIV | date:'dd/MM/yyyy'}}
+          </ion-chip>
+          <ion-label>
+            <h2><strong>{{expediente.NAME1}}</strong></h2>
+            <p>{{expediente.TXT50}}</p>
+          </ion-label>
+          <ion-chip slot="end" color="primary">
+            {{expediente.PROJK}}
+          </ion-chip>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

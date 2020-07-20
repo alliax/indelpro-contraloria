@@ -1,0 +1,29 @@
+<ion-item-sliding #slidingItem>
+  <ion-item lines="full" (click)="detalle.emit(solicitud)">
+    <ion-label class="ion-text-wrap">
+      <ion-text color="tertiary">
+        {{ solicitud.IDWFC }}
+      </ion-text>
+      <h2>{{ solicitud.TITLE }}</h2>
+      <p>{{ solicitud.REQNAME }}</p>
+    </ion-label>
+    <ion-note slot="end">
+      <small>{{ solicitud.ZDATE | sapDate | date: 'dd/MM/yyyy' }}</small>
+    </ion-note>
+  </ion-item>
+  <ion-item-options side="end">
+    <ion-item-option color="danger">
+      <ion-icon name="close-circle-outline" slot="top" size="large"></ion-icon>
+      Rechazar
+    </ion-item-option>
+    <!-- <ion-item-option color="success" (click)="rechazar.emit(slidingItem)"> -->
+    <ion-item-option color="success">
+      <ion-icon
+        name="checkmark-circle-outline"
+        slot="top"
+        size="large"
+      ></ion-icon>
+      Aprobar
+    </ion-item-option>
+  </ion-item-options>
+</ion-item-sliding>

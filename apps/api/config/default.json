@@ -1,0 +1,66 @@
+{
+  "host": "localhost",
+  "port": 3030,
+
+  "public": "../public/",
+  "uploads": "../public/uploads",
+  "templates": "../templates",
+  "path": "",
+  "paginate": {},
+  "authManagement": {
+    "mailUrl": "http://localhost:4200",
+    "authUrl": "http://localhost:4200/auth"
+  },
+  "socket": {
+    "pingTimeout": 60000
+  },
+  "authentication": {
+    "entity": "user",
+    "service": "users",
+    "secret": "Hc7<-aqcka(x$brX4KKDw$ecs?<-j+pDG_XZ%:qP'p)cYfQ$2Y3m}edGWn,2Y%::?BCc,%35t)=DsMxVv=WC^~2-^J'(9';Ec#.X%e?PT:^8e/G]Z8,}S7X/tMWc",
+    "authStrategies": ["jwt", "local"],
+    "jwtOptions": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://servicios.alliax.com",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "30d"
+    },
+    "local": {
+      "usernameField": "email",
+      "passwordField": "password"
+    },
+    "oauth": {
+      "redirect": "/",
+      "auth0": {
+        "key": "<auth0 oauth key>",
+        "secret": "<auth0 oauth secret>",
+        "subdomain": "<auth0 subdomain>"
+      },
+      "google": {
+        "key": "<google oauth key>",
+        "secret": "<google oauth secret>",
+        "scope": ["email", "profile", "openid"]
+      },
+      "github": {
+        "key": "<github oauth key>",
+        "secret": "<github oauth secret>"
+      }
+    }
+  },
+  "mongodb": "mongodb://localhost:27017/indelpro_contraloria_api",
+  "smtp": {
+    "host": "smtp.office365.com",
+    "from": "sendmail2@alliax.com",
+    "port": "587",
+    "auth": {
+      "user": "sendmail2@alliax.com",
+      "pass": "zQVRzPWnKS7mD159q0m5Dn5k"
+    },
+    "maxConnections": 3,
+    "maxMessages": 20,
+    "rateLimit": 50
+  }
+}
