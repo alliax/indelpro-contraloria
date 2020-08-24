@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/herramientas/busqueda"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Búsqueda por ubicación | {{nombre}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div
+    class="ion-padding ion-text-center"
+    *ngIf="loading$ | async; else listado"
+  >
+    <ion-spinner></ion-spinner>
+  </div>
+  <ng-template #listado>
+    <ng-container
+      *ngIf="(porUbicacion$ | async).length > 0; else sinResultados"
+    >
+      <ion-virtual-scroll
+        [items]="porUbicacion$ | async "
+        approxItemHeight="120px"
+      >
+        <ion-item
+          button
+          lines="full"
+          *virtualItem="let item;let i = index"
+          [routerLink]="'/herramientas/listado-expedientes/' + item._id"
+        >
+          <ion-chip color="secondary" slot="end" *ngIf="item.AKTIV">
+            {{item.AKTIV | date:'dd/MM/yyyy'}}
+          </ion-chip>
+          <ion-chip slot="start" color="tertiary">
+            <ion-text>
+              {{item.PROJK}}
+            </ion-text>
+          </ion-chip>
+          <ion-label>
+            <h2><strong>{{item.NAME1}}</strong></h2>
+            <p>{{item.TXT50}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-virtual-scroll>
+    </ng-container>
+    <ng-template #sinResultados>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            Sin registros
+          </ion-card-title>
+          <ion-card-subtitle>
+            Los parámetros de la búsqueda no arrojaron resultados
+          </ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+    </ng-template>
+  </ng-template>
+</ion-content>

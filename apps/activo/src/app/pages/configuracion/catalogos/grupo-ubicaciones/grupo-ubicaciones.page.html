@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>Catálogo de Grupo de Ubicaciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <alliax-admin-panel>
+    <ng-container slot="sidebar">
+      <alliax-form-control
+        [form]="form"
+        [fields]="fields"
+        [model]="model"
+        (enviar)="onSubmit($event)"
+        (limpiar)="resetButton()"
+      >
+      </alliax-form-control>
+    </ng-container>
+    <ng-container slot="content">
+      <alliax-list-item
+        *ngFor="let registro of registros$ | async; let i = index"
+        [registro]="registro"
+        firstLine="nombre"
+        (eliminar)="remove($event)"
+        (actualizar)="edit($event)"
+      >
+        <ng-container slot="orden">
+          <ion-chip color="secondary" slot="start">
+            {{registro.orden}}
+          </ion-chip>
+        </ng-container>
+        <ion-label>
+          <h2>
+            {{registro.nombre}}
+          </h2>
+        </ion-label>
+      </alliax-list-item>
+    </ng-container>
+  </alliax-admin-panel>
+</ion-content>

@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>
+      {{grupo?.tipoActivo.claveSap}} - {{grupo?.tipoActivo?.nombre}}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="modalCtrl.dismiss()">
+        Cerrar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar color="dark">
+    <ion-searchbar
+      [placeholder]="'Buscar entre los ' + (grupo?.activos | number) + ' registros'"
+      (ionChange)="buscar($event)"
+    ></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container>
+    <ion-virtual-scroll [items]="filtrados$ | async" approxItemHeight="120px">
+      <ion-item *virtualItem="let item;let i = index">
+        <ion-chip color="secondary" slot="start">
+          {{i+1}}
+        </ion-chip>
+        <ion-label class="ion-text-wrap">
+          <ion-text color="tertiary">
+            <h6>
+              {{item.ANLN1}}
+            </h6>
+          </ion-text>
+          <h2>
+            {{item.TXT50}}
+          </h2>
+          <p>
+            {{item.KANSW | currency}}
+          </p>
+        </ion-label>
+        <ion-chip color="medium" slot="end">
+          {{item.AKTIV | date:'dd/MM/yyyy'}}
+        </ion-chip>
+      </ion-item>
+      <ion-card *virtualItem="let item; let itemBounds = bounds;">
+        <ion-card-header>
+          <ion-card-title>{{ item }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>{{ item | json }}</ion-card-content>
+      </ion-card>
+    </ion-virtual-scroll>
+  </ng-container>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="dark">
+    <ion-title class="ion-text-center">
+      {{grupo?.activos | number}} registros
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>
