@@ -1,6 +1,14 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { LoadingController, ToastController } from '@ionic/angular';
-import { AuthService, FeathersService } from '@alliax/feathers-client';
+import {
+  LoadingController,
+  ToastController,
+  AlertController,
+} from '@ionic/angular';
+import {
+  AuthService,
+  FeathersService,
+  DataEntryClass,
+} from '@alliax/feathers-client';
 import {
   createTipoActivo,
   TipoActivo,
@@ -14,60 +22,90 @@ import { Observable } from 'rxjs';
   templateUrl: './tipo-activos.page.html',
   styleUrls: ['./tipo-activos.page.scss'],
 })
-export class TipoActivosPage implements OnInit {
-  @ViewChild('foto', { read: ElementRef, static: false }) foto: ElementRef;
-  nuevo: TipoActivo = createTipoActivo({});
-  registros$: Observable<TipoActivo[]> = this.tipoActivosQuery.selectAll();
-  imagen: any;
+export class TipoActivosPage
+  extends DataEntryClass<TipoActivo, TipoActivosService>
+  implements OnInit {
+  registros$ = this.tipoActivosQuery.selectAll();
+  model = createTipoActivo({});
+  fields = [
+    {
+      key: '_id',
+      type: 'input',
+      className: 'form-hidden',
+      templateOptions: {
+        type: 'hidden',
+      },
+    },
+    {
+      key: 'nombre',
+      type: 'input',
+      templateOptions: {
+        label: 'Nombre del tipo de activo',
+        placeholder: 'Ingresa un nombre',
+        labelPosition: 'stacked',
+        required: true,
+      },
+      validation: {
+        messages: {
+          required: 'Debes ingresar el nombre del tipo de activo',
+        },
+      },
+    },
+    {
+      key: 'claveSap',
+      type: 'input',
+      templateOptions: {
+        label: 'Clave SAP del tipo de activo',
+        placeholder: 'Ingresa la clave SAP',
+        labelPosition: 'stacked',
+        required: true,
+      },
+      validation: {
+        messages: {
+          required: 'Debes ingresar la clave SAP del tipo de activo',
+        },
+      },
+    },
+    {
+      key: 'imagen',
+      type: 'input',
+      className: 'form-hidden',
+      templateOptions: {
+        type: 'hidden',
+      },
+    },
+  ];
+
   constructor(
-    private loadingCtrl: LoadingController,
-    private feathersService: FeathersService,
+    protected loadingCtrl: LoadingController,
+    protected toastCtrl: ToastController,
+    protected alertCtrl: AlertController,
+    protected feathersService: FeathersService,
     private tipoActivosQuery: TipoActivosQuery,
-    private tipoActivos: TipoActivosService,
-    private toastCtrl: ToastController
-  ) {}
+    private tipoActivosService: TipoActivosService
+  ) {
+    super(
+      loadingCtrl,
+      toastCtrl,
+      alertCtrl,
+      tipoActivosService,
+      feathersService
+    );
+  }
 
   ngOnInit() {}
 
-  async cargarImagen(event) {
-    (await this.foto.nativeElement.getInputElement()).click();
-  }
-
-  async crear() {
-    const loading = await this.loadingCtrl.create({
-      message: 'Guardando registro',
-    });
+  async update(model: Partial<TipoActivo>): Promise<any> {
     try {
-      await loading.present();
-      console.log(this.imagen);
-      if (this.imagen) {
-        const uploaded = await this.feathersService.upload(this.imagen);
-        this.nuevo.imagen = uploaded.id;
-      }
-      const result = await this.tipoActivos.create(this.nuevo);
-      const toast = await this.toastCtrl.create({
-        message: 'Se guardó correctamente el registro',
-        duration: 4000,
-        color: 'success',
-      });
-      await toast.present();
-    } catch (err) {
-      console.log(err);
-      const toast = await this.toastCtrl.create({
-        message: 'Ocurrió un error al guardar el registro',
-        duration: 4000,
-        color: 'danger',
-      });
-      await toast.present();
-    } finally {
-      await loading.dismiss();
-    }
+      await super.upload(model, 'imagen');
+    } catch (err) {}
+    return super.update(model);
   }
 
-  async imagenSeleccionada(file: any) {
-    if (file.target.firstElementChild.files[0]) {
-      this.imagen = file.target.firstElementChild.files[0];
-      file.target.value = '';
-    }
+  async create(model: Partial<TipoActivo>): Promise<any> {
+    try {
+      await super.upload(model, 'imagen');
+    } catch (err) {}
+    return super.create(model);
   }
 }

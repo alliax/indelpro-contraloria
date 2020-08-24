@@ -1,16 +1,48 @@
-import { DataModel } from '@alliax/feathers-client';
+import { DataModel, DeletedPropertiesModel } from '@alliax/feathers-client';
+import { Sap } from '../sap/sap.model';
+import { Adjunto } from '../adjuntos/adjunto.model';
+import { Ubicacion } from '../../../..';
 
-export interface Expediente extends DataModel {
-  // _id?: string;
-  // nombre: string;
-  // tipo: string;
-  // numeroActivo: string;
-  // numeroActivoRelacionado: string;
-  // numeroTag: string;
-  // numeroSAI: string;
-  // fechaCapitalizacion: Date;
-  // montoCapitalizado: number;
-  // moneda: string;
+export interface ExpedienteHeader {
+  AKTIV: string;
+  ANLKL: string;
+  ANLN1: string;
+  ANLN2: string;
+  GJAHR_CAPI: number;
+  MONTO_CAPIT: number;
+  POSID: string;
+  POST1: string;
+  PPTO_USD: number;
+  REAL_USD: number;
+  SERNR: string;
+  TPOACT: string;
+}
+
+export interface ExpedienteDet {
+  AUGDT: string;
+  BELNR: string;
+  BUDAT: string;
+  DMBE2: number;
+  DMBT1: number;
+  EBELN: string;
+  EBELP: string;
+  KZKRS: number; // tipo de cambio
+  LIFNR: string;
+  NAME1: string;
+  PAIS: string;
+  PEDIMENTO: string;
+  SGTXT: string;
+  SHKZG: string;
+  WAERS: string;
+  WRBT1: number;
+  ZADUANA: string;
+  ZFCHPAGO: string;
+  ZPATENTE: string;
+  ZPEDIMENTO: string;
+  ZUONR: string;
+}
+
+export interface Expediente extends DataModel, DeletedPropertiesModel {
   PROJK: string;
   NAME1: string;
   ANLN1: string;
@@ -19,6 +51,20 @@ export interface Expediente extends DataModel {
   GJAHR_CAPI: number;
   ANLKL: string;
   TPOACT: string;
+  sap?: Sap;
+  sapId?: string;
+
+  HEADER: ExpedienteHeader;
+  DET: [ExpedienteDet];
+
+  fotosId: string[];
+  fotos: Adjunto[];
+  autorizacionProyectosId: string[];
+  autorizacionProyectos: Adjunto[];
+  capitalizacionProyectosId: string[];
+  capitalizacionProyectos: Adjunto[];
+  ubicacionId: string;
+  ubicacion: Ubicacion;
 }
 
 export function createExpediente(params: Partial<Expediente>) {

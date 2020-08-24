@@ -4,7 +4,7 @@ import {
   MailerService,
   AuthManagementService,
   UploadsService,
-  UsersService
+  UsersService,
 } from '@alliax/feathers-server';
 import expedientes from './activo/expedientes/expedientes.service';
 import ajustes from './ajustes/ajustes.service';
@@ -16,7 +16,10 @@ import formasDocumentos from './formas-documentos/formas-documentos.service';
 import activoTipoActivos from './activo/tipo-activos/tipo-activos.service';
 import activos from './activo/activos/activos.service';
 import activosSap from './activo/activos-sap/activos-sap.service';
-export default function(app: Application) {
+import activoGrupoUbicaciones from './activo/grupo-ubicaciones/grupo-ubicaciones.service';
+import activoUbicaciones from './activo/ubicaciones/ubicaciones.service';
+import activoAdjuntos from './activo/adjuntos/adjuntos.service';
+export default function (app: Application) {
   app.configure(UsersService);
   app.configure(MailerService);
   app.configure(UploadsService);
@@ -31,4 +34,7 @@ export default function(app: Application) {
   app.configure(activoTipoActivos);
   app.configure(activos);
   app.configure(activosSap);
+  app.configure(activoGrupoUbicaciones);
+  app.configure(activoUbicaciones);
+  app.configure(activoAdjuntos);
 }

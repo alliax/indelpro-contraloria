@@ -12,8 +12,10 @@ export class ActivosQuery extends QueryEntity<ActivosState> {
   page$ = this.select((state) => state.ui.page);
   ultimaActualizacion$ = this.select((state) => state.ui.ultimaActualizacion);
   activo$ = this.select((state) => state.ui.activo);
-
   total$: Observable<number> = this.selectCount();
+  fechaSeleccionada$ = this.select((state) => state.ui.fecha).pipe(
+    map((fecha) => new Date(fecha).toISOString())
+  );
 
   paginados$ = merge(this.limit$, this.page$, this.selectAll()).pipe(
     withLatestFrom(this.limit$, this.page$, this.selectAll()),

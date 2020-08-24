@@ -4,10 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { DashboardPageRoutingModule } from './dashboard-routing.module';
-
 import { DashboardPage } from './dashboard.page';
 import { PipesModule } from '@alliax/feathers-client';
+import { DashboardPageRoutingModule } from './dashboard-routing.module';
 
 @NgModule({
   imports: [
@@ -15,8 +14,8 @@ import { PipesModule } from '@alliax/feathers-client';
     FormsModule,
     IonicModule,
     DashboardPageRoutingModule,
-    PipesModule
+    PipesModule,
   ],
-  declarations: [DashboardPage]
+  declarations: [DashboardPage],
 })
 export class DashboardPageModule {}

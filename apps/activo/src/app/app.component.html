@@ -3,7 +3,7 @@
   [disabled]="!(user$ | async) || (user$ | async).isVerified !== true"
 >
   <ion-menu contentId="main">
-    <ion-header>
+    <ion-header class="ion-no-border">
       <ion-toolbar color="dark">
         <ion-grid class="ion-no-padding">
           <ion-row class="ion-justify-content-center">
@@ -12,12 +12,19 @@
               size-md="5"
               class="ion-padding-vertical ion-margin-vertical ion-text-center"
             >
-              <img src="assets/auth/logo-white.png" />
+              <div class="ion-padding-vertical ion-margin-vertical">
+                <img src="assets/auth/logo-white.png" />
+              </div>
             </ion-col>
           </ion-row>
         </ion-grid>
       </ion-toolbar>
-      <ion-item lines="none" *ngIf="user$ | async as user" color="secondary">
+      <ion-item
+        lines="none"
+        *ngIf="user$ | async as user"
+        color="dark"
+        lines="none"
+      >
         <ion-avatar slot="start">
           <img
             [src]="
@@ -29,12 +36,20 @@
           <h2>{{ user.nombre }}</h2>
           <p>{{ user.email }}</p>
         </ion-label>
+        <ion-button
+          slot="end"
+          color="danger"
+          (click)="cerrarSesion()"
+          fill="clear"
+        >
+          <ion-icon name="log-out"> </ion-icon>
+        </ion-button>
       </ion-item>
     </ion-header>
     <ion-content color="dark">
       <div class="ion-padding-top" *ngFor="let categoria of menu">
         <ion-item-divider color="dark">
-          <ion-label color="secondary">
+          <ion-label color="primary">
             {{ categoria.title }}
           </ion-label>
         </ion-item-divider>
@@ -62,21 +77,6 @@
       </div>
     </ion-content>
     <ion-footer class="ion-no-border">
-      <ion-toolbar color="dark">
-        <ion-grid class="ion-no-padding">
-          <ion-row class="ion-justify-content-center">
-            <ion-col size="auto">
-              <ion-fab-button
-                color="danger"
-                (click)="cerrarSesion()"
-                size="small"
-              >
-                <ion-icon name="log-out"> </ion-icon>
-              </ion-fab-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-toolbar>
       <ion-toolbar color="dark">
         <ion-title size="small" class="ion-text-center">
           <small>

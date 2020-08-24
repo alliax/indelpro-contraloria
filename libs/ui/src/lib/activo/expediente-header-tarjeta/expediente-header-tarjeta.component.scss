@@ -1,0 +1,13 @@
+:host {
+  .cuadros {
+    background: var(--ion-color-light-tint);
+    ion-col:first-child,
+    ion-col {
+      border-right: 1px solid var(--ion-color-light-shade);
+    }
+
+    ion-col:last-child {
+      border-right: 0;
+    }
+  }
+}

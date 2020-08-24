@@ -3,6 +3,7 @@
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
 import { Application } from '../declarations';
+import { DeletedPropertiesModel } from '@alliax/feathers-server';
 
 export default function (app: Application) {
   const modelName = 'formasTipos';
@@ -12,6 +13,7 @@ export default function (app: Application) {
     {
       clave: { type: String, required: true },
       nombre: { type: String, required: true },
+      ...DeletedPropertiesModel
     },
     {
       timestamps: true,

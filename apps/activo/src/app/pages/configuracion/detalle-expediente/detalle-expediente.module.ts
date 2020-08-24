@@ -8,8 +8,9 @@ import { DetalleExpedientePageRoutingModule } from './detalle-expediente-routing
 
 import { DetalleExpedientePage } from './detalle-expediente.page';
 
-import { UiPipesModule } from '@indelpro-contraloria/ui';
+import { ActivoUiModule, UiPipesModule } from '@indelpro-contraloria/ui';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { PipesModule } from '@alliax/feathers-client';
 
 @NgModule({
   imports: [
@@ -19,6 +20,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     DetalleExpedientePageRoutingModule,
     UiPipesModule,
     NgxDatatableModule,
+    ActivoUiModule,
+    PipesModule
   ],
   providers: [],
   declarations: [DetalleExpedientePage],

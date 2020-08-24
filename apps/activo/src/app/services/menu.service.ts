@@ -19,7 +19,7 @@ export class MenuService {
         {
           title: 'Búsqueda de Expedientes',
           icon: 'search-outline',
-          url: '/herramientas/busqueda-expedientes',
+          url: '/herramientas/busqueda',
         },
       ],
     },
@@ -36,6 +36,11 @@ export class MenuService {
           icon: 'document-text-outline',
           url: '/configuracion/expedientes',
         },
+        {
+          title: 'Información de Expedientes',
+          icon: 'document-attach-outline',
+          url: '/configuracion/informacion-de-expedientes',
+        },
       ],
     },
     {
@@ -45,6 +50,16 @@ export class MenuService {
           title: 'Tipo de activos',
           icon: 'cog-outline',
           url: '/configuracion/catalogos/tipo-activos',
+        },
+        {
+          title: 'Grupo de Ubicaciones',
+          icon: 'cog-outline',
+          url: '/configuracion/catalogos/grupo-ubicaciones',
+        },
+        {
+          title: 'Ubicaciones',
+          icon: 'cog-outline',
+          url: '/configuracion/catalogos/ubicaciones',
         },
       ],
     },

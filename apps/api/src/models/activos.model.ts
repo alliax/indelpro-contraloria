@@ -4,6 +4,8 @@
 // for more of what you can do here.
 import { Application } from '../declarations';
 import { Model, Mongoose } from 'mongoose';
+import mongoose from 'mongoose';
+import { DeletedPropertiesModel } from '@alliax/feathers-server';
 
 export default function (app: Application): Model<any> {
   const modelName = 'activos';
@@ -20,6 +22,8 @@ export default function (app: Application): Model<any> {
       TPOACT: { type: String }, //  -  Descripción del tipo de Activo
       POSNR: { type: String }, // -  Elemento PEP o SAI
       KANSW: { type: Number }, //-  Valor de adquisición.  (Longitud 13 más 2 decimales)
+      sapId: { type: mongoose.SchemaTypes.ObjectId, ref: 'sapSettings' },
+      ...DeletedPropertiesModel
     },
     {
       timestamps: true,

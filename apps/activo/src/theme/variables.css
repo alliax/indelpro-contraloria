@@ -10,7 +10,7 @@ ion-split-pane {
   }
 }
 :root {
-  --ion-font-family: 'Maven Pro', sans-serif;
+  --ion-font-family: 'Karla', sans-serif;
 }
 
 :root {
@@ -21,19 +21,19 @@ ion-split-pane {
   --ion-color-primary-shade: #3f97d3;
   --ion-color-primary-tint: #5ab4f2;
 
-  --ion-color-secondary: #5b85aa;
-  --ion-color-secondary-rgb: 91, 133, 170;
+  --ion-color-secondary: #0b5484;
+  --ion-color-secondary-rgb: 11, 84, 132;
   --ion-color-secondary-contrast: #ffffff;
   --ion-color-secondary-contrast-rgb: 255, 255, 255;
-  --ion-color-secondary-shade: #507596;
-  --ion-color-secondary-tint: #6b91b3;
+  --ion-color-secondary-shade: #0a4a74;
+  --ion-color-secondary-tint: #236590;
 
-  --ion-color-tertiary: #f46036;
-  --ion-color-tertiary-rgb: 244, 96, 54;
+  --ion-color-tertiary: #de6449;
+  --ion-color-tertiary-rgb: 222, 100, 73;
   --ion-color-tertiary-contrast: #ffffff;
   --ion-color-tertiary-contrast-rgb: 255, 255, 255;
-  --ion-color-tertiary-shade: #d75430;
-  --ion-color-tertiary-tint: #f5704a;
+  --ion-color-tertiary-shade: #c35840;
+  --ion-color-tertiary-tint: #e1745b;
 
   --ion-color-success: #599f67;
   --ion-color-success-rgb: 89, 159, 103;
@@ -56,12 +56,12 @@ ion-split-pane {
   --ion-color-danger-shade: #d73b30;
   --ion-color-danger-tint: #f5564a;
 
-  --ion-color-dark: #1d1b35;
-  --ion-color-dark-rgb: 29, 27, 53;
+  --ion-color-dark: #1a0f17;
+  --ion-color-dark-rgb: 26, 15, 23;
   --ion-color-dark-contrast: #ffffff;
   --ion-color-dark-contrast-rgb: 255, 255, 255;
-  --ion-color-dark-shade: #1a182f;
-  --ion-color-dark-tint: #343249;
+  --ion-color-dark-shade: #170d14;
+  --ion-color-dark-tint: #31272e;
 
   --ion-color-medium: #989aa2;
   --ion-color-medium-rgb: 152, 154, 162;

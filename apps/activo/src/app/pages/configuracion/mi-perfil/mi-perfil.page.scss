@@ -1,0 +1,10 @@
+.imagen-avatar {
+  border-radius: 50%;
+  overflow: hidden;
+
+  .actualizar {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+}

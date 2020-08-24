@@ -57,4 +57,21 @@ export class ActivosService extends FeathersState<Activo, ActivosStore> {
       },
     }));
   }
+  actualizaFecha(nuevaFecha: Date) {
+    this.activosStore.update((state) => ({
+      ...state,
+      ui: {
+        ...state.ui,
+        fecha: nuevaFecha,
+      },
+    }));
+  }
+
+  setFiltro() {
+
+  }
+
+  setDetalle() {
+
+  }
 }

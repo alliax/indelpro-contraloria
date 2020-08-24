@@ -13,7 +13,10 @@ export interface ActivosState extends EntityState<Activo>, ActiveState {
     page?: number;
     limit?: number;
     ultimaActualizacion?: number;
-    activo?: Expediente;
+    activo?: Activo;
+    fecha?: Date;
+    listaDetalle?: Activo[];
+    filtroDetalle?: string;
   };
 }
 
@@ -26,6 +29,7 @@ export class ActivosStore extends EntityStore<ActivosState> {
         page: 1,
         limit: 10,
         ultimaActualizacion: 0,
+        fecha: new Date(),
       },
     });
   }

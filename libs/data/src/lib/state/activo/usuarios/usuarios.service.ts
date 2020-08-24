@@ -5,35 +5,19 @@ import { UsuariosStore } from './usuarios.store';
 import { Usuario } from './usuario.model';
 import { tap } from 'rxjs/operators';
 import { Service } from '@feathersjs/feathers';
-import { FeathersService } from '@alliax/feathers-client';
+import {
+  FeathersService,
+  FeathersState,
+  ServiceModel,
+} from '@alliax/feathers-client';
+import { TipoActivosStore } from '../tipo-activos/tipo-activos.store';
 
 @Injectable({ providedIn: 'root' })
-export class UsuariosService {
-  service: Service<Usuario> = this.feathersService.service('users');
-
+export class UsuariosService extends FeathersState<Usuario, UsuariosStore> {
   constructor(
-    protected store: UsuariosStore,
-    private feathersService: FeathersService
-  ) {}
-
-  load() {
-    this.service
-      .watch()
-      .find({
-        query: {
-          $sort: {
-            nombre: 1
-          }
-        }
-      })
-      .subscribe(data => this.store.set(data));
+    protected usuariosStore: UsuariosStore,
+    feathersService: FeathersService
+  ) {
+    super(usuariosStore, feathersService, new ServiceModel('users'));
   }
-
-  // get() {}
-
-  // add(usuario: Usuario) {}
-
-  // update(id, usuario: Partial<Usuario>) {}
-
-  // remove(id: ID) {}
 }

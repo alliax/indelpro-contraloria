@@ -1,0 +1,70 @@
+<ion-card>
+  <ion-item lines="none">
+    <ion-chip slot="end" color="tertiary">
+      <strong>
+        {{ header.POSID }}
+      </strong>
+    </ion-chip>
+    <ion-label class="ion-text-wrap">
+      <h6>
+        {{ header.TPOACT }}
+      </h6>
+      <h2>
+        <strong class="ion-text-uppercase">
+          {{ header.POST1 }}
+        </strong>
+      </h2>
+    </ion-label>
+  </ion-item>
+
+  <ion-item lines="none">
+    <ion-label>
+      <h2>
+        Número de activo
+      </h2>
+      <p>
+        <strong>{{ header.ANLN1 }}</strong>
+      </p>
+    </ion-label>
+  </ion-item>
+
+  <ion-item lines="none">
+    <ion-label>
+      <h2>
+        Número de activo relacionado:
+      </h2>
+      <p>
+        <strong>{{ header.ANLN2 }}</strong>
+      </p>
+    </ion-label>
+  </ion-item>
+
+  <ion-grid class="ion-padding-vertical ion-margin-top cuadros">
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <ion-col size="4" class="ion-text-center">
+        <h3 class="ion-no-margin">
+          <strong>{{ header.GJAHR_CAPI }}</strong>
+        </h3>
+        <p class="ion-no-margin">
+          Año de capitalización
+        </p>
+      </ion-col>
+      <ion-col size="4" class="ion-text-center">
+        <h3 class="ion-no-margin">
+          <strong>{{ header.PPTO_USD | currency }}</strong>
+        </h3>
+        <p class="ion-no-margin">
+          Presupuesto en dólares
+        </p>
+      </ion-col>
+      <ion-col size="4" class="ion-text-center">
+        <h3 class="ion-no-margin">
+          <strong>{{ header.REAL_USD | currency }}</strong>
+        </h3>
+        <p class="ion-no-margin">
+          Monto final en dólares
+        </p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card>

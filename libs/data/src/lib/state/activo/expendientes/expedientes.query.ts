@@ -3,7 +3,7 @@ import { QueryEntity } from '@datorama/akita';
 import { ExpedientesStore, ExpedientesState } from './expedientes.store';
 import { Expediente } from './expediente.model';
 import { Observable, merge } from 'rxjs';
-import { map, withLatestFrom, switchMap, tap, startWith } from 'rxjs/operators';
+import { map, withLatestFrom } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class ExpedientesQuery extends QueryEntity<ExpedientesState> {
@@ -11,11 +11,16 @@ export class ExpedientesQuery extends QueryEntity<ExpedientesState> {
   page$ = this.select((state) => state.ui.page);
   ultimaActualizacion$ = this.select((state) => state.ui.ultimaActualizacion);
   activo$ = this.select((state) => state.ui.activo);
-
   total$: Observable<number> = this.selectCount();
-
-  paginados$ = merge(this.limit$, this.page$, this.selectAll()).pipe(
-    withLatestFrom(this.limit$, this.page$, this.selectAll()),
+  ordenados$: Observable<Expediente[]> = this.selectAll().pipe(
+    map((listado) =>
+      listado.sort(
+        (a, b) => new Date(b.AKTIV).valueOf() - new Date(a.AKTIV).valueOf()
+      )
+    )
+  );
+  paginados$ = merge(this.limit$, this.page$, this.ordenados$).pipe(
+    withLatestFrom(this.limit$, this.page$, this.ordenados$),
     map((value: [any, number, number, Expediente[]]) => {
       const limit = value[1];
       const page = value[2];

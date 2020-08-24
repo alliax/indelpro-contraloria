@@ -3,7 +3,6 @@ import favicon from 'serve-favicon';
 import compress from 'compression';
 import helmet from 'helmet';
 import cors from 'cors';
-import fs from 'fs';
 
 import feathers from '@feathersjs/feathers';
 process.env['NODE_CONFIG_DIR'] = path.join(__dirname, 'config/');

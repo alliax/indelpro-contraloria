@@ -8,6 +8,7 @@ import {
 import { Application } from '../../../declarations';
 import { Client, RfcConnectionParameters } from 'node-rfc';
 import { NotImplemented } from '@feathersjs/errors';
+import { SapSettings } from '../sap-settings/sap-settings.class';
 
 interface Data {
   PROJK: string;
@@ -18,6 +19,7 @@ interface Data {
   GJAHR_CAPI: number;
   ANLKL: string;
   TPOACT: string;
+  sapId: string;
 }
 
 interface ServiceOptions {}
@@ -25,7 +27,7 @@ interface ServiceOptions {}
 export class ExpedientesSap implements ServiceMethods<Data> {
   app: Application;
   options: ServiceOptions;
-  abapSystem: RfcConnectionParameters = {
+  /*abapSystem: RfcConnectionParameters = {
     user: 'prgr05',
     passwd: 'Passindqas#19',
     ashost: '10.241.0.9',
@@ -33,7 +35,7 @@ export class ExpedientesSap implements ServiceMethods<Data> {
     sysid: 'DES',
     sysnr: '00',
     lang: 'es',
-  };
+  };*/
   /*abapSystem: RfcConnectionParameters = {
     user: 'EFRFC005',
     passwd: 'EFMOVIL1',
@@ -50,7 +52,16 @@ export class ExpedientesSap implements ServiceMethods<Data> {
 
   async find(params?: Params): Promise<Data[] | Paginated<Data>> {
     try {
-      const client: Client = new Client(this.abapSystem);
+      const sapActivo: SapSettings[] = (await this.app
+        .service((this.app.get('path') + 'sap-settings') as 'sap-settings')
+        .find({
+          query: {
+            activo: true,
+          },
+          paginate: false,
+        })) as SapSettings[];
+
+      const client: Client = new Client(sapActivo[0]);
       await client.open();
       const functionName = 'ZCS_EXTRACT_WBS_2';
       const WBS_RESULT = await client.call(functionName, {
@@ -80,10 +91,12 @@ export class ExpedientesSap implements ServiceMethods<Data> {
           .find({
             query: {
               PROJK: registro.PROJK,
+              sapId: sapActivo[0]._id,
             },
             paginate: false,
           })
-          .then((existe) => {
+          .then((existe: any) => {
+            registro.sapId = sapActivo[0]._id;
             if (Array.isArray(existe) && existe.length === 0) {
               this.app
                 .service(
@@ -108,24 +121,34 @@ export class ExpedientesSap implements ServiceMethods<Data> {
   }
 
   async get(id: Id, params?: Params): Promise<Data> {
-    const registro = await this.app
-      .service((this.app.get('path') + 'expedientes') as 'expedientes')
-      .get(id);
-    const client: Client = new Client(this.abapSystem);
-    await client.open();
-    const functionName = 'ZCS_INF_SAI_AF';
-
-    return client.call(functionName, {
-      POSID: registro.PROJK,
-    });
-
-    // const WBS_RESULT = await client.call(functionName, {
-    //   POSID: registro.PROJK
-    // });
-    // const tabla = WBS_RESULT;
-    // await client.close();
-
-    // return tabla;
+    try {
+      const sapActivo: SapSettings[] = (await this.app
+        .service((this.app.get('path') + 'sap-settings') as 'sap-settings')
+        .find({
+          query: {
+            activo: true,
+          },
+          paginate: false,
+        })) as SapSettings[];
+      const registro = await this.app
+        .service((this.app.get('path') + 'expedientes') as 'expedientes')
+        .get(id);
+      const client: Client = new Client(sapActivo[0]);
+      await client.open();
+      const functionName = 'ZCS_INF_SAI_AF';
+      const response = await client.call(functionName, {
+        POSID: registro.PROJK,
+      });
+      await this.app
+        .service((this.app.get('path') + 'expedientes') as 'expedientes')
+        .patch(id, {
+          HEADER: response.HEADER,
+          DET: response.DET,
+        });
+      return response;
+    } catch (err) {
+      throw new Error(err);
+    }
   }
 
   async create(data: Data, params?: Params): Promise<Data> {

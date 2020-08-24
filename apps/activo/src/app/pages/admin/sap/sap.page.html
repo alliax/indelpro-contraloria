@@ -1,65 +1,68 @@
 <ion-header>
   <ion-toolbar color="secondary">
     <ion-title>Configuración de SAP</ion-title>
+    <ion-buttons slot="end">
+      <ion-item color="secondary" *ngIf="sapActivo$ | async as activo">
+        <ion-label>
+          Configuración activa
+        </ion-label>
+        <ion-select (ionChange)="cambiaActiva($event)" [value]="activo">
+          <ion-select-option
+            *ngFor="let sap of registros$ | async"
+            [value]="sap"
+          >
+            {{sap.nombre}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content color="light">
-  <ion-grid>
-    <ion-row>
-      <ion-col size="5">
-        <form>
-          <ion-card>
-            <ion-card-header>
-              <ion-card-title>
-                Configuración de SAP
-              </ion-card-title>
-              <ion-card-subtitle>
-                Actualiza la información de conexión al SAP de Indelpro donde se
-                obtendrán los expedientes de Activo Fijo
-              </ion-card-subtitle>
-            </ion-card-header>
-            <ion-list>
-              <ion-item>
-                <ion-label position="stacked">
-                  Host
-                </ion-label>
-                <ion-input type="text" value="10.241.0.9"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label position="stacked">
-                  ID de Sistema
-                </ion-label>
-                <ion-input type="text" value="DES"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label position="stacked">
-                  Número de Cliente
-                </ion-label>
-                <ion-input type="text" value="00"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label position="stacked">
-                  Usuario
-                </ion-label>
-                <ion-input type="text" value="prgr05"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label position="stacked">
-                  Contraseña
-                </ion-label>
-                <ion-input type="password" value="Passindqas#17"></ion-input>
-              </ion-item>
-            </ion-list>
-            <div class="ion-padding ion-text-end">
-              <ion-button color="primary">
-                Guardar
-                <ion-icon name="save-outline" slot="end"></ion-icon>
-              </ion-button>
-            </div>
-          </ion-card>
-        </form>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <alliax-admin-panel>
+    <ng-container slot="sidebar">
+      <alliax-form-control
+        [form]="form"
+        [fields]="fields"
+        [model]="model"
+        (enviar)="onSubmit($event)"
+        (limpiar)="resetButton()"
+      >
+      </alliax-form-control>
+    </ng-container>
+    <ng-container slot="content">
+      <alliax-list-item
+        *ngFor="let registro of registros$ | async; let i = index"
+        [registro]="registro"
+        firstLine="nombre"
+        (eliminar)="remove($event)"
+        (actualizar)="edit($event)"
+      >
+        <ng-container slot="orden">
+          <ion-chip color="secondary" slot="start">
+            {{i+1}}
+          </ion-chip>
+        </ng-container>
+        <!--<ion-icon
+          slot="start"
+          *ngIf="registro.activo === true"
+          name="checkbox"
+          color="success"
+        >
+        </ion-icon>-->
+        <ion-label>
+          <h2>
+            {{registro.nombre}}
+            <ion-chip color="success" *ngIf="registro.activo === true"
+              >Activo</ion-chip
+            >
+          </h2>
+          <p>
+            {{registro.ashost}}
+          </p>
+        </ion-label>
+      </alliax-list-item>
+    </ng-container>
+  </alliax-admin-panel>
 </ion-content>

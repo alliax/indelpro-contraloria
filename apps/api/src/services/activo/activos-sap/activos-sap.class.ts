@@ -8,6 +8,7 @@ import {
 import { Application } from '../../../declarations';
 import { Client, RfcConnectionParameters } from 'node-rfc';
 import { NotImplemented } from '@feathersjs/errors';
+import { SapSettings } from '../sap-settings/sap-settings.class';
 
 interface Data {
   ANLN1: string;
@@ -19,6 +20,7 @@ interface Data {
   TPOACT: string;
   POSNR: string;
   KANSW: number;
+  sapId: string;
 }
 
 interface ServiceOptions {}
@@ -26,7 +28,7 @@ interface ServiceOptions {}
 export class ActivosSap implements ServiceMethods<Data> {
   app: Application;
   options: ServiceOptions;
-  abapSystem: RfcConnectionParameters = {
+  /*abapSystem: RfcConnectionParameters = {
     user: 'prgr05',
     passwd: 'Passindqas#19',
     ashost: '10.241.0.9',
@@ -34,7 +36,7 @@ export class ActivosSap implements ServiceMethods<Data> {
     sysid: 'DES',
     sysnr: '00',
     lang: 'es',
-  };
+  };*/
 
   constructor(options: ServiceOptions = {}, app: Application) {
     this.options = options;
@@ -43,7 +45,16 @@ export class ActivosSap implements ServiceMethods<Data> {
 
   async find(params?: Params): Promise<Data[] | Paginated<Data>> {
     try {
-      const client: Client = new Client(this.abapSystem);
+      const sapActivo: SapSettings[] = (await this.app
+        .service((this.app.get('path') + 'sap-settings') as 'sap-settings')
+        .find({
+          query: {
+            activo: true,
+          },
+          paginate: false,
+        })) as SapSettings[];
+
+      const client: Client = new Client(sapActivo[0]);
       await client.open();
       const functionName = 'ZCS_EXTRACT_ACTIVO';
       const WBS_RESULT = await client.call(functionName, {
@@ -72,10 +83,12 @@ export class ActivosSap implements ServiceMethods<Data> {
           .find({
             query: {
               ANLN1: registro.ANLN1,
+              sapId: sapActivo[0]._id,
             },
-            paginate:false
+            paginate: false,
           })
-          .then((existe) => {
+          .then((existe: any) => {
+            registro.sapId = sapActivo[0]._id;
             if (Array.isArray(existe) && existe.length === 0) {
               this.app
                 .service((this.app.get('path') + 'activos') as 'activos')

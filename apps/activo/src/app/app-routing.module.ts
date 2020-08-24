@@ -12,7 +12,7 @@ const routes: Routes = [
     path: 'dashboard',
     canActivate: [AuthGuard, VerifyGuard],
     loadChildren: () =>
-      import('./pages/dashboard/dashboard.module').then(
+      import('./pages/herramientas/dashboard/dashboard.module').then(
         (m) => m.DashboardPageModule
       ),
   },
@@ -46,11 +46,38 @@ const routes: Routes = [
         ],
       },
       {
-        path: 'busqueda-expedientes',
-        loadChildren: () =>
-          import(
-            './pages/herramientas/busqueda-expedientes/busqueda-expedientes.module'
-          ).then((m) => m.BusquedaExpedientesPageModule),
+        path: 'busqueda',
+        children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            loadChildren: () =>
+              import(
+                './pages/herramientas/busqueda-expedientes/busqueda-expedientes.module'
+              ).then((m) => m.BusquedaExpedientesPageModule),
+          },
+          {
+            path: 'tipo/:id/:nombre',
+            loadChildren: () =>
+              import(
+                './pages/herramientas/busqueda/busqueda-tipo/busqueda-tipo.module'
+              ).then((m) => m.BusquedaTipoPageModule),
+          },
+          {
+            path: 'ubicacion/:id/:nombre',
+            loadChildren: () =>
+              import(
+                './pages/herramientas/busqueda/busqueda-ubicacion/busqueda-ubicacion.module'
+              ).then((m) => m.BusquedaUbicacionPageModule),
+          },
+          {
+            path: 'datos',
+            loadChildren: () =>
+              import(
+                './pages/herramientas/busqueda/busqueda-datos/busqueda-datos.module'
+              ).then((m) => m.BusquedaDatosPageModule),
+          },
+        ],
       },
     ],
   },
@@ -87,6 +114,20 @@ const routes: Routes = [
                 './pages/configuracion/catalogos/tipo-activos/tipo-activos.module'
               ).then((m) => m.TipoActivosPageModule),
           },
+          {
+            path: 'ubicaciones',
+            loadChildren: () =>
+              import(
+                './pages/configuracion/catalogos/ubicaciones/ubicaciones.module'
+              ).then((m) => m.UbicacionesPageModule),
+          },
+          {
+            path: 'grupo-ubicaciones',
+            loadChildren: () =>
+              import(
+                './pages/configuracion/catalogos/grupo-ubicaciones/grupo-ubicaciones.module'
+              ).then((m) => m.GrupoUbicacionesPageModule),
+          },
         ],
       },
     ],
@@ -113,6 +154,17 @@ const routes: Routes = [
           import('./pages/admin/sap/sap.module').then((m) => m.SapPageModule),
       },
     ],
+  },
+  {
+    path: 'detalle-activos',
+    loadChildren: () =>
+      import(
+        './pages/herramientas/detalle-activos/detalle-activos.module'
+      ).then((m) => m.DetalleActivosPageModule),
+  },
+  {
+    path: 'informacion-expedientes',
+    loadChildren: () => import('./pages/configuracion/informacion-expedientes/informacion-expedientes.module').then( m => m.InformacionExpedientesPageModule)
   },
 ];
 

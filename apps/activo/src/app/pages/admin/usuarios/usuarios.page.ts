@@ -2,18 +2,102 @@ import { Component, OnInit } from '@angular/core';
 import {
   Usuario,
   UsuariosService,
-  UsuariosQuery
+  UsuariosQuery,
+  TipoActivo,
+  createUsuario,
 } from '@indelpro-contraloria/data';
-import { Observable } from 'rxjs';
+import { DataEntryClass, FeathersService } from '@alliax/feathers-client';
+import {
+  AlertController,
+  LoadingController,
+  ToastController,
+} from '@ionic/angular';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'indelpro-contraloria-usuarios',
   templateUrl: './usuarios.page.html',
-  styleUrls: ['./usuarios.page.scss']
+  styleUrls: ['./usuarios.page.scss'],
 })
-export class UsuariosPage implements OnInit {
-  usuarios$: Observable<Usuario[]> = this.usuariosQuery.selectAll();
-  constructor(private usuariosQuery: UsuariosQuery) {}
+export class UsuariosPage extends DataEntryClass<Usuario, UsuariosService>
+  implements OnInit {
+  registros$ = this.usuariosQuery
+    .selectAll()
+    .pipe(tap((val) => console.log(val)));
+  model = createUsuario({});
+  fields = [
+    {
+      key: '_id',
+      type: 'input',
+      className: 'form-hidden',
+      templateOptions: {
+        type: 'hidden',
+      },
+    },
+    {
+      key: 'nombre',
+      type: 'input',
+      templateOptions: {
+        label: 'Nombre del usuario',
+        placeholder: 'Ingresa un nombre',
+        labelPosition: 'stacked',
+        required: true,
+      },
+      validation: {
+        messages: {
+          required: 'Debes ingresar el nombre del usuario',
+        },
+      },
+    },
+    {
+      key: 'email',
+      type: 'input',
+      templateOptions: {
+        label: 'Correo electrónico',
+        placeholder: 'Ingresa un correo electrónico',
+        labelPosition: 'stacked',
+        required: true,
+      },
+      validation: {
+        messages: {
+          required: 'Debes ingresar el correo electrónico',
+        },
+      },
+    },
+    {
+      key: 'foto',
+      type: 'input',
+      className: 'form-hidden',
+      templateOptions: {
+        type: 'hidden',
+      },
+    },
+  ];
+
+  constructor(
+    protected loadingCtrl: LoadingController,
+    protected toastCtrl: ToastController,
+    protected alertCtrl: AlertController,
+    protected feathersService: FeathersService,
+    private usuariosQuery: UsuariosQuery,
+    private usuariosService: UsuariosService
+  ) {
+    super(loadingCtrl, toastCtrl, alertCtrl, usuariosService, feathersService);
+  }
 
   ngOnInit() {}
+
+  async update(model: Partial<TipoActivo>): Promise<any> {
+    try {
+      await super.upload(model, 'foto');
+    } catch (err) {}
+    return super.update(model);
+  }
+
+  async create(model: Partial<TipoActivo>): Promise<any> {
+    try {
+      await super.upload(model, 'foto');
+    } catch (err) {}
+    return super.create(model);
+  }
 }

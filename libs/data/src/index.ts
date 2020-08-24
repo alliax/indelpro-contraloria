@@ -4,7 +4,10 @@ export * from './lib/state/activo/expendientes/expediente.model';
 export * from './lib/state/activo/expendientes/expedientes.query';
 export * from './lib/state/activo/expendientes/expedientes.service';
 
+export * from './lib/state/activo/adjuntos/adjunto.model';
+
 export * from './lib/state/activo/activos/activo.model';
+export * from './lib/state/activo/activos/grupo-activo.model';
 export * from './lib/state/activo/activos/activos.query';
 export * from './lib/state/activo/activos/activos.service';
 
@@ -19,6 +22,18 @@ export * from './lib/state/activo/ajustes/ajustes.service';
 export * from './lib/state/activo/tipo-activos/tipo-activo.model';
 export * from './lib/state/activo/tipo-activos/tipo-activos.query';
 export * from './lib/state/activo/tipo-activos/tipo-activos.service';
+
+export * from './lib/state/activo/grupo-ubicaciones/grupo-ubicacion.model';
+export * from './lib/state/activo/grupo-ubicaciones/grupo-ubicaciones.query';
+export * from './lib/state/activo/grupo-ubicaciones/grupo-ubicaciones.service';
+
+export * from './lib/state/activo/ubicaciones/ubicacion.model';
+export * from './lib/state/activo/ubicaciones/ubicaciones.query';
+export * from './lib/state/activo/ubicaciones/ubicaciones.service';
+
+export * from './lib/state/activo/sap/sap.model';
+export * from './lib/state/activo/sap/sap.query';
+export * from './lib/state/activo/sap/sap.service';
 
 export * from './lib/state/state.service';
 

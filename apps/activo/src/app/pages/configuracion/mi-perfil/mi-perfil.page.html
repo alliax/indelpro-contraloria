@@ -6,44 +6,39 @@
 
 <ion-content color="light">
   <ion-grid fixed *ngIf="user$ | async as user">
-    <ion-row class="ion-justify-content-center">
-      <ion-col size="11">
-        <ion-card>
-          <ion-grid class="ion-no-padding">
-            <ion-row>
-              <ion-col size="3">
-                <img
-                  [src]="user.foto ? (user.foto | upload) : 'assets/img/no-profile.jpg'"
-                />
-                <ion-item color="secondary">
-                  <ion-label>
-                    <h2>{{user.nombre}}</h2>
-                    <p>{{user.email}}</p>
-                  </ion-label>
-                </ion-item>
-              </ion-col>
-              <ion-col size="9">
-                <div class="ion-padding-start">
-                  <h3>
-                    Actualizar información
-                  </h3>
-                </div>
-                <div class="ion-padding">
-                  <ion-button color="primary" (click)="actualizarFoto($event)">
-                    Actualizar foto
-                    <ion-icon name="camera-outline" slot="end"></ion-icon>
-                  </ion-button>
-                  <ion-input
-                    type="file"
-                    #foto
-                    [hidden]="true"
-                    (ionChange)="fotoSeleccionada($event)"
-                  ></ion-input>
-                </div>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card>
+    <ion-row
+      class="ion-justify-content-start ion-align-items-center ion-padding-vertical"
+    >
+      <ion-col size="2">
+        <div class="imagen-avatar">
+          <img
+            [src]="user.foto ? (user.foto | upload) : 'assets/img/no-profile.jpg'"
+          />
+          <ion-fab-button
+            color="primary"
+            (click)="actualizarFoto($event)"
+            class="actualizar"
+            size="small"
+          >
+            <ion-icon name="camera-outline"></ion-icon>
+          </ion-fab-button>
+          <ion-input
+            type="file"
+            style="display: none;"
+            #foto
+            (ionChange)="fotoSeleccionada($event)"
+          ></ion-input>
+        </div>
+      </ion-col>
+      <ion-col size="10" class="ion-padding-start">
+        <div class="ion-padding-horizontal">
+          <h2 class="ion-no-margin">
+            {{user.nombre}}
+          </h2>
+          <h6 class="ion-no-margin">
+            {{user.email}}
+          </h6>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>

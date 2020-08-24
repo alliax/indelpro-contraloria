@@ -4,6 +4,7 @@
 // for more of what you can do here.
 import { Application } from '../declarations';
 import mongoose from 'mongoose';
+import { DeletedPropertiesModel } from '@alliax/feathers-server';
 
 export default function (app: Application) {
   const modelName = 'formasDocumentos';
@@ -14,6 +15,7 @@ export default function (app: Application) {
       clave: { type: String, required: true },
       nombre: { type: String },
       tipoId: { type: mongoose.SchemaTypes.ObjectId, ref: 'formas-tipos' },
+      ...DeletedPropertiesModel
     },
     {
       timestamps: true,

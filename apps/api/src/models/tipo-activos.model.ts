@@ -3,6 +3,7 @@
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
 import { Application } from '../declarations';
+import { DeletedPropertiesModel } from '@alliax/feathers-server';
 
 export default function (app: Application) {
   const modelName = 'tipoActivos';
@@ -13,6 +14,7 @@ export default function (app: Application) {
       nombre: { type: String, required: true },
       imagen: { type: String },
       claveSap: { type: String, required: true },
+      ...DeletedPropertiesModel
     },
     {
       timestamps: true,

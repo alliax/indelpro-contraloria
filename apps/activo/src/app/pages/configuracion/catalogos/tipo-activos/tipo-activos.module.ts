@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { TipoActivosPageRoutingModule } from './tipo-activos-routing.module';
 
 import { TipoActivosPage } from './tipo-activos.page';
-import { PipesModule } from '@alliax/feathers-client';
+import { PipesModule, IonicComponentsModule } from '@alliax/feathers-client';
 
 @NgModule({
   imports: [
@@ -15,8 +15,9 @@ import { PipesModule } from '@alliax/feathers-client';
     FormsModule,
     IonicModule,
     TipoActivosPageRoutingModule,
-    PipesModule
+    PipesModule,
+    IonicComponentsModule,
   ],
-  declarations: [TipoActivosPage]
+  declarations: [TipoActivosPage],
 })
 export class TipoActivosPageModule {}

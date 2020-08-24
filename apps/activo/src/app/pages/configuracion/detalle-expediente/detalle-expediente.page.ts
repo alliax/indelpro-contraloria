@@ -1,11 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  Expediente,
+  ExpedienteDet,
+  ExpedienteHeader,
   ExpedientesQuery,
   ExpedientesService,
 } from '@indelpro-contraloria/data';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { FeathersService } from '@alliax/feathers-client';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Observable } from 'rxjs';
+import { filter, map, switchMap, tap } from 'rxjs/operators';
+import { Adjunto } from '@indelpro-contraloria/data';
 
 @Component({
   selector: 'indelpro-contraloria-detalle-expediente',
@@ -16,6 +22,10 @@ export class DetalleExpedientePage implements OnInit {
   expedienteId: string;
   activo: any;
   rows: any[] = [];
+  detalleVisible = false;
+  autorizacionVisible = false;
+  capitalizacionVisible = false;
+  actualizandoSap = false;
   columns = [
     { name: 'Factura adjunta' },
     { name: 'Fecha de pago', prop: 'AUGDT' },
@@ -41,18 +51,52 @@ export class DetalleExpedientePage implements OnInit {
     { name: 'ZPEDIMIENTO', prop: 'ZPEDIMIENTO' },
     { name: 'ZUONR', prop: 'ZUONR' },
   ];
-  /*
 
-   <ion-item>
-                <ion-chip slot="end" color="secondary">
-                  {{detalle.DMBT1 | currency}} USD /&nbsp;
-                  <strong
-                    >{{detalle.WRBT1 | currency}} {{detalle.WAERS}}</strong
-                  >
-                </ion-chip>
-              </ion-item>
+  cargando$: Observable<boolean> = this.expedientesQuery.selectLoading();
+  expediente$: Observable<Expediente> = this.active.paramMap.pipe(
+    map((paramsMap: ParamMap) => paramsMap.get('expedienteId')),
+    filter((_id) => !!_id),
+    switchMap((_id: string) =>
+      this.expedientesQuery.selectEntity(_id).pipe(
+        filter((expediente) => !!expediente),
+        tap(async (expediente: Expediente) => {
+          this.rows = expediente.DET;
+          this.actualizandoSap = true;
+          try {
+            // await this.feathersService.service('expedientes-sap').get(_id);
+            await (
+              await this.toastCtrl.create({
+                message: 'Se actualizó correctamente el registro desde SAP',
+                color: 'success',
+                duration: 4500,
+              })
+            ).present();
+          } catch (err) {
+            await (
+              await this.toastCtrl.create({
+                message:
+                  'Ocurrió un error al actualizar el expedientes desde SAP',
+                color: 'danger',
+                duration: 4500,
+              })
+            ).present();
+          } finally {
+            this.actualizandoSap = false;
+          }
+        })
+      )
+    )
+  );
 
-   */
+  fotos$: Observable<Adjunto[]> = this.expediente$.pipe(
+    map((expediente: Expediente) => expediente.fotos)
+  );
+  header$: Observable<ExpedienteHeader> = this.expediente$.pipe(
+    map((expediente: Expediente) => expediente.HEADER)
+  );
+  det$: Observable<ExpedienteDet[]> = this.expediente$.pipe(
+    map((expediente: Expediente) => expediente.DET)
+  );
 
   constructor(
     private active: ActivatedRoute,
@@ -63,21 +107,5 @@ export class DetalleExpedientePage implements OnInit {
     private feathersService: FeathersService
   ) {}
 
-  async ngOnInit() {
-    const cargando = await this.loadingCtrl.create({
-      message: 'Cargando detalles del expediente',
-    });
-    await cargando.present();
-
-    this.expedienteId = this.active.snapshot.paramMap.get('expedienteId');
-    this.feathersService
-      .service('expedientes-sap')
-      .get(this.expedienteId)
-      .then((datos) => {
-        this.activo = datos;
-        this.rows = datos.DET;
-        console.log(datos);
-        cargando.dismiss();
-      });
-  }
+  async ngOnInit() {}
 }
