@@ -12,7 +12,7 @@ import {
   AuthService,
   FeathersService,
 } from '@alliax/feathers-client';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 
@@ -26,6 +26,7 @@ export class MiPerfilPage implements OnInit {
   user$: Observable<User> = this.authQuery.selectUser$;
   @ViewChild('foto', { read: ElementRef, static: false }) foto: ElementRef;
   form: FormGroup = new FormGroup({});
+  cumplimiento: number;
   fields: FormlyFieldConfig[] = [
     {
       key: 'oldPassword',
@@ -35,6 +36,7 @@ export class MiPerfilPage implements OnInit {
         label: 'Contraseña actual',
         labelPosition: 'stacked',
         required: true,
+        lines: 'full',
       },
       validation: {
         messages: {
@@ -50,6 +52,7 @@ export class MiPerfilPage implements OnInit {
         label: 'Nueva contraseña',
         labelPosition: 'stacked',
         required: true,
+        lines: 'full',
       },
       validation: {
         messages: {
@@ -61,12 +64,16 @@ export class MiPerfilPage implements OnInit {
   model: {
     oldPassword: string;
     password: string;
+  } = {
+    oldPassword: '',
+    password: '',
   };
 
   constructor(
     private authQuery: AuthQuery,
     private loadingCtrl: LoadingController,
     private authService: AuthService,
+    private toastCtrl: ToastController,
     private feathersService: FeathersService
   ) {}
 
@@ -94,7 +101,34 @@ export class MiPerfilPage implements OnInit {
     }
   }
 
-  async actualizarPassword(){
-    this.authService.
+  async actualizarPassword() {
+    const actualizando = await this.loadingCtrl.create({});
+    await actualizando.present();
+    try {
+      await this.authService.updatePasswordByEmail(
+        this.model.oldPassword,
+        this.model.password
+      );
+      await actualizando.dismiss();
+      this.form.reset();
+      await (
+        await this.toastCtrl.create({
+          message: 'Se actualizó correctamente tu contraseña',
+          color: 'success',
+          duration: 4500,
+        })
+      ).present();
+    } catch (err) {
+      console.error(err);
+      await actualizando.dismiss();
+      await (
+        await this.toastCtrl.create({
+          message:
+            'Ocurrió un error al actualizar tu contraseña, intenta de nuevo',
+          color: 'danger',
+          duration: 4500,
+        })
+      ).present();
+    }
   }
 }

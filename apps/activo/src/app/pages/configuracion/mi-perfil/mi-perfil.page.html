@@ -51,6 +51,13 @@
             [fields]="fields"
             [model]="model"
           ></formly-form>
+          <div class="ion-padding-start">
+            <alliax-validate-password
+              [password]="model.password"
+              *ngIf="model.password && model.password.length > 0"
+            ></alliax-validate-password>
+          </div>
+
           <div class="ion-padding ion-text-end">
             <ion-button fill="clear" color="medium" (click)="form.reset()">
               Cancelar
