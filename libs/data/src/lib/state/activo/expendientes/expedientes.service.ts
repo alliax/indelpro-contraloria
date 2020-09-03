@@ -4,7 +4,7 @@ import { Service } from '@feathersjs/feathers';
 import {
   FeathersService,
   ServiceModel,
-  FeathersState
+  FeathersState,
 } from '@alliax/feathers-client';
 import { Expediente } from './expediente.model';
 
@@ -20,40 +20,44 @@ export class ExpedientesService extends FeathersState<
     super(expedientesStore, feathersService, new ServiceModel('expedientes'));
   }
 
+  cambiarActivo(id) {
+    this.expedientesStore.setActive(id);
+  }
+
   cambiarPagina(cantidad: number) {
-    this.expedientesStore.update(state => ({
+    this.expedientesStore.update((state) => ({
       ...state,
       ui: {
         ...state.ui,
-        page: state.ui.page + cantidad
-      }
+        page: state.ui.page + cantidad,
+      },
     }));
   }
   setPage(page: number) {
-    this.expedientesStore.update(state => ({
+    this.expedientesStore.update((state) => ({
       ...state,
       ui: {
         ...state.ui,
-        page
-      }
+        page,
+      },
     }));
   }
   setLimit(limit: number) {
-    this.expedientesStore.update(state => ({
+    this.expedientesStore.update((state) => ({
       ...state,
       ui: {
         ...state.ui,
-        limit
-      }
+        limit,
+      },
     }));
   }
   setUltimaActualizacion(registros: number) {
-    this.expedientesStore.update(state => ({
+    this.expedientesStore.update((state) => ({
       ...state,
       ui: {
         ...state.ui,
-        ultimaActualizacion: registros
-      }
+        ultimaActualizacion: registros,
+      },
     }));
   }
 }

@@ -40,8 +40,15 @@ const routes: Routes = [
             path: ':expedienteId',
             loadChildren: () =>
               import(
-                './pages/configuracion/detalle-expediente/detalle-expediente.module'
+                './pages/herramientas/detalle-expediente/detalle-expediente.module'
               ).then((m) => m.DetalleExpedientePageModule),
+          },
+          {
+            path: 'detalle-activos',
+            loadChildren: () =>
+              import(
+                './pages/herramientas/detalle-activos/detalle-activos.module'
+              ).then((m) => m.DetalleActivosPageModule),
           },
         ],
       },
@@ -53,7 +60,7 @@ const routes: Routes = [
             pathMatch: 'full',
             loadChildren: () =>
               import(
-                './pages/herramientas/busqueda-expedientes/busqueda-expedientes.module'
+                './pages/herramientas/busqueda/busqueda-expedientes/busqueda-expedientes.module'
               ).then((m) => m.BusquedaExpedientesPageModule),
           },
           {
@@ -154,17 +161,6 @@ const routes: Routes = [
           import('./pages/admin/sap/sap.module').then((m) => m.SapPageModule),
       },
     ],
-  },
-  {
-    path: 'detalle-activos',
-    loadChildren: () =>
-      import(
-        './pages/herramientas/detalle-activos/detalle-activos.module'
-      ).then((m) => m.DetalleActivosPageModule),
-  },
-  {
-    path: 'informacion-expedientes',
-    loadChildren: () => import('./pages/configuracion/informacion-expedientes/informacion-expedientes.module').then( m => m.InformacionExpedientesPageModule)
   },
 ];
 

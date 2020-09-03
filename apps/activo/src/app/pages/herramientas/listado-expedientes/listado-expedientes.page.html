@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>Listado de Expedientes</ion-title>
   </ion-toolbar>
   <ion-toolbar color="secondary">
@@ -22,29 +25,14 @@
   </ng-container>
 
   <ng-template #datos>
-    <ion-grid>
+    <ion-grid fixed>
       <ion-row>
         <ion-col size="12">
           <ion-card>
-            <ion-item
-              button
-              lines="full"
+            <indelpro-contraloria-expediente-lista-elemento
               *ngFor="let expediente of resultados$ | async"
-              [routerLink]="'/herramientas/listado-expedientes/' + expediente._id"
-            >
-              <ion-chip color="secondary" slot="end" *ngIf="expediente.AKTIV">
-                {{expediente.AKTIV | date:'dd/MM/yyyy'}}
-              </ion-chip>
-              <ion-chip slot="start" color="tertiary">
-                <ion-text>
-                  {{expediente.PROJK}}
-                </ion-text>
-              </ion-chip>
-              <ion-label>
-                <h2><strong>{{expediente.NAME1}}</strong></h2>
-                <p>{{expediente.TXT50}}</p>
-              </ion-label>
-            </ion-item>
+              [expediente]="expediente"
+            ></indelpro-contraloria-expediente-lista-elemento>
           </ion-card>
         </ion-col>
       </ion-row>
@@ -101,25 +89,10 @@
         <ion-row>
           <ion-col>
             <ion-card>
-              <ion-item
-                button
-                lines="full"
+              <indelpro-contraloria-expediente-lista-elemento
                 *ngFor="let expediente of expedientes"
-                [routerLink]="'/herramientas/listado-expedientes/' + expediente._id"
-              >
-                <ion-chip color="secondary" slot="end" *ngIf="expediente.AKTIV">
-                  {{expediente.AKTIV | date:'dd/MM/yyyy'}}
-                </ion-chip>
-                <ion-chip slot="start" color="tertiary">
-                  <ion-text>
-                    {{expediente.PROJK}}
-                  </ion-text>
-                </ion-chip>
-                <ion-label>
-                  <h2><strong>{{expediente.NAME1}}</strong></h2>
-                  <p>{{expediente.TXT50}}</p>
-                </ion-label>
-              </ion-item>
+                [expediente]="expediente"
+              ></indelpro-contraloria-expediente-lista-elemento>
             </ion-card>
           </ion-col>
         </ion-row>

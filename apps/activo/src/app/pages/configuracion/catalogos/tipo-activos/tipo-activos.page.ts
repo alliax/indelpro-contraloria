@@ -12,10 +12,9 @@ import {
 import {
   createTipoActivo,
   TipoActivo,
-} from '../../../../../../../../libs/data/src/lib/state/activo/tipo-activos/tipo-activo.model';
-import { TipoActivosService } from '../../../../../../../../libs/data/src/lib/state/activo/tipo-activos/tipo-activos.service';
-import { TipoActivosQuery } from '../../../../../../../../libs/data/src/lib/state/activo/tipo-activos/tipo-activos.query';
-import { Observable } from 'rxjs';
+  TipoActivosService,
+  TipoActivosQuery,
+} from '@indelpro-contraloria/data';
 
 @Component({
   selector: 'indelpro-contraloria-tipo-activos',

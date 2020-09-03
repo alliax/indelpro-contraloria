@@ -20,6 +20,9 @@ interface Data {
   ANLKL: string;
   TPOACT: string;
   sapId: string;
+  HEADER?: any;
+  DET?: any;
+  ACT_REL?: any;
 }
 
 interface ServiceOptions {}
@@ -27,23 +30,6 @@ interface ServiceOptions {}
 export class ExpedientesSap implements ServiceMethods<Data> {
   app: Application;
   options: ServiceOptions;
-  /*abapSystem: RfcConnectionParameters = {
-    user: 'prgr05',
-    passwd: 'Passindqas#19',
-    ashost: '10.241.0.9',
-    client: '100',
-    sysid: 'DES',
-    sysnr: '00',
-    lang: 'es',
-  };*/
-  /*abapSystem: RfcConnectionParameters = {
-    user: 'EFRFC005',
-    passwd: 'EFMOVIL1',
-    client: '100',
-    sysnr: '00',
-    ashost: '10.128.160.49',
-    lang: 'en',
-  };*/
 
   constructor(options: ServiceOptions = {}, app: Application) {
     this.options = options;
@@ -67,26 +53,27 @@ export class ExpedientesSap implements ServiceMethods<Data> {
       const WBS_RESULT = await client.call(functionName, {
         P_BUKRS: 'IN10',
       });
-      const registros = WBS_RESULT.TWBS as Data[];
+      const registros = WBS_RESULT.TWBS as any[];
       await client.close();
+
+      const pendientesCrear: any = [];
 
       for (let i = 0; i < registros.length; i++) {
         const registro = registros[i];
+        registro.sapId = sapActivo[0]._id;
         try {
-          if (typeof registro.AKTIV === 'string') {
-            registro.AKTIV = new Date(
-              registro.AKTIV.substring(0, 4) +
-                '-' +
-                registro.AKTIV.substring(4, 6) +
-                '-' +
-                registro.AKTIV.substring(6, 8)
-            );
-          }
+          const fecha = new Date(
+            registro.AKTIV.substring(0, 4) +
+              '-' +
+              registro.AKTIV.substring(4, 6) +
+              '-' +
+              registro.AKTIV.substring(6, 8)
+          );
+          registro.AKTIV = fecha.toISOString();
         } catch (err) {
           delete registro.AKTIV;
         }
-
-        await this.app
+        const existe = await this.app
           .service((this.app.get('path') + 'expedientes') as 'expedientes')
           .find({
             query: {
@@ -94,25 +81,24 @@ export class ExpedientesSap implements ServiceMethods<Data> {
               sapId: sapActivo[0]._id,
             },
             paginate: false,
-          })
-          .then((existe: any) => {
-            registro.sapId = sapActivo[0]._id;
-            if (Array.isArray(existe) && existe.length === 0) {
-              this.app
-                .service(
-                  (this.app.get('path') + 'expedientes') as 'expedientes'
-                )
-                .create(registro);
-            } else {
-              const encontrado: any = Array.isArray(existe) ? existe[0] : null;
-              this.app
-                .service(
-                  (this.app.get('path') + 'expedientes') as 'expedientes'
-                )
-                .patch(encontrado._id, registro);
-            }
           });
+        if (Array.isArray(existe) && existe.length === 0) {
+          pendientesCrear.push(registro);
+        } else {
+          try {
+            await this.app
+              .service((this.app.get('path') + 'expedientes') as 'expedientes')
+              .patch(existe[0]._id, registro);
+          } catch (err) {}
+        }
       }
+
+      try {
+        await this.app
+          .service((this.app.get('path') + 'expedientes') as 'expedientes')
+          .create(pendientesCrear);
+      } catch (err) {}
+
       return registros;
     } catch (ex) {
       console.error(ex);
@@ -139,13 +125,14 @@ export class ExpedientesSap implements ServiceMethods<Data> {
       const response = await client.call(functionName, {
         POSID: registro.PROJK,
       });
-      await this.app
+      const actualizado = await this.app
         .service((this.app.get('path') + 'expedientes') as 'expedientes')
         .patch(id, {
           HEADER: response.HEADER,
           DET: response.DET,
+          ACT_REL: response.ACT_REL,
         });
-      return response;
+      return actualizado;
     } catch (err) {
       throw new Error(err);
     }

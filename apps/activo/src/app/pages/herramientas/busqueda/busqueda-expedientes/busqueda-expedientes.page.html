@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>Búsqueda de expedientes</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -10,18 +13,14 @@
       <ion-col size="12" size-md="4">
         <ion-card>
           <ion-card-header>
-            <ion-card-title>
-              Búsqueda por datos
-            </ion-card-title>
+            <ion-card-title> Búsqueda por datos </ion-card-title>
             <ion-card-subtitle>
               Ingresa alguno de estos datos para filtrar los registros
             </ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
             <ion-item>
-              <ion-label position="stacked">
-                Número de activo SAP
-              </ion-label>
+              <ion-label position="stacked"> Número de activo SAP </ion-label>
               <ion-input
                 type="text"
                 placeholder="Ingrese el número de activo"
@@ -29,22 +28,16 @@
               ></ion-input>
             </ion-item>
             <ion-item>
-              <ion-label position="stacked">
-                Número de SAI
-              </ion-label>
+              <ion-label position="stacked"> Número de SAI </ion-label>
               <ion-input
                 type="text"
                 placeholder="Ingrese el número de SAI"
                 [(ngModel)]="query.sai"
               ></ion-input>
             </ion-item>
-            <ion-list-header>
-              Fecha de capitalización
-            </ion-list-header>
+            <ion-list-header> Fecha de capitalización </ion-list-header>
             <ion-item>
-              <ion-label>
-                Desde
-              </ion-label>
+              <ion-label> Desde </ion-label>
               <ion-datetime
                 placeholder="dd/mm/yyyy"
                 pickerFormat="DD/MMM/YYYY"
@@ -53,9 +46,7 @@
               ></ion-datetime>
             </ion-item>
             <ion-item>
-              <ion-label>
-                Hasta
-              </ion-label>
+              <ion-label> Hasta </ion-label>
               <ion-datetime
                 placeholder="dd/mm/yyyy"
                 pickerFormat="DD/MMM/YYYY"
@@ -75,9 +66,7 @@
       <ion-col size="12" size-md="8">
         <ion-card>
           <ion-card-header>
-            <ion-card-title>
-              Búsqueda por tipo de activo
-            </ion-card-title>
+            <ion-card-title> Búsqueda por tipo de activo </ion-card-title>
             <ion-card-subtitle>
               Selecciona un tipo de activo para ver los activos correspondientes
               a ese tipo
@@ -85,7 +74,11 @@
           </ion-card-header>
           <ion-grid>
             <ion-row class="ion-justify-content-start ion-align-items-center">
-              <ion-col size="6" *ngFor="let tipo of tipos$ | async">
+              <ion-col
+                size="12"
+                size-md="6"
+                *ngFor="let tipo of tipos$ | async"
+              >
                 <ion-card>
                   <ion-item
                     lines="none"
@@ -96,12 +89,8 @@
                       <img [src]="tipo.imagen | upload" />
                     </ion-thumbnail>
                     <ion-label class="ion-text-wrap">
-                      <h2>
-                        {{tipo.nombre}}
-                      </h2>
-                      <p>
-                        {{tipo.claveSap}}
-                      </p>
+                      <h2>{{tipo.nombre}}</h2>
+                      <p>{{tipo.claveSap}}</p>
                     </ion-label>
                     <ion-ripple-effect></ion-ripple-effect>
                   </ion-item>
@@ -115,16 +104,18 @@
       <ion-col size="12">
         <ion-card>
           <ion-card-header>
-            <ion-card-title>
-              Búsqueda por ubicación
-            </ion-card-title>
+            <ion-card-title> Búsqueda por ubicación </ion-card-title>
             <ion-card-subtitle>
               Selecciona una ubicación para ver su listado de activos
             </ion-card-subtitle>
           </ion-card-header>
           <ion-grid>
             <ion-row>
-              <ion-col size="3" *ngFor="let ubicacion of ubicaciones$ | async">
+              <ion-col
+                size="12"
+                size-md="3"
+                *ngFor="let ubicacion of ubicaciones$ | async"
+              >
                 <ion-card button>
                   <ion-item
                     lines="none"
@@ -132,12 +123,8 @@
                     [routerLink]="'/herramientas/busqueda/ubicacion/' + ubicacion._id +'/' + ubicacion.nombre"
                   >
                     <ion-label class="ion-text-wrap">
-                      <h2>
-                        {{ubicacion.nombre}}
-                      </h2>
-                      <p>
-                        {{ubicacion.grupoUbicacion?.nombre}}
-                      </p>
+                      <h2>{{ubicacion.nombre}}</h2>
+                      <p>{{ubicacion.grupoUbicacion?.nombre}}</p>
                     </ion-label>
                   </ion-item>
                 </ion-card>

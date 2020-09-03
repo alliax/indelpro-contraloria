@@ -6,8 +6,8 @@ import {
   Expediente,
   ExpedientesQuery,
 } from '@indelpro-contraloria/data';
-import { map } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { map, switchMap } from 'rxjs/operators';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'indelpro-contraloria-busqueda-ubicacion',
@@ -18,17 +18,20 @@ export class BusquedaUbicacionPage implements OnInit {
   id;
   nombre;
 
-  porUbicacion$: Observable<
-    Expediente[]
-  > = this.expedientesQuery.selectAll().pipe(
-    map((expedientes: Expediente[]) =>
-      expedientes
-        .filter(
-          (expediente: Expediente) => false
-          // expediente.TPOACT.includes(this.activated.snapshot.paramMap.get('id'))
-        )
-        .sort(
-          (a, b) => new Date(b.AKTIV).valueOf() - new Date(a.AKTIV).valueOf()
+  porUbicacion$: Observable<Expediente[]> = this.activated.paramMap.pipe(
+    map((paramMap: ParamMap) => paramMap.get('id')),
+    switchMap((id: string) =>
+      this.expedientesQuery
+        .selectAll()
+        .pipe(
+          map((expedientes: Expediente[]) =>
+            expedientes
+              .filter((expediente: Expediente) => expediente.ubicacionId === id)
+              .sort(
+                (a, b) =>
+                  new Date(b.AKTIV).valueOf() - new Date(a.AKTIV).valueOf()
+              )
+          )
         )
     )
   );

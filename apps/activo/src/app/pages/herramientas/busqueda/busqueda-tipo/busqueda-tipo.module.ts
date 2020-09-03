@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { BusquedaTipoPageRoutingModule } from './busqueda-tipo-routing.module';
 
 import { BusquedaTipoPage } from './busqueda-tipo.page';
+import { ActivoUiModule } from '@indelpro-contraloria/ui';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    BusquedaTipoPageRoutingModule
+    BusquedaTipoPageRoutingModule,
+    ActivoUiModule,
   ],
-  declarations: [BusquedaTipoPage]
+  declarations: [BusquedaTipoPage],
 })
 export class BusquedaTipoPageModule {}

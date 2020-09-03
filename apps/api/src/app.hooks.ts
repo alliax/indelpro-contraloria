@@ -1,18 +1,21 @@
 // Application hooks that run for every service
 // Don't remove this comment. It's needed to format import lines nicely.
-import { softDelete } from 'feathers-hooks-common';
+import { softDelete, iff } from 'feathers-hooks-common';
 export default {
   before: {
     all: [
-      softDelete({
-        removeData: async (context) => {
-          return {
-            deleted: true,
-            deletedAt: new Date(),
-            deletedBy: context?.params?.user?._id || null,
-          };
-        },
-      }),
+      iff(
+        (context) => !context.path.includes('authentication'),
+        softDelete({
+          removeData: async (context) => {
+            return {
+              deleted: true,
+              deletedAt: new Date(),
+              deletedBy: context?.params?.user?._id || null,
+            };
+          },
+        })
+      ),
     ],
     find: [],
     get: [],

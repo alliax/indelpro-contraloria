@@ -1,18 +1,15 @@
 import { NgModule } from '@angular/core';
+import { DetalleActivosPageRoutingModule } from './detalle-activos-routing.module';
+import { DetalleActivosPage } from './detalle-activos.page';
+import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-import { IonicModule } from '@ionic/angular';
-
-import { DetalleActivosPageRoutingModule } from './detalle-activos-routing.module';
-
-import { DetalleActivosPage } from './detalle-activos.page';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
     IonicModule,
+    FormsModule,
     DetalleActivosPageRoutingModule,
   ],
   declarations: [DetalleActivosPage],

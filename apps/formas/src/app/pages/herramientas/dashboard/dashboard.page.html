@@ -40,12 +40,12 @@
     <indelpro-contraloria-header-tipo
       icono="file-tray-full-outline"
       titulo="Solicitudes pendientes de autorizar"
-      [total]="solicitudesQuery.totalPendientes$ | async"
+      [total]="solicitudesQuery.totalPendientes$ | async"
       colorIcono="secondary"
       (click)="pendientesVisible = !pendientesVisible"
     ></indelpro-contraloria-header-tipo>
     <indelpro-contraloria-lista-tipo
-      *ngFor="let tipo of pendientesPorTipo$ | async"
+      *ngFor="let tipo of pendientesPorTipo$ | async"
       [tipo]="tipo"
       [hidden]="!pendientesVisible"
     ></indelpro-contraloria-lista-tipo>
@@ -53,12 +53,12 @@
     <indelpro-contraloria-header-tipo
       icono="document-text-outline"
       titulo="Mis solicitudes enviadas"
-      [total]="solicitudesQuery.totalPropias$ | async"
+      [total]="solicitudesQuery.totalPropias$ | async"
       colorIcono="secondary"
       (click)="enviadasVisible = !enviadasVisible"
     ></indelpro-contraloria-header-tipo>
     <indelpro-contraloria-lista-tipo
-      *ngFor="let tipo of propiasPorTipo$ | async"
+      *ngFor="let tipo of propiasPorTipo$ | async"
       [tipo]="tipo"
       [hidden]="!enviadasVisible"
     ></indelpro-contraloria-lista-tipo>

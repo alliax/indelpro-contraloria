@@ -6,10 +6,12 @@ export const environment = {
   production: false,
   /*apiUrl: 'http://localhost:3030',
   rootPath: '',
-  socketPath: '/socket.io/',*/
+  socketPath: '/socket.io/',
+  storageKey: 'indelpro_contraloria_api_des'*/
   apiUrl: 'https://servicios.alliax.com/',
   rootPath: 'indelpro/api',
   socketPath: '/indelpro/api/socket.io/',
+  storageKey: 'indelpro_contraloria_api_prd',
 };
 
 /*

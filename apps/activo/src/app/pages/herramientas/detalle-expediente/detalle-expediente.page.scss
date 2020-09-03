@@ -1,0 +1,43 @@
+.ngx-datatable {
+  width: 100%;
+}
+
+ion-content > ion-grid {
+  padding-bottom: 75px;
+}
+
+.fotos {
+  max-height: 320px;
+  ion-button.back-arrow {
+    position: absolute;
+    top: calc(50% - 24px);
+    left: 6px;
+    z-index: 100;
+  }
+  ion-button.next-arrow {
+    position: absolute;
+    top: calc(50% - 24px);
+    right: 6px;
+    z-index: 100;
+  }
+  ion-slides {
+    max-height: 320px;
+    ion-button.borrar {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+    ion-slide {
+      img {
+        object-fit: contain;
+        object-position: center;
+        height: 320px;
+      }
+    }
+  }
+}
+
+/*.detalle-expediente {
+  max-height: 350px;
+}*/

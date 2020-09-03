@@ -22,15 +22,15 @@ export class AppComponent {
     private menuService: MenuService,
     private stateService: StateService
   ) {
-    this.authService
-      .login()
-      .then(() => {
-        this.stateService.loadState();
-      })
-      .catch((err) => {})
-      .then(() => {
-        this.menu = this.menuService.getMenu();
-      });
+    this.initApp();
+  }
+
+  async initApp() {
+    try {
+      this.menu = this.menuService.getMenu();
+      await this.authService.login();
+      await this.stateService.loadState();
+    } catch (err) {}
   }
 
   async cerrarSesion() {

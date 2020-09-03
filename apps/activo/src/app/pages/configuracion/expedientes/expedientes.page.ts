@@ -42,10 +42,8 @@ export class ExpedientesPage implements OnInit {
     try {
       const expedientes = await this.feathersService
         .service('expedientes-sap')
-        .find({ paginate: false });
-      const activos = await this.feathersService
-        .service('activos-sap')
-        .find({ paginate: false });
+        .find();
+      const activos = await this.feathersService.service('activos-sap').find();
       await this.expedientesService.setUltimaActualizacion(expedientes.length);
       await this.activosService.setUltimaActualizacion(activos.length);
       const success = await this.toastCtrl.create({

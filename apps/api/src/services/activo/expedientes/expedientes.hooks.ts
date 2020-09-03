@@ -40,6 +40,7 @@ const postResolvers = {
         ? await context.app
             .service(context.app.get('path') + 'activo/ubicaciones')
             .get(expediente.ubicacionId)
+            .catch(() => null)
         : null;
     },
   },

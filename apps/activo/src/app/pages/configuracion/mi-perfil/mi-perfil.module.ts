@@ -8,6 +8,7 @@ import { MiPerfilPageRoutingModule } from './mi-perfil-routing.module';
 
 import { MiPerfilPage } from './mi-perfil.page';
 import { PipesModule } from '@alliax/feathers-client';
+import { FormlyModule } from '@ngx-formly/core';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { PipesModule } from '@alliax/feathers-client';
     FormsModule,
     IonicModule,
     MiPerfilPageRoutingModule,
-    PipesModule
+    PipesModule,
+    FormlyModule
   ],
   declarations: [MiPerfilPage]
 })

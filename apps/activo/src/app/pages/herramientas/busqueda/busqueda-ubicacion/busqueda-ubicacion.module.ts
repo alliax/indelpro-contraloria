@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { BusquedaUbicacionPageRoutingModule } from './busqueda-ubicacion-routing.module';
 
 import { BusquedaUbicacionPage } from './busqueda-ubicacion.page';
+import { ActivoUiModule } from '@indelpro-contraloria/ui';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    BusquedaUbicacionPageRoutingModule
+    BusquedaUbicacionPageRoutingModule,
+    ActivoUiModule,
   ],
-  declarations: [BusquedaUbicacionPage]
+  declarations: [BusquedaUbicacionPage],
 })
 export class BusquedaUbicacionPageModule {}

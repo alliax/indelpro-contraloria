@@ -1,14 +1,9 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Activo, GrupoActivo } from '@indelpro-contraloria/data';
 import { ModalController } from '@ionic/angular';
-import { BehaviorSubject, combineLatest, from, Observable, of } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { json2csvAsync } from 'json-2-csv';
 
 @Component({
   selector: 'indelpro-contraloria-detalle-activos',
@@ -39,6 +34,45 @@ export class DetalleActivosPage implements OnInit {
 
   ngOnInit() {
     this.grupoActual.next(this.grupo);
+  }
+
+  async descargarExcel(grupo: GrupoActivo) {
+    const csvData = await json2csvAsync(
+      grupo.registros.map((activo: Activo) => ({
+        'Código Tipo de Activo': activo.ANLKL,
+        'Tipo de Activo': activo.TPOACT,
+        Activo: activo.ANLN1,
+        Descripcion: activo.TXT50.concat(activo.TXA50),
+        Fecha: activo.AKTIV,
+        'Año de Capitalización': activo.GJAHR_CAPI,
+        Monto: activo.KANSW,
+      })),
+      { excelBOM: true }
+    );
+
+    const blob = new Blob([...csvData], {
+      type: 'text/csv',
+    });
+    const url = window.URL.createObjectURL(blob);
+
+    if (navigator.msSaveOrOpenBlob) {
+      navigator.msSaveBlob(
+        blob,
+        `listadoActivos-${grupo.tipoActivo?.claveSap}-${
+          grupo.tipoActivo?.nombre
+        }-${new Date().toLocaleDateString()}`
+      );
+    } else {
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `listadoActivos-${grupo.tipoActivo?.claveSap}-${
+        grupo.tipoActivo?.nombre
+      }-${new Date().toLocaleDateString()}`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+    window.URL.revokeObjectURL(url);
   }
 
   buscar(event) {

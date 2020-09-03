@@ -1,16 +1,29 @@
 <ion-header>
   <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>Dashboard</ion-title>
-    <ion-buttons slot="end">
-      <ion-card color="dark" class="ion-padding-end ion-margin-end">
+    <ion-buttons slot="end" class="ion-hide-sm-down">
+      <div class="ion-padding-end">
         <ion-datetime
           displayFormat="DD/MM/YYYY"
           pickerFormat="DD/MM/YYYY"
           [value]="fechaSeleccionada$ | async"
           (ionChange)="cambiaFecha($event)"
         ></ion-datetime>
-      </ion-card>
+      </div>
     </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar color="secondary" class="ion-hide-md-up ion-text-center">
+    <ion-button color="primary">
+      <ion-datetime
+        displayFormat="DD/MM/YYYY"
+        pickerFormat="DD/MM/YYYY"
+        [value]="fechaSeleccionada$ | async"
+        (ionChange)="cambiaFecha($event)"
+      ></ion-datetime>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -19,10 +32,7 @@
     <ng-template #cargando>
       <ion-row>
         <ion-col size="12" class="ion-padding">
-          <ion-skeleton-text
-            animated
-            style="height: 100px;"
-          ></ion-skeleton-text>
+          <ion-skeleton-text animated style="height: 100px"></ion-skeleton-text>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -32,15 +42,14 @@
           *ngFor="let i of [0,1,2,3,4,5]"
           class="ion-padding"
         >
-          <ion-skeleton-text
-            style="height: 205px;"
-            animated
-          ></ion-skeleton-text>
+          <ion-skeleton-text style="height: 205px" animated></ion-skeleton-text>
         </ion-col>
       </ion-row>
     </ng-template>
-
     <ion-row *ngIf="(loading$ | async) !== true; else cargando">
+      <ion-col size="12" size-md="auto">
+        <div class="ion-padding-horizontal"></div>
+      </ion-col>
       <ion-col size="12">
         <ion-card color="primary">
           <ion-grid class="ion-padding-horizontal">
@@ -49,17 +58,13 @@
                 <h4>Reporte general de activo</h4>
               </ion-col>
               <ion-col size="12" offset="0" size-md="2" offset-md="1">
-                <p class="ion-text-end">
-                  Cantidad de activos
-                </p>
+                <p class="ion-text-end">Cantidad de activos</p>
                 <h4 class="ion-text-end">
                   <strong>{{agrupadoTotal$ | async | number}}</strong>
                 </h4>
               </ion-col>
               <ion-col size="12" offset="0" size-md="3" offset-md="0">
-                <p class="ion-text-end">
-                  Valor total de activos
-                </p>
+                <p class="ion-text-end">Valor total de activos</p>
                 <h4 class="ion-text-end">
                   <strong>{{agrupadoValor$ | async | currency}}</strong>
                 </h4>
@@ -82,12 +87,8 @@
                     <img [src]="grupo.tipoActivo.imagen | upload" />
                   </ion-thumbnail>
                   <ion-label>
-                    <h2>
-                      {{grupo.tipoActivo.nombre}}
-                    </h2>
-                    <p>
-                      {{grupo.tipoActivo.claveSap}}
-                    </p>
+                    <h2>{{grupo.tipoActivo.nombre}}</h2>
+                    <p>{{grupo.tipoActivo.claveSap}}</p>
                   </ion-label>
                 </ion-item>
 
@@ -96,17 +97,13 @@
                     class="ion-align-items-center ion-justify-content-around ion-text-center"
                   >
                     <ion-col size="auto">
-                      <p class="ion-no-margin ion-text-end">
-                        Activos
-                      </p>
+                      <p class="ion-no-margin ion-text-end">Activos</p>
                       <h6 class="ion-no-margin ion-text-end">
                         <strong>{{grupo.activos | number}}</strong>
                       </h6>
                     </ion-col>
                     <ion-col size="auto">
-                      <p class="ion-no-margin ion-text-end">
-                        Valor
-                      </p>
+                      <p class="ion-no-margin ion-text-end">Valor</p>
                       <h6 class="ion-no-margin ion-text-end">
                         <strong>{{grupo.valor | currency }}</strong>
                       </h6>

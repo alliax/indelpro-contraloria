@@ -1,11 +1,16 @@
 <ion-header>
   <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>Configuración de SAP</ion-title>
     <ion-buttons slot="end">
-      <ion-item color="secondary" *ngIf="sapActivo$ | async as activo">
-        <ion-label>
-          Configuración activa
-        </ion-label>
+      <ion-item
+        color="secondary"
+        *ngIf="sapActivo$ | async as activo"
+        class="ion-hide-sm-down"
+      >
+        <ion-label> Configuración activa </ion-label>
         <ion-select (ionChange)="cambiaActiva($event)" [value]="activo">
           <ion-select-option
             *ngFor="let sap of registros$ | async"
@@ -16,6 +21,20 @@
         </ion-select>
       </ion-item>
     </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar color="secondary">
+    <ion-item
+      color="secondary"
+      *ngIf="sapActivo$ | async as activo"
+      class="ion-hide-md-up"
+    >
+      <ion-label> Configuración activa </ion-label>
+      <ion-select (ionChange)="cambiaActiva($event)" [value]="activo">
+        <ion-select-option *ngFor="let sap of registros$ | async" [value]="sap">
+          {{sap.nombre}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
   </ion-toolbar>
 </ion-header>
 
@@ -40,9 +59,7 @@
         (actualizar)="edit($event)"
       >
         <ng-container slot="orden">
-          <ion-chip color="secondary" slot="start">
-            {{i+1}}
-          </ion-chip>
+          <ion-chip color="secondary" slot="start"> {{i+1}} </ion-chip>
         </ng-container>
         <!--<ion-icon
           slot="start"
@@ -58,9 +75,7 @@
               >Activo</ion-chip
             >
           </h2>
-          <p>
-            {{registro.ashost}}
-          </p>
+          <p>{{registro.ashost}}</p>
         </ion-label>
       </alliax-list-item>
     </ng-container>

@@ -3,7 +3,7 @@
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
 import { Application } from '../declarations';
-import { Model, Mongoose } from 'mongoose';
+import { Model, Mongoose, SchemaTypes } from 'mongoose';
 import { DeletedPropertiesModel } from '@alliax/feathers-server';
 
 export default function (app: Application): Model<any> {
@@ -14,6 +14,7 @@ export default function (app: Application): Model<any> {
     {
       nombre: { type: String, required: true },
       archivo: { type: String, required: true },
+      expedienteId: { type: SchemaTypes.ObjectId, ref: 'expedientes' },
       ...DeletedPropertiesModel,
     },
     {

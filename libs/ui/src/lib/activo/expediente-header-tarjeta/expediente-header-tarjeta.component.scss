@@ -1,13 +1,40 @@
 :host {
   .cuadros {
     background: var(--ion-color-light-tint);
+    padding: 26px 0;
+    margin-top: 16px;
     ion-col:first-child,
     ion-col {
       border-right: 1px solid var(--ion-color-light-shade);
     }
 
+    @media (max-width: 600px) {
+      ion-col:first-child,
+      ion-col {
+        border-right: 0;
+        border-bottom: 1px solid var(--ion-color-light-shade);
+        padding: 0 36px 15px;
+        margin-bottom: 15px;
+      }
+      ion-col:last-child {
+        margin-bottom: 0;
+        border-bottom: 0;
+      }
+    }
+
     ion-col:last-child {
       border-right: 0;
+    }
+  }
+  .activos-relacionados {
+    box-shadow: 0 0 2px var(--ion-color-light-shade);
+    background: var(--ion-color-light-tint);
+    border-radius: 8px;
+    padding: 16px;
+    margin: 0 16px;
+    .listado {
+      height: 250px;
+      overflow: auto;
     }
   }
 }

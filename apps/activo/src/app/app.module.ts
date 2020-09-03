@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
-import { FeathersClientModule } from '@alliax/feathers-client';
+import { FeathersClientModule, IonicComponentsModule } from '@alliax/feathers-client';
 import { environment } from '../environments/environment';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
@@ -25,11 +25,13 @@ import { RouteReuseStrategy } from '@angular/router';
       accountPath: 'auth',
       socketConfig: {
         path: environment.socketPath,
-        timeout: 240000,
+        timeout: 480000
       },
+      storageKey: environment.storageKey
     }),
     NgxDatatableModule,
     environment.production ? [] : AkitaNgDevtools.forRoot(),
+    IonicComponentsModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

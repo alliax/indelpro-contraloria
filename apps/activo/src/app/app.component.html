@@ -19,62 +19,21 @@
           </ion-row>
         </ion-grid>
       </ion-toolbar>
-      <ion-item
-        lines="none"
-        *ngIf="user$ | async as user"
-        color="dark"
-        lines="none"
-      >
-        <ion-avatar slot="start">
-          <img
-            [src]="
-              user.foto ? (user.foto | upload) : 'assets/img/no-profile.jpg'
-            "
-          />
-        </ion-avatar>
-        <ion-label class="ion-text-wrap">
-          <h2>{{ user.nombre }}</h2>
-          <p>{{ user.email }}</p>
-        </ion-label>
-        <ion-button
-          slot="end"
-          color="danger"
-          (click)="cerrarSesion()"
-          fill="clear"
-        >
-          <ion-icon name="log-out"> </ion-icon>
-        </ion-button>
-      </ion-item>
+      <ion-toolbar color="dark">
+        <alliax-user-line
+          color="dark"
+          [user]="user$ | async"
+        ></alliax-user-line>
+      </ion-toolbar>
     </ion-header>
     <ion-content color="dark">
-      <div class="ion-padding-top" *ngFor="let categoria of menu">
-        <ion-item-divider color="dark">
-          <ion-label color="primary">
-            {{ categoria.title }}
-          </ion-label>
-        </ion-item-divider>
-        <ion-item
-          detail
-          lines="none"
-          button
-          *ngFor="let opcion of categoria.children"
-          [routerLink]="opcion.url"
-          #rla="routerLinkActive"
-          routerLinkActive
-          [routerLinkActiveOptions]="{ exact: opcion.exacto || false }"
-          color="dark"
-        >
-          <ion-icon
-            size="small"
-            [name]="opcion.icon"
-            [color]="rla.isActive ? 'tertiary' : 'medium'"
-            slot="start"
-          ></ion-icon>
-          <ion-label [color]="rla.isActive ? 'tertiary' : 'medium'">
-            {{ opcion.title }}
-          </ion-label>
-        </ion-item>
-      </div>
+      <alliax-nav-menu
+        bgColor="dark"
+        titleColor="primary"
+        mainColor="tertiary"
+        secondaryColor="light"
+        [menu]="menu"
+      ></alliax-nav-menu>
     </ion-content>
     <ion-footer class="ion-no-border">
       <ion-toolbar color="dark">

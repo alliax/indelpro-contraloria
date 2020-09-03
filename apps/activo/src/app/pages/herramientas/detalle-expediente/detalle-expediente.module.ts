@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
@@ -10,7 +10,7 @@ import { DetalleExpedientePage } from './detalle-expediente.page';
 
 import { ActivoUiModule, UiPipesModule } from '@indelpro-contraloria/ui';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { PipesModule } from '@alliax/feathers-client';
+import { IonicComponentsModule, PipesModule } from '@alliax/feathers-client';
 
 @NgModule({
   imports: [
@@ -21,9 +21,10 @@ import { PipesModule } from '@alliax/feathers-client';
     UiPipesModule,
     NgxDatatableModule,
     ActivoUiModule,
-    PipesModule
+    PipesModule,
+    IonicComponentsModule,
   ],
-  providers: [],
+  providers: [CurrencyPipe],
   declarations: [DetalleExpedientePage],
 })
 export class DetalleExpedientePageModule {}

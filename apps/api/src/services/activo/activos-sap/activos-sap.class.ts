@@ -60,48 +60,38 @@ export class ActivosSap implements ServiceMethods<Data> {
       const WBS_RESULT = await client.call(functionName, {
         P_BUKRS: 'IN10',
       });
-      const registros = WBS_RESULT.TANLA as Data[];
+      const registros = WBS_RESULT.TANLA as any[];
       await client.close();
+      await this.app
+        .service((this.app.get('path') + 'activos') as 'activos')
+        .remove(null, {
+          disableSoftDelete: true,
+          sapId: sapActivo[0]._id,
+        });
 
+      const creados: any[] = [];
       for (let i = 0; i < registros.length; i++) {
         const registro = registros[i];
+        registro.sapId = sapActivo[0]._id;
         try {
-          if (typeof registro.AKTIV === 'string')
-            registro.AKTIV = new Date(
-              registro.AKTIV.substring(0, 4) +
-                '-' +
-                registro.AKTIV.substring(4, 6) +
-                '-' +
-                registro.AKTIV.substring(6, 8)
-            );
+          const fecha = new Date(
+            registro.AKTIV.substring(0, 4) +
+              '-' +
+              registro.AKTIV.substring(4, 6) +
+              '-' +
+              registro.AKTIV.substring(6, 8)
+          );
+          registro.AKTIV = fecha.toISOString();
         } catch (err) {
           delete registro.AKTIV;
         }
-
-        await this.app
+        const creado = await this.app
           .service((this.app.get('path') + 'activos') as 'activos')
-          .find({
-            query: {
-              ANLN1: registro.ANLN1,
-              sapId: sapActivo[0]._id,
-            },
-            paginate: false,
-          })
-          .then((existe: any) => {
-            registro.sapId = sapActivo[0]._id;
-            if (Array.isArray(existe) && existe.length === 0) {
-              this.app
-                .service((this.app.get('path') + 'activos') as 'activos')
-                .create(registro);
-            } else {
-              const encontrado: any = Array.isArray(existe) ? existe[0] : null;
-              this.app
-                .service((this.app.get('path') + 'activos') as 'activos')
-                .patch(encontrado._id, registro);
-            }
-          });
+          .create(registro);
+        creados.push(creado);
       }
-      return registros;
+
+      return creados;
     } catch (ex) {
       console.error(ex);
       throw ex;

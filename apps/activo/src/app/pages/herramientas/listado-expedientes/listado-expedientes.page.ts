@@ -24,7 +24,7 @@ export class ListadoExpedientesPage implements OnInit {
     this.searchEvent$,
   ]).pipe(
     filter(
-      (val: [Expediente[], string]) => val[1].length > 3 || val[1].length === 0
+      (val: [Expediente[], string]) => val[1].length > 2 || val[1].length === 0
     ),
     map((val: [Expediente[], string]) =>
       val[1].length === 0
@@ -34,11 +34,11 @@ export class ListadoExpedientesPage implements OnInit {
               (expediente) =>
                 expediente.ANLN1.toUpperCase().includes(val[1]) ||
                 expediente.TXT50.toUpperCase().includes(val[1]) ||
-                expediente.NAME1.toUpperCase().includes(val[1])
+                expediente.NAME1.toUpperCase().includes(val[1]) ||
+                expediente.PROJK.toUpperCase().includes(val[1])
             )
             .slice(0, 4)
-    ),
-    tap((val) => console.log(val))
+    )
   );
 
   totalExpedientes$: Observable<

@@ -16,6 +16,7 @@ export default function (app: Application) {
   const options = {
     Model: createModel(app),
     paginate: app.get('paginate'),
+    multi: ['create'],
   };
 
   // Initialize our service with any options it requires

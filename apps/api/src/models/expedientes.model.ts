@@ -26,7 +26,9 @@ export default function (app: Application) {
         AKTIV: { type: String },
         ANLKL: { type: String },
         ANLN1: { type: String },
+        TXT501: { type: String },
         ANLN2: { type: String },
+        TXT502: { type: String },
         GJAHR_CAPI: { type: Number },
         MONTO_CAPIT: { type: Number },
         POSID: { type: String },
@@ -59,6 +61,12 @@ export default function (app: Application) {
           ZPATENTE: { type: String },
           ZPEDIMENTO: { type: String },
           ZUONR: { type: String },
+        },
+      ],
+      ACT_REL: [
+        {
+          ANLN1: { type: String },
+          TXT50: { type: String },
         },
       ],
       fotosId: [

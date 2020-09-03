@@ -36,11 +36,11 @@ export class MenuService {
           icon: 'document-text-outline',
           url: '/configuracion/expedientes',
         },
-        {
+        /*{
           title: 'Información de Expedientes',
           icon: 'document-attach-outline',
           url: '/configuracion/informacion-de-expedientes',
-        },
+        },*/
       ],
     },
     {

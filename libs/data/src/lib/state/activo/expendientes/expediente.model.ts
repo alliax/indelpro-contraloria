@@ -7,7 +7,9 @@ export interface ExpedienteHeader {
   AKTIV: string;
   ANLKL: string;
   ANLN1: string;
+  TXT501: string;
   ANLN2: string;
+  TXT502: string;
   GJAHR_CAPI: number;
   MONTO_CAPIT: number;
   POSID: string;
@@ -42,6 +44,11 @@ export interface ExpedienteDet {
   ZUONR: string;
 }
 
+export interface ExpedienteActRel {
+  ANLN1: string;
+  TXT50: string;
+}
+
 export interface Expediente extends DataModel, DeletedPropertiesModel {
   PROJK: string;
   NAME1: string;
@@ -56,6 +63,7 @@ export interface Expediente extends DataModel, DeletedPropertiesModel {
 
   HEADER: ExpedienteHeader;
   DET: [ExpedienteDet];
+  ACT_REL: [ExpedienteActRel];
 
   fotosId: string[];
   fotos: Adjunto[];

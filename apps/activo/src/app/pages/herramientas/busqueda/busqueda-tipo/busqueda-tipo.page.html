@@ -16,26 +16,11 @@
   </div>
   <ng-template #listado>
     <ion-virtual-scroll [items]="porTipo$ | async " approxItemHeight="120px">
-      <ion-item
-        button
-        lines="full"
-        *virtualItem="let item;let i = index"
-        [routerLink]="'/herramientas/listado-expedientes/' + item._id"
-      >
-        <ion-chip color="secondary" slot="end" *ngIf="item.AKTIV">
-          {{item.AKTIV | date:'dd/MM/yyyy'}}
-        </ion-chip>
-        <ion-chip slot="start" color="tertiary">
-          <ion-text>
-            {{item.PROJK}}
-          </ion-text>
-        </ion-chip>
-        <ion-label>
-          <h2><strong>{{item.NAME1}}</strong></h2>
-          <p>{{item.TXT50}}</p>
-        </ion-label>
-      </ion-item>
+      <div *virtualItem="let item;let i = index">
+        <indelpro-contraloria-expediente-lista-elemento
+          [expediente]="item"
+        ></indelpro-contraloria-expediente-lista-elemento>
+      </div>
     </ion-virtual-scroll>
   </ng-template>
 </ion-content>
-

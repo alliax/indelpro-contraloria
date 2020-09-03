@@ -1,0 +1,29 @@
+<ion-item
+  button
+  lines="full"
+  [routerLink]="'/herramientas/listado-expedientes/' + expediente._id"
+>
+  <ion-chip
+    color="secondary"
+    slot="end"
+    *ngIf="expediente.AKTIV"
+    class="ion-hide-sm-down"
+  >
+    {{ expediente.AKTIV | date: 'dd/MM/yyyy' }}
+  </ion-chip>
+  <ion-chip slot="start" color="tertiary" class="ion-hide-sm-down">
+    <ion-text> {{ expediente.PROJK }} </ion-text>
+  </ion-chip>
+  <ion-label class="ion-text-wrap">
+    <ion-text color="tertiary" class="ion-hide-md-up">
+      {{ expediente.PROJK }}
+    </ion-text>
+    <h2>
+      <strong>{{ expediente.NAME1 }}</strong>
+    </h2>
+    <p>{{ expediente.TXT50 }}</p>
+    <ion-text color="medium" class="ion-hide-md-up">
+      <p>{{ expediente.AKTIV | date: 'dd/MM/yyyy' }}</p>
+    </ion-text>
+  </ion-label>
+</ion-item>

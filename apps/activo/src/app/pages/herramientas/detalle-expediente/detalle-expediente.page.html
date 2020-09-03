@@ -1,0 +1,432 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-buttons slot="start">
+        <ion-back-button
+          defaultHref="/herramientas/listado-expedientes"
+        ></ion-back-button>
+      </ion-buttons>
+    </ion-buttons>
+    <ion-title>
+      Expediente
+      <span *ngIf="expediente$ | async  as expediente">
+        {{expediente.PROJK}}
+      </span>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="light" fill="clear" *ngIf="actualizandoSap === true">
+        <span class="ion-hide-sm-down">Actualizando desde SAP</span>
+        <ion-spinner class="ion-margin-horizontal"></ion-spinner>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12" size-md="7">
+        <ng-container *ngIf="header$ | async as header; else loadingHeader">
+          <indelpro-contraloria-expediente-header-tarjeta
+            [header]="header"
+            [activos]="activos$ | async"
+          ></indelpro-contraloria-expediente-header-tarjeta>
+
+          <ion-card *ngIf="expediente$ | async as expediente">
+            <ion-card-header>
+              <ion-card-title> Ubicación </ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-select
+                placeholder="Selecciona la ubicación a la que pertenece el expediente"
+                (ionChange)="actualizaUbicacion(expediente, $event)"
+                [value]="expediente.ubicacionId"
+                [interfaceOptions]="{header: 'Selecciona una ubicación'}"
+              >
+                <ion-select-option
+                  *ngFor="let ubicacion of ubicaciones$ | async"
+                  [value]="ubicacion._id"
+                >
+                  {{ubicacion.grupoUbicacion?.nombre}} - {{ubicacion.nombre}}
+                </ion-select-option>
+              </ion-select>
+            </ion-card-content>
+          </ion-card>
+        </ng-container>
+        <ng-template #loadingHeader>
+          <ion-card>
+            <ion-skeleton-text
+              animated
+              style="height: 310px"
+              class="ion-no-margin"
+            ></ion-skeleton-text>
+          </ion-card>
+        </ng-template>
+      </ion-col>
+      <ion-col size="12" size-md="5">
+        <ng-container *ngIf="fotos$ | async as fotos; else loadingFotos">
+          <ion-card *ngIf="fotos.length > 0; else sinFotos" class="fotos">
+            <ion-button
+              class="back-arrow ion-hide-sm-down"
+              size="small"
+              fill="clear"
+              shape="round"
+              color="light"
+              (click)="slideBack()"
+              *ngIf="muestraAnterior"
+            >
+              <ion-icon
+                name="caret-back-circle-outline"
+                size="large"
+              ></ion-icon>
+            </ion-button>
+            <ion-button
+              class="next-arrow ion-hide-sm-down"
+              size="small"
+              fill="clear"
+              shape="round"
+              color="light"
+              (click)="slideNext()"
+              *ngIf="muestraSiguiente"
+            >
+              <ion-icon
+                name="caret-forward-circle-outline"
+                size="large"
+              ></ion-icon>
+            </ion-button>
+            <ion-slides
+              pager
+              *ngIf="expediente$ | async as expediente"
+              (ionSlideWillChange)="revisaBotones($event)"
+              (ionSlidesDidLoad)="revisaBotones($event)"
+              #fotografias
+            >
+              <ion-slide *ngFor="let foto of fotos">
+                <ion-button
+                  color="danger"
+                  size="small"
+                  shape="round"
+                  class="borrar"
+                  (click)="borrarFoto(expediente, foto)"
+                >
+                  Borrar
+                </ion-button>
+                <img [src]="foto.archivo | upload" />
+              </ion-slide>
+            </ion-slides>
+          </ion-card>
+          <ng-template #sinFotos>
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title> Sin fotos </ion-card-title>
+                <ion-card-subtitle>
+                  El expediente no cuenta con fotografías capturadas en el
+                  sistema
+                </ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </ng-template>
+          <ion-card *ngIf="expediente$ | async as expediente">
+            <ion-card-header>
+              <ion-card-subtitle>
+                Selecciona una fotografía para cargar
+              </ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content class="ion-text-center">
+              <alliax-file-upload
+                [archivo]="foto"
+                (archivoCargado)="foto = $event"
+              ></alliax-file-upload>
+              <div class="ion-padding" *ngIf="foto">
+                <ion-button
+                  color="success"
+                  expand="block"
+                  (click)="subirFoto(expediente)"
+                >
+                  Subir fotografía
+                </ion-button>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ng-container>
+        <ng-template #loadingFotos>
+          <ion-card>
+            <ion-skeleton-text
+              animated
+              style="height: 310px"
+              class="ion-no-margin"
+            ></ion-skeleton-text>
+          </ion-card>
+        </ng-template>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ng-container
+          *ngIf="expediente$ | async as expediente; else loadingAutorizacion"
+        >
+          <ion-card>
+            <ion-item
+              tappable="true"
+              button
+              color="primary"
+              (click)="autorizacionVisible = !autorizacionVisible"
+              detail="false"
+            >
+              Autorización del proyecto
+              <ion-icon
+                slot="start"
+                [name]="autorizacionVisible ? 'chevron-down-outline' : 'chevron-forward-outline'"
+              ></ion-icon>
+            </ion-item>
+
+            <div *ngIf="autorizacionVisible === true">
+              <ion-item
+                *ngFor="let autorizacion of expediente.autorizacionProyectos"
+              >
+                <ion-icon
+                  name="document-attach-outline"
+                  slot="start"
+                ></ion-icon>
+                <ion-label class="ion-text-wrap">
+                  <h2>{{autorizacion.nombre}}</h2>
+                  <div class="ion-text-center ion-margin-top">
+                    <ion-button
+                      [href]="autorizacion.archivo | upload"
+                      target="_blank"
+                      download="download"
+                      slot="end"
+                      class="ion-hide-md-up ion-padding-end"
+                    >
+                      Descargar
+                    </ion-button>
+                    <ion-button
+                      slot="end"
+                      color="danger"
+                      (click)="borrarAutorizacion(expediente, autorizacion)"
+                      class="ion-hide-md-up ion-padding-start"
+                    >
+                      Borrar
+                    </ion-button>
+                  </div>
+                </ion-label>
+                <ion-button
+                  [href]="autorizacion.archivo | upload"
+                  target="_blank"
+                  download="download"
+                  slot="end"
+                  class="ion-hide-sm-down"
+                >
+                  Descargar
+                </ion-button>
+                <ion-button
+                  slot="end"
+                  color="danger"
+                  (click)="borrarAutorizacion(expediente, autorizacion)"
+                  class="ion-hide-sm-down"
+                >
+                  Borrar
+                </ion-button>
+              </ion-item>
+              <div class="ion-padding ion-text-center">
+                <ion-label>
+                  <h2>Subir archivo de autorización</h2>
+                </ion-label>
+                <alliax-file-upload
+                  [archivo]="autorizacion"
+                  (archivoCargado)="autorizacion = $event"
+                ></alliax-file-upload>
+                <div class="ion-padding" *ngIf="autorizacion">
+                  <ion-button
+                    color="success"
+                    (click)="subirAutorizacion(expediente)"
+                  >
+                    Subir archivo
+                  </ion-button>
+                </div>
+              </div>
+            </div>
+          </ion-card>
+        </ng-container>
+
+        <ng-template #loadingAutorizacion>
+          <ion-card>
+            <ion-skeleton-text
+              animated
+              style="height: 40px"
+              class="ion-no-margin"
+            ></ion-skeleton-text>
+          </ion-card>
+        </ng-template>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ng-container *ngIf="det$ | async as det; else loadingDet">
+          <ion-card>
+            <ion-item
+              tappable="true"
+              button
+              color="primary"
+              (click)="detalleVisible = !detalleVisible"
+              detail="false"
+            >
+              Detalle del expediente
+
+              <ion-icon
+                slot="start"
+                [name]="detalleVisible ? 'chevron-down-outline' : 'chevron-forward-outline'"
+              ></ion-icon>
+            </ion-item>
+
+            <div *ngIf="detalleVisible === true" class="detalle-expediente">
+              <ngx-datatable
+                class="material"
+                [rows]="det"
+                [rowHeight]="50"
+                [columns]="columns"
+                [columnMode]="'force'"
+                [sortType]="'multi'"
+                [scrollbarH]="true"
+                [headerHeight]="50"
+                [footerHeight]="50"
+                [summaryHeight]="50"
+                [summaryRow]="true"
+                [summaryPosition]="'bottom'"
+                [limit]="8"
+              >
+                <ng-template
+                  #cellTemplate
+                  let-row="row"
+                  let-value="value"
+                  let-i="index"
+                >
+                  templated {{value}}
+                </ng-template>
+              </ngx-datatable>
+              <ion-row class="ion-justify-content-center ion-padding-vertical">
+                <ion-col size="auto">
+                  <ion-button
+                    shape="round"
+                    color="primary"
+                    (click)="descargarDetalle(det)"
+                  >
+                    Descargar a Excel
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </div>
+          </ion-card>
+        </ng-container>
+        <ng-template #loadingDet>
+          <ion-card>
+            <ion-skeleton-text
+              animated
+              style="height: 40px"
+              class="ion-no-margin"
+            ></ion-skeleton-text>
+          </ion-card>
+        </ng-template>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ng-container
+          *ngIf="expediente$ | async as expediente; else loadingCapitalizacion"
+        >
+          <ion-card>
+            <ion-item
+              tappable="true"
+              button
+              color="primary"
+              (click)="capitalizacionVisible = !capitalizacionVisible"
+              detail="false"
+            >
+              Autorización de capitalización
+              <ion-icon
+                slot="start"
+                [name]="capitalizacionVisible ? 'chevron-down-outline' : 'chevron-forward-outline'"
+              ></ion-icon>
+            </ion-item>
+
+            <div *ngIf="capitalizacionVisible === true">
+              <ion-item
+                *ngFor="let capitalizacion of expediente.capitalizacionProyectos"
+              >
+                <ion-icon
+                  name="document-attach-outline"
+                  slot="start"
+                ></ion-icon>
+                <ion-label class="ion-text-wrap">
+                  <h2>{{capitalizacion.nombre}}</h2>
+                  <div class="ion-text-center ion-margin-top">
+                    <ion-button
+                      [href]="capitalizacion.archivo | upload"
+                      target="_blank"
+                      download="download"
+                      slot="end"
+                      class="ion-hide-md-up ion-padding-end"
+                    >
+                      Descargar
+                    </ion-button>
+                    <ion-button
+                      slot="end"
+                      color="danger"
+                      (click)="borrarCapitalizacion(expediente, capitalizacion)"
+                      class="ion-hide-md-up ion-padding-start"
+                    >
+                      Borrar
+                    </ion-button>
+                  </div>
+                </ion-label>
+                <ion-button
+                  [href]="capitalizacion.archivo | upload"
+                  target="_blank"
+                  download="download"
+                  slot="end"
+                  class="ion-hide-sm-down"
+                >
+                  Descargar
+                </ion-button>
+                <ion-button
+                  slot="end"
+                  color="danger"
+                  (click)="borrarCapitalizacion(expediente, capitalizacion)"
+                  class="ion-hide-sm-down"
+                >
+                  Borrar
+                </ion-button>
+              </ion-item>
+              <div class="ion-padding ion-text-center">
+                <ion-label>
+                  <h2>Subir archivo de capitalización</h2>
+                </ion-label>
+                <alliax-file-upload
+                  [archivo]="capitalizacion"
+                  (archivoCargado)="capitalizacion = $event"
+                ></alliax-file-upload>
+                <div class="ion-padding" *ngIf="capitalizacion">
+                  <ion-button
+                    color="success"
+                    (click)="subirCapitalizacion(expediente)"
+                  >
+                    Subir archivo
+                  </ion-button>
+                </div>
+              </div>
+            </div>
+          </ion-card>
+        </ng-container>
+        <ng-template #loadingCapitalizacion>
+          <ion-card>
+            <ion-skeleton-text
+              animated
+              style="height: 40px"
+              class="ion-no-margin"
+            ></ion-skeleton-text>
+          </ion-card>
+        </ng-template>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
