@@ -3,7 +3,15 @@
     <ion-title>
       {{grupo?.tipoActivo.claveSap}} - {{grupo?.tipoActivo?.nombre}}
     </ion-title>
-    <ion-buttons slot="end">
+    <ion-buttons slot="end" class="ion-hide-sm-down">
+      <ion-button
+        (click)="descargarExcel(grupo)"
+        color="primary"
+        shape="round"
+        fill="outline"
+      >
+        Descargar en Excel
+      </ion-button>
       <ion-button (click)="modalCtrl.dismiss()"> Cerrar </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -47,15 +55,28 @@
       {{grupo?.activos | number}} registros
     </ion-title>
   </ion-toolbar>
-  <ion-toolbar color="dark">
-    <ion-button
-      (click)="descargarExcel(grupo)"
-      color="primary"
-      fill="outline"
-      shape="round"
-      expand="full"
-    >
-      Descargar en Excel
-    </ion-button>
+  <ion-toolbar color="dark" class="ion-hide-md-up">
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+      <ion-col size="6">
+        <ion-button
+          (click)="modalCtrl.dismiss()"
+          color="danger"
+          shape="round"
+          expand="full"
+        >
+          Cerrar
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button
+          (click)="descargarExcel(grupo)"
+          color="primary"
+          shape="round"
+          expand="full"
+        >
+          Descargar en Excel
+        </ion-button>
+      </ion-col>
+    </ion-row>
   </ion-toolbar>
 </ion-footer>

@@ -7,7 +7,6 @@ import {
   SapService,
   StateService,
 } from '@indelpro-contraloria/data';
-import { take, takeLast, tap } from 'rxjs/operators';
 import {
   AlertController,
   LoadingController,

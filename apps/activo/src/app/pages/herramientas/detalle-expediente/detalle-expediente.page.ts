@@ -1,4 +1,10 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 import {
   Activo,
   Expediente,
@@ -12,6 +18,7 @@ import {
 import {
   AlertController,
   LoadingController,
+  ModalController,
   ToastController,
 } from '@ionic/angular';
 import {
@@ -27,6 +34,7 @@ import { Adjunto } from '@indelpro-contraloria/data';
 import { CurrencyPipe } from '@angular/common';
 import { TableColumn } from '@swimlane/ngx-datatable';
 import { json2csvAsync } from 'json-2-csv';
+import { FacturasExpedientePage } from '../facturas-expediente/facturas-expediente.page';
 
 @Component({
   selector: 'indelpro-contraloria-detalle-expediente',
@@ -37,6 +45,7 @@ export class DetalleExpedientePage
   extends DataEntryClass<Expediente, ExpedientesService>
   implements OnInit {
   @ViewChild('fotografias') fotografias: HTMLIonSlidesElement;
+  @ViewChild('archivosAdjuntos') archivosAdjuntos: TemplateRef<any>;
   detalleVisible = false;
   autorizacionVisible = false;
   capitalizacionVisible = false;
@@ -82,7 +91,7 @@ export class DetalleExpedientePage
       expediente.DET
         ? expediente.DET.map((detalle: ExpedienteDet) => ({
             ...detalle,
-            DMBT1: detalle.SHKZG === 'H' ? detalle.DMBT1 * -1 : detalle.DMBT1,
+            DMBE2: detalle.SHKZG === 'H' ? detalle.DMBE2 * -1 : detalle.DMBE2,
             WRBT1: detalle.SHKZG === 'H' ? detalle.WRBT1 * -1 : detalle.WRBT1,
           }))
         : []
@@ -105,7 +114,8 @@ export class DetalleExpedientePage
     private feathersService: FeathersService,
     private authQuery: AuthQuery,
     private ubicacionesQuery: UbicacionesQuery,
-    private currencyPipe: CurrencyPipe
+    private currencyPipe: CurrencyPipe,
+    public modalCtrl: ModalController
   ) {
     super(
       loadingCtrl,
@@ -116,9 +126,20 @@ export class DetalleExpedientePage
     );
   }
 
+  async rowActivated(event) {
+    if (event.type === 'click') {
+      const facturas = await this.modalCtrl.create({
+        component: FacturasExpedientePage,
+        componentProps: {
+          expediente: event.row,
+        },
+      });
+      await facturas.present();
+    }
+  }
+
   async ngOnInit() {
     this.columns = [
-      { name: 'Factura adjunta', summaryFunc: null },
       {
         name: 'Fecha de pago',
         prop: 'AUGDT',
@@ -162,7 +183,7 @@ export class DetalleExpedientePage
       { name: 'Pedido', prop: 'EBELN', summaryFunc: null },
       {
         name: 'Inversion USD',
-        prop: 'DMBT1',
+        prop: 'DMBE2',
         // pipe: new CurrencyPipe('en-US'),
         pipe: {
           transform(value: any, ...args): any {
@@ -319,7 +340,7 @@ export class DetalleExpedientePage
         'Doc. Contable': detalle.BELNR,
         'Fecha factura SAP': detalle.BUDAT,
         Pedido: detalle.EBELN,
-        'Inversion USD': detalle.DMBT1,
+        'Inversion USD': detalle.DMBE2,
         'Inversion Pesos': detalle.WRBT1,
         'Tipo de Cambio': detalle.KZKRS,
         Moneda: detalle.WAERS,

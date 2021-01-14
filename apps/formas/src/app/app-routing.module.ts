@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, PreloadAllModules, Routes } from '@angular/router';
-import { AuthGuard } from '@alliax/feathers-client';
+import { AuthGuard, VerifyGuard } from '@alliax/feathers-client';
+import { HasRoleGuard } from '@indelpro-contraloria/ui';
 
 const routes: Routes = [
   {
@@ -10,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'herramientas',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, VerifyGuard],
     children: [
       {
         path: '',
@@ -39,7 +40,7 @@ const routes: Routes = [
           ).then((m) => m.SolicitudesEnviadasPageModule),
       },
       {
-        path: 'solicitud/:id',
+        path: 'solicitud/:id/:proceso',
         loadChildren: () =>
           import(
             './pages/herramientas/solicitud-detalle/solicitud-detalle.module'
@@ -49,7 +50,7 @@ const routes: Routes = [
   },
   {
     path: 'configuracion',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, VerifyGuard],
     children: [
       {
         path: '',
@@ -65,6 +66,45 @@ const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'admin',
+    canActivate: [AuthGuard, VerifyGuard, HasRoleGuard],
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'usuarios',
+      },
+      {
+        path: 'usuarios',
+        loadChildren: () =>
+          import('./pages/admin/usuarios/usuarios.module').then(
+            (m) => m.UsuariosPageModule
+          ),
+      },
+      {
+        path: 'tipo-solicitudes',
+        loadChildren: () =>
+          import('./pages/admin/tipo-solicitudes/tipo-solicitudes.module').then(
+            (m) => m.TipoSolicitudesPageModule
+          ),
+      },
+      {
+        path: 'sistemas-sap',
+        loadChildren: () =>
+          import('./pages/admin/sistemas-sap/sistemas-sap.module').then(
+            (m) => m.SistemasSapPageModule
+          ),
+      },
+      {
+        path: 'sap-aplicacion',
+        loadChildren: () =>
+          import('./pages/admin/sap-aplicacion/sap-aplicacion.module').then(
+            (m) => m.SapAplicacionPageModule
+          ),
+      },
+    ],
+  },
 ];
 
 @NgModule({
@@ -73,6 +113,7 @@ const routes: Routes = [
       preloadingStrategy: PreloadAllModules,
     }),
   ],
+  providers: [HasRoleGuard],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

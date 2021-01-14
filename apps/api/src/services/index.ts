@@ -19,11 +19,18 @@ import activosSap from './activo/activos-sap/activos-sap.service';
 import activoGrupoUbicaciones from './activo/grupo-ubicaciones/grupo-ubicaciones.service';
 import activoUbicaciones from './activo/ubicaciones/ubicaciones.service';
 import activoAdjuntos from './activo/adjuntos/adjuntos.service';
+import formasSolicitudesIndelpro from './formas/solicitudes-indelpro/solicitudes-indelpro.service';
+import formasSolicitudesCompras from './formas/solicitudes-compras/solicitudes-compras.service';
+import formasSap from './formas/sap/sap.service';
+import formasConfiguracion from './formas/configuracion/configuracion.service';
+import { customNotifier } from './customNotifier';
 export default function (app: Application) {
   app.configure(UsersService);
   app.configure(MailerService);
   app.configure(UploadsService);
-  app.configure(AuthManagementService);
+
+  app.configure(() => AuthManagementService(app, customNotifier));
+
   app.configure(expedientes);
   app.configure(ajustes);
   app.configure(sapSettings);
@@ -37,4 +44,8 @@ export default function (app: Application) {
   app.configure(activoGrupoUbicaciones);
   app.configure(activoUbicaciones);
   app.configure(activoAdjuntos);
+  app.configure(formasSolicitudesIndelpro);
+  app.configure(formasSolicitudesCompras);
+  app.configure(formasSap);
+  app.configure(formasConfiguracion);
 }

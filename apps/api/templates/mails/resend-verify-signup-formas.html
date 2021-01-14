@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:v="urn:schemas-microsoft-com:vml"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="x-apple-disable-message-reformatting" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!--[if mso]>
+      <xml>
+        <o:OfficeDocumentSettings>
+          <o:AllowPNG />
+          <o:PixelsPerInch>96</o:PixelsPerInch>
+        </o:OfficeDocumentSettings>
+      </xml>
+      <style>
+        .spacer,
+        .divider {
+          mso-line-height-rule: exactly;
+        }
+        td,
+        th,
+        div,
+        p,
+        a,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+          font-size: 13px;
+          line-height: 23px;
+          font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+        }
+      </style>
+    <![endif]-->
+
+    <style type="text/css">
+      @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400,700');
+      @media only screen {
+        .serif {
+          font-family: 'Montserrat', sans-serif !important;
+        }
+        .sans-serif {
+          font-family: 'Open Sans', sans-serif !important;
+        }
+        .column,
+        th,
+        td,
+        div,
+        p,
+        ul,
+        li {
+          font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI',
+            'Roboto', Helvetica, Arial, sans-serif;
+        }
+      }
+
+      #outlook a {
+        padding: 0;
+      }
+      a {
+        text-decoration: none;
+      }
+      table {
+        border-collapse: collapse;
+      }
+      img {
+        border: 0;
+        display: block;
+        line-height: 100%;
+      }
+      .column,
+      th,
+      td,
+      div,
+      p,
+      ul {
+        font-size: 13px;
+        line-height: 23px;
+      }
+      li {
+        font-size: 13px;
+        line-height: 18px;
+      }
+
+      .wrapper {
+        min-width: 700px;
+      }
+      .row {
+        margin: 0 auto;
+        width: 700px;
+      }
+      .row .row,
+      th .row {
+        width: 100%;
+      }
+
+      @media only screen and (max-width: 699px) {
+        .wrapper {
+          min-width: 100% !important;
+        }
+        .row {
+          width: 90% !important;
+        }
+        .row .row {
+          width: 100% !important;
+        }
+
+        .column {
+          box-sizing: border-box;
+          display: inline-block !important;
+          line-height: inherit !important;
+          width: 100% !important;
+          word-break: break-word;
+          -webkit-text-size-adjust: 100%;
+        }
+        .mobile-1 {
+          max-width: 8.33333%;
+        }
+        .mobile-2 {
+          max-width: 16.66667%;
+        }
+        .mobile-3 {
+          max-width: 25%;
+        }
+        .mobile-4 {
+          max-width: 33.33333%;
+        }
+        .mobile-5 {
+          max-width: 41.66667%;
+        }
+        .mobile-6 {
+          max-width: 50%;
+        }
+        .mobile-7 {
+          max-width: 58.33333%;
+        }
+        .mobile-8 {
+          max-width: 66.66667%;
+        }
+        .mobile-9 {
+          max-width: 75%;
+        }
+        .mobile-10 {
+          max-width: 83.33333%;
+        }
+        .mobile-11 {
+          max-width: 91.66667%;
+        }
+        .mobile-12 {
+          padding-right: 30px !important;
+          padding-left: 30px !important;
+        }
+
+        .mobile-offset-1 {
+          margin-left: 8.33333% !important;
+        }
+        .mobile-offset-2 {
+          margin-left: 16.66667% !important;
+        }
+        .mobile-offset-3 {
+          margin-left: 25% !important;
+        }
+        .mobile-offset-4 {
+          margin-left: 33.33333% !important;
+        }
+        .mobile-offset-5 {
+          margin-left: 41.66667% !important;
+        }
+        .mobile-offset-6 {
+          margin-left: 50% !important;
+        }
+        .mobile-offset-7 {
+          margin-left: 58.33333% !important;
+        }
+        .mobile-offset-8 {
+          margin-left: 66.66667% !important;
+        }
+        .mobile-offset-9 {
+          margin-left: 75% !important;
+        }
+        .mobile-offset-10 {
+          margin-left: 83.33333% !important;
+        }
+        .mobile-offset-11 {
+          margin-left: 91.66667% !important;
+        }
+
+        .has-columns {
+          padding-right: 20px !important;
+          padding-left: 20px !important;
+        }
+
+        .has-columns .column {
+          padding-right: 10px !important;
+          padding-left: 10px !important;
+        }
+
+        .mobile-collapsed .column {
+          padding-left: 0 !important;
+          padding-right: 0 !important;
+        }
+
+        img {
+          width: 100% !important;
+          height: auto !important;
+        }
+
+        .mobile-center {
+          display: table !important;
+          float: none;
+          margin-left: auto !important;
+          margin-right: auto !important;
+        }
+        .mobile-left {
+          float: none;
+          margin: 0 !important;
+        }
+        .mobile-text-center {
+          text-align: center !important;
+        }
+        .mobile-text-left {
+          text-align: left !important;
+        }
+        .mobile-text-right {
+          text-align: right !important;
+        }
+
+        .mobile-valign-top {
+          vertical-align: top !important;
+        }
+
+        .mobile-full-width {
+          display: table;
+          width: 100% !important;
+        }
+
+        .spacer {
+          height: 30px;
+          line-height: 100% !important;
+          font-size: 100% !important;
+        }
+        .divider th {
+          height: 60px;
+        }
+        .mobile-padding-top {
+          padding-top: 30px !important;
+        }
+        .mobile-padding-top-mini {
+          padding-top: 10px !important;
+        }
+        .mobile-padding-bottom {
+          padding-bottom: 30px !important;
+        }
+        .mobile-padding-bottom-mini {
+          padding-bottom: 10px !important;
+        }
+        .mobile-margin-top {
+          margin-top: 30px !important;
+        }
+        .mobile-margin-top-mini {
+          margin-top: 10px !important;
+        }
+        .mobile-margin-bottom {
+          margin-bottom: 30px !important;
+        }
+        .mobile-margin-bottom-mini {
+          margin-bottom: 10px !important;
+        }
+      }
+
+      p {
+        margin: 0 !important;
+      }
+      #bodyCorreo table {
+        max-width: 90%;
+        margin: 0 auto;
+        border: 1px solid #cecece;
+        border-spacing: 0;
+      }
+      #bodyCorreo th {
+        background: #488ac7;
+        color: #fff;
+        border: 1px solid #cecece;
+        padding: 12px 6px;
+      }
+      #bodyCorreo td {
+        border: 1px solid #cecece;
+        padding: 8px 6px;
+      }
+      #bodyCorreo {
+        margin: 14pt 0;
+      }
+      body > div:last-child {
+        padding: 50px !important;
+        background: #787878;
+      }
+      body > div:last-child p,
+      body > div:last-child a {
+        font-size: 8pt !important;
+        color: #f6f6f6 !important;
+      }
+      body > div:last-child a {
+        font-weight: bolder;
+      }
+    </style>
+  </head>
+  <body
+    style="
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      -webkit-font-smoothing: antialiased;
+    "
+  >
+    <table
+      class="wrapper"
+      align="center"
+      bgcolor="#EEEEEE"
+      cellpadding="0"
+      cellspacing="0"
+      width="100%"
+    >
+      <tr>
+        <td style="padding: 30px 0">
+          <!-- Header Left -->
+          <table
+            class="row"
+            align="center"
+            bgcolor="#FFFFFF"
+            cellpadding="0"
+            cellspacing="0"
+          >
+            <tr>
+              <td
+                class="spacer"
+                height="40"
+                colspan="2"
+                style="
+                  font-size: 40px;
+                  line-height: 40px;
+                  mso-line-height-rule: exactly;
+                "
+              >
+                &nbsp;
+              </td>
+            </tr>
+            <tr>
+              <th
+                class="column"
+                width="340"
+                style="
+                  padding-left: 30px;
+                  padding-right: 30px;
+                  text-align: left;
+                "
+              >
+                <a href="http://alliax.com/" style="text-decoration: none">
+                  <img
+                    class="mobile-center"
+                    src="cid:ImgLogoMain"
+                    width="160"
+                    alt="Header Logo"
+                    style="border: 0; width: 100%; max-width: 160px"
+                  />
+                </a>
+              </th>
+              <th
+                width="300"
+                style="
+                  padding-right: 30px;
+                  font-size: 15px;
+                  text-align: right;
+                  color: #488ac7;
+                "
+              >
+                ##ASUNTO##
+              </th>
+            </tr>
+            <tr>
+              <td
+                class="spacer"
+                height="40"
+                colspan="2"
+                style="
+                  font-size: 40px;
+                  line-height: 40px;
+                  mso-line-height-rule: exactly;
+                "
+              >
+                &nbsp;
+              </td>
+            </tr>
+          </table>
+
+          <!-- /Header Left -->
+
+          <!-- Intro Basic -->
+          <table
+            class="row"
+            align="center"
+            bgcolor="#F9F9F9"
+            cellpadding="0"
+            cellspacing="0"
+          >
+            <tr>
+              <td
+                class="spacer"
+                height="20"
+                style="
+                  font-size: 20px;
+                  line-height: 20px;
+                  mso-line-height-rule: exactly;
+                "
+              >
+                &nbsp;
+              </td>
+            </tr>
+            <tr>
+              <th
+                class="column"
+                width="640"
+                style="
+                  padding-left: 30px;
+                  padding-right: 30px;
+                  font-weight: 400;
+                  text-align: left;
+                "
+              >
+                <div
+                  id="bodyCorreo"
+                  class="sans-serif"
+                  style="
+                    color: #474950;
+                    font-size: 12px;
+                    line-height: 14px;
+                    margin-bottom: 20px;
+                  "
+                >
+                  <p>¡Hola!</p>
+                  <br /><br />
+                  <p>
+                    Te hemos dado de alta en el portal de aplicación de Workflow
+                    Indelpro en donde podrás encontrar en un solo lugar los
+                    workflow que tenemos implementados en la empresa para
+                    mantener nuestros controles internos, por favor utiliza la
+                    siguiente liga para validar tu cuenta de correo electrónico
+                    y poder hacer uso del portal.
+                  </p>
+                  <br />
+                  <p>
+                    Al validar tu cuenta de correo se abrirá la página de formas
+                    electrónicas en donde deberás ingresar tu correo electrónico
+                    de la empresa y el password que te mostramos a continuación:
+                  </p>
+                  <br />
+                  <p>
+                    <strong>Indelpro2020%$</strong>
+                  </p>
+                </div>
+
+                <table
+                  class="mobile-text-center"
+                  bgcolor="#488ac7"
+                  cellpadding="0"
+                  cellspacing="0"
+                  style="border-radius: 3px"
+                >
+                  <tr>
+                    <th class="sans-serif">
+                      <a
+                        href="##LIGA_ACCESO##"
+                        style="
+                          border: 0 solid #0f3c69;
+                          color: #ffffff;
+                          display: inline-block;
+                          font-size: 14px;
+                          font-weight: 400;
+                          padding: 15px 50px 15px 50px;
+                          text-decoration: none;
+                        "
+                        >Confirmar correo electrónico</a
+                      >
+                    </th>
+                  </tr>
+                </table>
+
+                <div style="color: #474950; font-size: 13px; margin-top: 20px">
+                  Saludos cordiales,
+                </div>
+                <div
+                  style="
+                    color: #474950;
+                    font-size: 13px;
+                    line-height: 15px;
+                    text-align: right;
+                    margin-top: 45px;
+                  "
+                >
+                  <strong>Alliax | Alfa Procesos de Negocio</strong><br />
+                  <a style="color: #488ac7" href="mailto:info@alliax.com"
+                    >info@alliax.com</a
+                  ><br />
+                  <a style="color: #488ac7" href="tel:+528187483500"
+                    >Tel. +52 (81) 8748 3500</a
+                  >
+                </div>
+              </th>
+            </tr>
+            <tr>
+              <td
+                class="spacer"
+                height="80"
+                style="
+                  font-size: 80px;
+                  line-height: 80px;
+                  mso-line-height-rule: exactly;
+                "
+              >
+                &nbsp;
+              </td>
+            </tr>
+          </table>
+
+          <!-- /Intro Basic -->
+
+          <!-- Footer 1 -->
+          <table
+            class="row"
+            align="center"
+            bgcolor="#114477"
+            cellpadding="0"
+            cellspacing="0"
+          >
+            <tr>
+              <th
+                class="column has-columns"
+                width="640"
+                style="padding-left: 30px; padding-right: 30px"
+              >
+                <div
+                  class="spacer"
+                  style="
+                    font-size: 80px;
+                    line-height: 80px;
+                    mso-line-height-rule: exactly;
+                  "
+                >
+                  &nbsp;
+                </div>
+
+                <table class="row" cellpadding="0" cellspacing="0">
+                  <tr valign="top" style="vertical-align: top">
+                    <th
+                      class="column mobile-padding-bottom"
+                      width="255"
+                      style="
+                        padding-top: 10px;
+                        padding-right: 10px;
+                        text-align: left;
+                      "
+                    >
+                      <table class="row" cellpadding="0" cellspacing="0">
+                        <tr>
+                          <td width="100" style="width: 100px">
+                            <a href="http://www.alliax.com">
+                              <img
+                                src="cid:ImgLogoFooter"
+                                width="78"
+                                alt="Footer Logo"
+                              />
+                            </a>
+                          </td>
+                          <td>
+                            <div style="color: #f4f5f8; font-size: 13px">
+                              Indelpro, el único productor de resinas de
+                              Polipropileno en México, es una co-inversión entre
+                              Alpek, el grupo petroquímico de Alfa, y
+                              LyondellBasell, líder mundial en tecnología y
+                              producción de poliolefinas.
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                    </th>
+                  </tr>
+                </table>
+
+                <table
+                  class="row divider"
+                  cellpadding="0"
+                  cellspacing="0"
+                  width="100%"
+                >
+                  <tr>
+                    <th height="81">
+                      <div
+                        style="
+                          border-top: 1px solid #0f3c69;
+                          font-size: 0;
+                          line-height: 0;
+                          mso-line-height-rule: exactly;
+                        "
+                      >
+                        &nbsp;
+                      </div>
+                    </th>
+                  </tr>
+                </table>
+
+                <table class="row" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <th
+                      class="column"
+                      width="640"
+                      style="color: #f4f5f8; font-weight: 400; text-align: left"
+                    >
+                      <div class="sans-serif">
+                        Indelpro &copy; Copyright 2020. Derechos Reservados.
+                      </div>
+                    </th>
+                  </tr>
+                  <tr>
+                    <td
+                      class="spacer"
+                      height="30"
+                      style="
+                        font-size: 30px;
+                        line-height: 30px;
+                        mso-line-height-rule: exactly;
+                      "
+                    >
+                      &nbsp;
+                    </td>
+                  </tr>
+                </table>
+              </th>
+            </tr>
+          </table>
+
+          <!-- /Footer 1 -->
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

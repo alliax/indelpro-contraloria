@@ -1,0 +1,16 @@
+.user {
+  .foto {
+    border-radius: 50%;
+    height: 125px;
+    width: 125px;
+    overflow: hidden;
+    box-shadow: 0 0 2px var(--ion-color-light);
+    margin: auto;
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+  }
+}

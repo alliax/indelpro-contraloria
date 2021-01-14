@@ -5,7 +5,10 @@ import { AppComponent } from './app.component';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
-import { FeathersClientModule } from '@alliax/feathers-client';
+import {
+  FeathersClientModule,
+  IonicComponentsModule,
+} from '@alliax/feathers-client';
 import { environment } from '../environments/environment';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { RouteReuseStrategy } from '@angular/router';
@@ -28,8 +31,12 @@ import { ServiceWorkerModule } from '@angular/service-worker';
         timeout: 60000,
       },
     }),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' }),
-    environment.production ? [] : AkitaNgDevtools,
+    /*ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      registrationStrategy: 'registerImmediately'
+    }),*/
+    environment.production ? [] : AkitaNgDevtools.forRoot(),
+    IonicComponentsModule,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

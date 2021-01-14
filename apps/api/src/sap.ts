@@ -39,7 +39,7 @@ const abapSystem: RfcConnectionParameters = {
 
   //INDELPRO DES
   user: 'prgr05',
-  passwd: 'Passindqas#18',
+  passwd: 'Passindqas#20',
   ashost: '10.241.0.9',
   /*ashost: '140.140.60.211',*/
   client: '100',

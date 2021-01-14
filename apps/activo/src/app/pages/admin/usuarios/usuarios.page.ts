@@ -19,11 +19,11 @@ import { tap } from 'rxjs/operators';
   templateUrl: './usuarios.page.html',
   styleUrls: ['./usuarios.page.scss'],
 })
-export class UsuariosPage extends DataEntryClass<Usuario, UsuariosService>
+export class UsuariosPage
+  extends DataEntryClass<Usuario, UsuariosService>
   implements OnInit {
   registros$ = this.usuariosQuery
     .selectAll()
-    .pipe(tap((val) => console.log(val)));
   model = createUsuario({});
   fields = [
     {
@@ -58,9 +58,30 @@ export class UsuariosPage extends DataEntryClass<Usuario, UsuariosService>
         labelPosition: 'stacked',
         required: true,
       },
+      expressionProperties: {
+        'templateOptions.disabled': (model) => model._id,
+      },
       validation: {
         messages: {
           required: 'Debes ingresar el correo electrónico',
+        },
+      },
+    },
+    {
+      key: 'password',
+      type: 'input',
+      templateOptions: {
+        label: 'Contraseña',
+        placeholder: 'Ingresa la contraseña del usuario',
+        labelPosition: 'stacked',
+        required: true,
+      },
+      expressionProperties: {
+        'templateOptions.disabled': (model) => model._id,
+      },
+      validation: {
+        messages: {
+          required: 'Debes ingresar la contraseña del usuario',
         },
       },
     },
@@ -87,14 +108,16 @@ export class UsuariosPage extends DataEntryClass<Usuario, UsuariosService>
 
   ngOnInit() {}
 
-  async update(model: Partial<TipoActivo>): Promise<any> {
+  async update(model: Partial<Usuario>): Promise<any> {
     try {
       await super.upload(model, 'foto');
     } catch (err) {}
+    delete model.email;
+    delete model.password;
     return super.update(model);
   }
 
-  async create(model: Partial<TipoActivo>): Promise<any> {
+  async create(model: Partial<Usuario>): Promise<any> {
     try {
       await super.upload(model, 'foto');
     } catch (err) {}

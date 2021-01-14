@@ -3,40 +3,45 @@
 <ion-content>
   <ion-grid>
     <ion-row class="ion-justify-content-center ion-align-items-center">
-      <ion-col size="10" size-md="4" size-lg="3" size-xl="3">
-        <ion-card>
-          <div class="ion-padding logo">
-            <img src="assets/auth/logo.png" />
+      <ion-col size="11" size-md="4" size-lg="3" size-xl="3">
+        <div class="logo ion-text-center ion-margin">
+          <img src="assets/auth/logo.png" class="ion-margin-vertical" />
+        </div>
+        <div>
+          <div class="ion-margin-bottom">
+            <h2 class="ion-text-center ion-no-margin">Formas electrónicas</h2>
+            <h6 class="ion-text-center ion-no-margin">Cuenta no validada</h6>
           </div>
-          <ion-card-content>
-            <h2 class="ion-text-center">Cuenta no validada</h2>
-            <div class="ion-padding-horizontal">
-              <p class="aviso">
-                Aún no has validado tu cuenta, por favor revisa tu correo
-                electrónico y accede a la liga de validación
-              </p>
-            </div>
-            <div class="ion-padding">
-              <ion-button
-                expand="block"
-                color="primary"
-                shape="round"
-                (click)="enviarCorreo()"
-              >
-                Reenviar correo
-              </ion-button>
-            </div>
-            <div class="logout">
-              <ion-fab-button
-                color="danger"
-                size="small"
-                (click)="cerrarSesion()"
-              >
-                <ion-icon name="log-out-outline"></ion-icon>
-              </ion-fab-button>
-            </div>
-          </ion-card-content>
-        </ion-card>
+          <div class="ion-padding-horizontal">
+            <p class="aviso">
+              Aún no has validado tu cuenta, por favor revisa tu correo
+              electrónico y accede a la liga de validación
+            </p>
+          </div>
+          <div class="ion-padding">
+            <ion-button
+              expand="block"
+              color="primary"
+              shape="round"
+              (click)="enviarCorreo()"
+            >
+              Reenviar correo
+            </ion-button>
+          </div>
+          <div
+            class="logout ion-padding-bottom ion-text-center ion-text-sm-center ion-text-md-end ion-text-lg-end ion-text-xl-end"
+          >
+            <ion-button fill="clear" color="danger" (click)="cerrarSesion()">
+              Cerrar sesión
+            </ion-button>
+          </div>
+          <div class="ion-text-center texto-alliax">
+            <small>
+              Made with <ion-icon name="heart" color="danger"></ion-icon> by
+              Alliax
+            </small>
+          </div>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>

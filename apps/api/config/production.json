@@ -16,8 +16,14 @@
   "authManagement": {
     "path": "/indelpro/api/authManagement",
     "service": "/indelpro/api/users",
-    "mailUrl": "https://apps.alliax.com/indelpro/activo",
-    "authUrl": "https://apps.alliax.com/indelpro/activo/auth",
+    "default": {
+      "mailUrl": "https://apps.alliax.com/indelpro/activo",
+      "authUrl": "https://apps.alliax.com/indelpro/activo/auth"
+    },
+    "formas": {
+      "mailUrl": "https://apps.alliax.com/indelpro/formas",
+      "authUrl": "https://apps.alliax.com/indelpro/formas/auth"
+    },
     "apiUrl": "https://servicios.alliax.com/indelpro/api"
   },
   "socket": {

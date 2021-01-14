@@ -1,109 +1,412 @@
 <ion-header>
   <ion-toolbar color="secondary">
-    <ion-grid *ngIf="user$ | async as user">
-      <ion-row class="ion-justify-content-between ion-align-items-center">
-        <ion-col size="auto">
-          <ion-back-button
-            color="light"
-            defaultHref="/herramientas/dashboard"
-          ></ion-back-button>
-        </ion-col>
-        <ion-col size="auto">
-          <ion-avatar class="user">
-            <img
-              [src]="(user.foto) ? (user.foto | upload) : 'assets/img/no-profile.jpg'"
-            />
-          </ion-avatar>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <ion-buttons slot="start">
+      <ion-back-button
+        color="light"
+        defaultHref="/herramientas/dashboard"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalle de la solicitud</ion-title>
+    <ion-buttons slot="end" *ngIf="user$ | async as user">
+      <ion-avatar class="user">
+        <img
+          [src]="(user.foto) ? (user.foto | upload) : 'assets/img/no-profile.jpg'"
+        />
+      </ion-avatar>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-item *ngIf="solicitud">
-    <ion-label class="ion-text-wrap">
-      <h1 class="ion-padding-bottom">{{solicitud.title}}</h1>
-      <p>Creado el {{solicitud.createDate}}</p>
-      <h4>Monto: {{solicitud.totalAmount | currency}} {{solicitud?.currency?.description}}</h4>
-    </ion-label>
-  </ion-item>
-  <ion-list *ngIf="solicitud?.supplier">
-    <ion-list-header>
-      Proveedor
-    </ion-list-header>
-    <ion-item lines="none">
-      <ion-icon name="business-outline" slot="start"></ion-icon>
+  <ng-container *ngIf="solicitud; else solIndelpro">
+    <ion-item *ngIf="solicitud">
       <ion-label class="ion-text-wrap">
-        <p>
-          {{solicitud.supplier.description}}
-        </p>
+        <h1 class="ion-padding-bottom">{{solicitud.title}}</h1>
+        <h6 class="ion-no-margin">{{solicitud.config?.status}}</h6>
       </ion-label>
     </ion-item>
-  </ion-list>
-  <ion-list *ngIf="solicitud?.requester">
-    <ion-list-header>
-      Solicitante
-    </ion-list-header>
-    <ion-item lines="none">
-      <ion-icon name="create-outline" slot="start"></ion-icon>
-      <ion-label class="ion-text-wrap">
-        <p>
-          {{solicitud.requester.description}}
-        </p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
-  <ion-list *ngIf="solicitud?.comments && false">
-    <ion-list-header>
-      Comentarios
-    </ion-list-header>
-    <ion-item lines="none" *ngFor="let comentario of solicitud.comments">
-      <ion-icon name="chat-bubble-outline" slot="end"> </ion-icon>
-      <ion-label class="ion-text-wrap">
-        <p>
-          <ion-text color="primary">
-            <strong>{{comentario.user}}</strong>
-          </ion-text>
-          : {{comentario.text}}
-        </p>
-        <div>
-          <small
-            >Registrado el {{comentario.date}} a las {{comentario.time}}</small
+    <ion-list *ngIf="solicitud?.requester" lines="none">
+      <ion-list-header>Solicitante</ion-list-header>
+      <ion-item>
+        <ion-icon slot="start" name="person-outline"></ion-icon>
+        <ion-label>
+          <h2>{{solicitud?.requester?.description}}</h2>
+          <p>{{solicitud.requester?.account}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngIf="solicitud">
+      <ion-list-header> Enviado el </ion-list-header>
+      <ion-item lines="none">
+        <ion-icon name="calendar-outline" slot="start"></ion-icon>
+        <ion-label class="ion-text-wrap">
+          <!--<h2>{{solicitud.createDate | date:'dd / MMMM / yyyy'}}</h2>-->
+          <h2>{{solicitud.submitDate}}</h2>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <!--SP - GV - CG - AC - FO - CL - LC - PR - PV - CM - SV-->
+    <ng-container [ngSwitch]="proceso">
+      <ng-container *ngSwitchCase="'LC'">
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Cliente</h2>
+            <p>{{solicitud?.deudor?.description}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Plazo</h2>
+            <p>{{solicitud?.condicionPago?.description}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Términos del crédito</h2>
+            <p>{{solicitud?.termCredito}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Importe asegurado</h2>
+            <p>{{solicitud?.importeAsegurado | currency}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Límite de crédito</h2>
+            <p>{{solicitud?.limiteCredito | currency}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Moneda</h2>
+            <p>USD</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>País</h2>
+            <p>{{solicitud?.pais}}</p>
+          </ion-label>
+        </ion-item>
+      </ng-container>
+      <ng-container *ngSwitchCase="'GV'">
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Destino</h2>
+            <p>{{solicitud?.destiny?.description}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Lugar</h2>
+            <p>{{solicitud?.place }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Monto</h2>
+            <p>
+              {{(solicitud?.amountDollar ? solicitud?.amountDollar :
+              solicitud?.amountPesos) | currency}} {{((solicitud?.amountDollar)
+              ? 'USD' : 'MXN')}}
+            </p>
+          </ion-label>
+        </ion-item>
+      </ng-container>
+      <ng-container *ngSwitchCase="'AC'">
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Cliente</h2>
+            <p>{{solicitud?.deudor?.description}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Tipo de nota</h2>
+            <p>{{solicitud?.tipoNota?.description}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Motivo</h2>
+            <p>{{solicitud?.motivoNota?.description }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Monto</h2>
+            <p>{{solicitud?.monto | currency}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Moneda</h2>
+            <p>USD</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Justificación</h2>
+            <p>{{solicitud?.leyendaNota}}</p>
+          </ion-label>
+        </ion-item>
+      </ng-container>
+      <ng-container *ngSwitchCase="'CG'">
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Importe</h2>
+            <p>{{solicitud?.invoices?.totalInvoices | currency}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Moneda</h2>
+            <p>{{solicitud?.payments?.pay?.currency?.description }}</p>
+          </ion-label>
+        </ion-item>
+      </ng-container>
+      <ng-container *ngSwitchCase="'CL'">
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Movimiento</h2>
+            <p>{{solicitud?.tipoMovimiento?.description}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Tipo de cliente</h2>
+            <p>{{solicitud?.tipoCliente?.description }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Condiciones de Pago</h2>
+            <p>{{solicitud?.condPago?.description}}</p>
+          </ion-label>
+        </ion-item>
+      </ng-container>
+      <ng-container *ngSwitchCase="'PR'">
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Movimiento</h2>
+            <p>{{solicitud?.tipoMovimiento?.description}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Tipo de proveedor</h2>
+            <p>{{solicitud?.tipoProveedor?.description }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Condiciones de Pago</h2>
+            <p>{{solicitud?.condicionPago?.description}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Proveedor</h2>
+            <p>{{solicitud.rfc}} - {{solicitud?.razonSoc}}</p>
+          </ion-label>
+        </ion-item>
+      </ng-container>
+      <ng-container *ngSwitchCase="'PV'">
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Importe</h2>
+            <p>{{solicitud.importe | currency}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Moneda</h2>
+            <p>{{solicitud?.currency?.description }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Justificacion</h2>
+            <p>{{solicitud?.justificacion}}</p>
+          </ion-label>
+        </ion-item>
+      </ng-container>
+      <ng-container *ngSwitchCase="'SP'">
+        <!--<ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Documento</h2>
+            <p>{{solicitud.importe}}</p>
+          </ion-label>
+        </ion-item>-->
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Rubro</h2>
+            <p>{{solicitud?.rubro?.description }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Proveedor</h2>
+            <p>{{solicitud?.supplier?.description}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Importe</h2>
+            <p>{{solicitud?.totalAmount | currency}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Moneda</h2>
+            <p>{{solicitud?.currency?.description}}</p>
+          </ion-label>
+        </ion-item>
+      </ng-container>
+      <ng-container *ngSwitchCase="'FO'">
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Empresa</h2>
+            <p>{{solicitud.company?.description}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Monto</h2>
+            <p>{{solicitud?.monto | currency}} USD</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>Justificacion</h2>
+            <p>{{solicitud?.justificacion}}</p>
+          </ion-label>
+        </ion-item>
+      </ng-container>
+    </ng-container>
+
+    <div *ngIf="solicitud?.files">
+      <ion-item lines="none">
+        <ion-label class="ion-text-wrap">
+          <h2>Archivos adjuntos</h2>
+        </ion-label>
+      </ion-item>
+      <ion-grid>
+        <ion-row class="ion-justify-content-start ion-align-items-center">
+          <ion-col
+            size="auto"
+            *ngFor="let file of (solicitud.files | objToArr)"
           >
-        </div>
-      </ion-label>
-    </ion-item>
-  </ion-list>
-  <ion-list *ngIf="solicitud && solicitud.approvalFlow">
-    <ion-list-header>
-      Flujo de aprobación
-    </ion-list-header>
-    <ion-item *ngFor="let aprobador of solicitud.approvalFlow" lines="none">
-      <ion-chip color="secondary" slot="start">
-        {{aprobador.step}}
-      </ion-chip>
-      <ion-icon
-        slot="start"
-        size="small"
-        name="people-outline"
-        [hidden]="!aprobador.isRol"
-      ></ion-icon>
-      <ion-label class="ion-text-wrap">
-        <p>{{aprobador.userName}}</p>
-      </ion-label>
-      <ion-icon
-        slot="end"
-        [name]="aprobador.approvalStatus === 'P' ? 'radio-button-on-outline' : (aprobador.approvalStatus === 'A' ? 'checkmark-circle-outline' : 'radio-button-off-outline')"
-        color="secondary"
-      ></ion-icon>
-      <!-- {{aprovador | json}} -->
-    </ion-item>
-  </ion-list>
+            <ion-button
+              (click)="abrirAdjunto(file.physicalName)"
+              size="small"
+              target="_blank"
+            >
+              <ion-icon name="document-attach-outline" slot="start"></ion-icon>
+              {{file.realName}}
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
 
-  <!-- {{solicitud | json}} -->
+    <!--<ion-list *ngIf="solicitud && solicitud.totalAmount">
+      <ion-list-header> Monto </ion-list-header>
+      <ion-item lines="none">
+        <ion-icon name="cash-outline" slot="start"></ion-icon>
+        <ion-label class="ion-text-wrap">
+          <h2>{{solicitud.totalAmount | currency}}</h2>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngIf="solicitud?.supplier">
+      <ion-list-header> Cliente </ion-list-header>
+      <ion-item lines="none">
+        <ion-icon name="business-outline" slot="start"></ion-icon>
+        <ion-label class="ion-text-wrap">
+          <h2>{{solicitud.supplier.description}}</h2>
+          <p>{{solicitud.supplier.id}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>-->
+    <ion-list *ngIf="solicitud?.comments && false">
+      <ion-list-header> Comentarios </ion-list-header>
+      <ion-item lines="none" *ngFor="let comentario of solicitud.comments">
+        <ion-icon name="chat-bubble-outline" slot="end"> </ion-icon>
+        <ion-label class="ion-text-wrap">
+          <p>
+            <ion-text color="primary">
+              <strong>{{comentario.user}}</strong>
+            </ion-text>
+            : {{comentario.text}}
+          </p>
+          <div>
+            <small
+              >Registrado el {{comentario.date}} a las
+              {{comentario.time}}</small
+            >
+          </div>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngIf="solicitud && solicitud.approvalFlow">
+      <ion-list-header> Flujo de aprobación </ion-list-header>
+      <ion-item *ngFor="let aprobador of solicitud.approvalFlow" lines="none">
+        <ion-chip color="secondary" slot="start"> {{aprobador.step}} </ion-chip>
+        <ion-icon
+          slot="start"
+          size="small"
+          name="people-outline"
+          [hidden]="!aprobador.isRol"
+        ></ion-icon>
+        <ion-label class="ion-text-wrap">
+          <p>{{aprobador.userName}}</p>
+        </ion-label>
+        <ion-icon
+          slot="end"
+          [name]="aprobador.approvalStatus === 'P' ? 'radio-button-on-outline' : (aprobador.approvalStatus === 'A' ? 'checkmark-circle-outline' : 'radio-button-off-outline')"
+          color="secondary"
+        ></ion-icon>
+        <!-- {{aprovador | json}} -->
+      </ion-item>
+    </ion-list>
+  </ng-container>
 </ion-content>
-
+<ng-template #solIndelpro>
+  <ng-container *ngIf="solicitudIndelpro; else solCompras">
+    <ion-grid>
+      <ion-row class="ion-align-items-center ion-justify-content-center">
+        <ion-col size="auto">
+          <ng-container *ngIf="solicitudIndelpro?.PDF">
+            <ion-button color="primary" size="small" (click)="abrirPdf()">
+              <ion-icon name="document-attach-outline" slot="start"></ion-icon>
+              Ver archivo adjunto
+            </ion-button>
+          </ng-container>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div
+      [innerHTML]="sanitizer.bypassSecurityTrustHtml(solicitudIndelpro?.HTML)"
+      class="ion-padding-horizontal ion-margin-vertical solicitud-indelpro"
+    ></div>
+  </ng-container>
+</ng-template>
+<ng-template #solCompras>
+  <ion-grid fixed>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-md="8">
+        <div
+          [innerHTML]="sanitizer.bypassSecurityTrustHtml(solicitudCompras?.HTML)"
+          class="ion-padding-horizontal ion-margin-vertical solicitud-compras"
+        ></div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ng-template>
 <ion-footer>
   <ion-toolbar *ngIf="solicitud">
     <div class="ion-text-end">
@@ -112,6 +415,46 @@
         Rechazar
       </ion-button>
       <ion-button color="success" class="ion-margin-end" (click)="aprobar()">
+        <ion-icon name="checkmark-circle-outline" slot="start"></ion-icon>
+        Aprobar
+      </ion-button>
+    </div>
+  </ion-toolbar>
+  <ion-toolbar *ngIf="solicitudIndelpro">
+    <div class="ion-text-end">
+      <ion-button
+        color="danger"
+        class="ion-margin-end"
+        (click)="rechazarIndelpro()"
+      >
+        <ion-icon name="close-circle-outline" slot="start"></ion-icon>
+        Rechazar
+      </ion-button>
+      <ion-button
+        color="success"
+        class="ion-margin-end"
+        (click)="aprobarIndelpro()"
+      >
+        <ion-icon name="checkmark-circle-outline" slot="start"></ion-icon>
+        Aprobar
+      </ion-button>
+    </div>
+  </ion-toolbar>
+  <ion-toolbar *ngIf="solicitudCompras">
+    <div class="ion-text-end">
+      <ion-button
+        color="danger"
+        class="ion-margin-end"
+        (click)="rechazarCompras()"
+      >
+        <ion-icon name="close-circle-outline" slot="start"></ion-icon>
+        Rechazar
+      </ion-button>
+      <ion-button
+        color="success"
+        class="ion-margin-end"
+        (click)="aprobarCompras()"
+      >
         <ion-icon name="checkmark-circle-outline" slot="start"></ion-icon>
         Aprobar
       </ion-button>

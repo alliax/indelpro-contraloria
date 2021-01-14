@@ -13,7 +13,11 @@ import { FormasStateService } from '@indelpro-contraloria/data';
 })
 export class AppComponent implements OnInit {
   user$: Observable<User> = this.authQuery.selectUser$;
+  shouldShowMenu$: Observable<boolean> = this.authQuery
+    .shouldDisplayMemberContent$;
   menu;
+  menuAdmin;
+  isWeb: boolean = this.platform.is('desktop');
   constructor(
     private authService: AuthService,
     private authQuery: AuthQuery,
@@ -23,22 +27,15 @@ export class AppComponent implements OnInit {
     private menuService: MenuService,
     private formasStateService: FormasStateService,
     private platform: Platform
-  ) {
-    this.initializeApp();
-  }
+  ) {}
 
-  initializeApp() {
-    this.platform.ready().then(() => {});
-  }
-
-  ngOnInit() {
-    this.authService
-      .login()
-      .then(() => this.formasStateService.loadState())
-      .catch((err) => {})
-      .then(() => {
-        this.menu = this.menuService.getMenu();
-      });
+  async ngOnInit() {
+    try {
+      this.menu = this.menuService.getMenu();
+      this.menuAdmin = this.menuService.getMenuAdmin();
+      await this.authService.reAuthenticate();
+      await this.formasStateService.loadState();
+    } catch (err) {}
   }
 
   async cerrarSesion() {

@@ -4,12 +4,12 @@
 
 export const environment = {
   production: false,
-  /*apiUrl: 'http://localhost:3030',
+  apiUrl: 'http://localhost:3030',
   rootPath: '',
-  socketPath: '/socket.io/',*/
-  apiUrl: 'https://servicios.alliax.com/',
+  socketPath: '/socket.io/',
+  /*apiUrl: 'https://servicios.alliax.com/',
   rootPath: 'indelpro/api',
-  socketPath: '/indelpro/api/socket.io/',
+  socketPath: '/indelpro/api/socket.io/',*/
 };
 
 /*

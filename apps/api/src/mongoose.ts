@@ -14,6 +14,7 @@ export default function(app: Application) {
       process.exit(1);
     });
 
+  // @ts-ignore
   mongoose.Promise = global.Promise;
 
   app.set('mongooseClient', mongoose);

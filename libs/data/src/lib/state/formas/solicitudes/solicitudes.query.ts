@@ -24,9 +24,9 @@ export class SolicitudesQuery extends QueryEntity<SolicitudesState> {
     )
   );
   propias$: Observable<Solicitud[]> = this.solicitudes$.pipe(
-    map((solicitudes: Solicitud[]) =>
+    /*map((solicitudes: Solicitud[]) =>
       solicitudes.filter((solicitud) => solicitud.STATUS === 'ENVIADO')
-    )
+    )*/
   );
 
   pendientesPorTipoSeleccionado$: Observable<Solicitud[]> = combineLatest([
@@ -44,7 +44,6 @@ export class SolicitudesQuery extends QueryEntity<SolicitudesState> {
     this.tipos.selectAll(),
     this.pendientes$,
   ]).pipe(
-    tap(val => console.log(val)),
     map((tipos: [Tipo[], Solicitud[]]) =>
       tipos[0].map((tipo: Tipo) => ({
         nombre: tipo.nombre,
@@ -62,6 +61,7 @@ export class SolicitudesQuery extends QueryEntity<SolicitudesState> {
     this.tipos.selectAll(),
     this.propias$,
   ]).pipe(
+    tap((val) => console.log(val)),
     map((tipos: [Tipo[], Solicitud[]]) =>
       tipos[0].map((tipo: Tipo) => ({
         nombre: tipo.nombre,
@@ -94,8 +94,12 @@ export class SolicitudesQuery extends QueryEntity<SolicitudesState> {
       enviadas[1].filter((solicitud) =>
         !enviadas[0] || enviadas[0].length === 0
           ? false
-          : solicitud.IDWFC.includes(enviadas[0]) ||
-            solicitud.TITLE.includes(enviadas[0])
+          : solicitud.IDWFC.toString()
+              .toLocaleUpperCase('es-MX')
+              .includes(enviadas[0]) ||
+            solicitud.TITLE.toString()
+              .toLocaleUpperCase('es-MX')
+              .includes(enviadas[0])
       )
     )
   );

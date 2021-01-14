@@ -3,3 +3,21 @@
   height: 30px;
   width: 30px;
 }
+.solicitud-indelpro {
+  &::ng-deep {
+    table {
+      width: 100% !important;
+
+      img {
+        width: 75px;
+        height: 75px;
+        margin-right: 25px;
+      }
+    }
+    table#pos {
+      tr {
+        margin-bottom: 8px;
+      }
+    }
+  }
+}

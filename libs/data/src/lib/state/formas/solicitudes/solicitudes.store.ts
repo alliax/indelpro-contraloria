@@ -23,7 +23,11 @@ export interface SolicitudesState extends EntityState<Solicitud>, ActiveState {
 }
 
 @Injectable({ providedIn: 'root' })
-@StoreConfig({ name: 'solicitudes', idKey: 'IDWFC' })
+@StoreConfig({
+  name: 'solicitudes',
+  idKey: 'IDWFC',
+  resettable: true,
+})
 export class SolicitudesStore extends EntityStore<SolicitudesState> {
   constructor() {
     super({

@@ -31,7 +31,7 @@ export class SolicitudesService extends FeathersState<
     this.solicitudesStore.update((state) => ({
       ...state,
       ui: {
-        busqueda: termino,
+        busqueda: termino.toString().toLocaleUpperCase('es-MX'),
       },
     }));
   }

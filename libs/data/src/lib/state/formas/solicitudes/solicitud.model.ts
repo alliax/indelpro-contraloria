@@ -15,6 +15,7 @@ export interface Solicitud {
   AMOUNTUSD: string;
   ZCOMMENT: string;
   WAERS: string;
+  EMPRESA: 'string';
 }
 
 export function createSolicitud(params: Partial<Solicitud>) {

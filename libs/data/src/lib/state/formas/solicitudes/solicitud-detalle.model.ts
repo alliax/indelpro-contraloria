@@ -1,3 +1,10 @@
+export interface SolicitudDetalleIndelpro {
+  HTML: string;
+  PDF: ArrayBuffer;
+}
+export interface SolicitudDetalleCompras {
+  HTML: string;
+}
 export interface SolicitudDetalle {
   submitDate: string;
   createDate: string;
@@ -26,7 +33,12 @@ export interface SolicitudDetalle {
     id: number;
     account: string;
   };
-  comments: string;
+  comments: {
+    user: string;
+    text: string;
+    date: string;
+    time: string;
+  };
   date: string;
   title: string;
   totalAmount: number;
@@ -85,6 +97,34 @@ export interface SolicitudDetalle {
       time: string;
     }
   ];
+  deudor?: any;
+  condicionPago?: any;
+  importeAsegurado?: any;
+  limiteCredito?: any;
+  termCredito?: any;
+  pais?: any;
+
+  tipoNota?: any;
+  motivoNota?: any;
+  monto?: any;
+  leyendaNota?: any;
+
+  destiny?: any;
+  place?: any;
+  amountDollar?: any;
+  amountPesos?: any;
+
+  condPago?: any;
+  tipoCliente?: any;
+  tipoMovimiento?: any;
+
+  importe?: any;
+  justificacion?: any;
+
+  tipoProveedor?: any;
+  razonSoc?: any;
+  rfc?: any;
+  payments?: any;
 }
 export function createSolicitudDetalle(params: Partial<SolicitudDetalle>) {
   return { ...params } as SolicitudDetalle;

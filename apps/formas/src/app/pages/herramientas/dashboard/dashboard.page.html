@@ -1,28 +1,16 @@
 <ion-header>
   <ion-toolbar color="secondary">
-    <ion-grid *ngIf="user$ | async as user">
-      <ion-row class="ion-justify-content-between ion-align-items-center">
-        <ion-col size="auto">
-          <ion-menu-button color="light"></ion-menu-button>
-        </ion-col>
-        <ion-col size="auto">
-          <ion-avatar class="user">
-            <img
-              [src]="(user.foto) ? (user.foto | upload) : 'assets/img/no-profile.jpg'"
-            />
-          </ion-avatar>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-label>
-            <h1 class="ion-padding-top">
-              Hola, <strong>{{user.nombre}}</strong>
-            </h1>
-          </ion-label>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title> Dashboard </ion-title>
+    <ion-buttons slot="end" *ngIf="user$ | async as user">
+      <ion-avatar class="user">
+        <img
+          [src]="(user.foto) ? (user.foto | upload) : 'assets/img/no-profile.jpg'"
+        />
+      </ion-avatar>
+    </ion-buttons>
   </ion-toolbar>
   <ion-toolbar color="secondary">
     <ion-searchbar
@@ -37,6 +25,18 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ng-container *ngIf="(loading$ | async) === false; else loading">
+    <ion-card
+      color="light"
+      button
+      class="solicitud"
+      *ngIf="(solicitudes$ | async)?.length > 0"
+    >
+      <indelpro-contraloria-lista-solicitud
+        *ngFor="let sol of solicitudes$ | async"
+        [routerLink]="'/herramientas/solicitud/' + sol.IDWF + '/' + sol.TYPE"
+        [solicitud]="sol"
+      ></indelpro-contraloria-lista-solicitud>
+    </ion-card>
     <indelpro-contraloria-header-tipo
       icono="file-tray-full-outline"
       titulo="Solicitudes pendientes de autorizar"
@@ -47,10 +47,9 @@
     <indelpro-contraloria-lista-tipo
       *ngFor="let tipo of pendientesPorTipo$ | async"
       [tipo]="tipo"
-      [hidden]="!pendientesVisible"
     ></indelpro-contraloria-lista-tipo>
 
-    <indelpro-contraloria-header-tipo
+    <!--    <indelpro-contraloria-header-tipo
       icono="document-text-outline"
       titulo="Mis solicitudes enviadas"
       [total]="solicitudesQuery.totalPropias$ | async"
@@ -61,28 +60,7 @@
       *ngFor="let tipo of propiasPorTipo$ | async"
       [tipo]="tipo"
       [hidden]="!enviadasVisible"
-    ></indelpro-contraloria-lista-tipo>
-
-    <ion-card
-      color="light"
-      *ngFor="let sol of solicitudes$ | async"
-      button
-      class="solicitud"
-    >
-      <ion-item lines="none" [routerLink]="'/herramientas/solicitud/' + sol.IDWF">
-        <div slot="start" class="tipo">
-          <p>{{sol.TYPE}}</p>
-        </div>
-        <ion-label class="ion-text-wrap">
-          <p>
-            <strong>
-              {{sol.IDWFC}}
-            </strong>
-          </p>
-          <h2>{{sol.TITLE}}</h2>
-        </ion-label>
-      </ion-item>
-    </ion-card>
+    ></indelpro-contraloria-lista-tipo>-->
   </ng-container>
 
   <ng-template #loading>

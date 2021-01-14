@@ -10,6 +10,7 @@ import { environment } from '../environments/environment';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { RouteReuseStrategy } from '@angular/router';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,7 +32,8 @@ import { RouteReuseStrategy } from '@angular/router';
     }),
     NgxDatatableModule,
     environment.production ? [] : AkitaNgDevtools.forRoot(),
-    IonicComponentsModule
+    IonicComponentsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

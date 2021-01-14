@@ -53,7 +53,7 @@ export class SolicitudesEnviadasPage extends BaseClass implements OnInit {
   }
 
   async verDetalle(solicitud: Solicitud) {
-    this.router.navigateByUrl(`/herramientas/solicitud/${solicitud.IDWF}`);
+    this.router.navigateByUrl(`/herramientas/solicitud/${solicitud.IDWF}/${solicitud.TYPE}`);
   }
 
   buscar(event) {

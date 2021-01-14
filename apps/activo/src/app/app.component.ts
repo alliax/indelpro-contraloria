@@ -28,7 +28,7 @@ export class AppComponent {
   async initApp() {
     try {
       this.menu = this.menuService.getMenu();
-      await this.authService.login();
+      await this.authService.reAuthenticate();
       await this.stateService.loadState();
     } catch (err) {}
   }

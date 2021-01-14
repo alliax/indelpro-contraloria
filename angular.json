@@ -35,7 +35,8 @@
                 "glob": "**/*.svg",
                 "input": "node_modules/ionicons/dist/ionicons/svg",
                 "output": "./svg"
-              }
+              },
+              "apps/activo/src/manifest.webmanifest"
             ],
             "styles": [
               {
@@ -74,7 +75,9 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
-              ]
+              ],
+              "serviceWorker": false,
+              "ngswConfigPath": "apps/activo/ngsw-config.json"
             }
           }
         },
@@ -375,7 +378,7 @@
                   "maximumError": "10kb"
                 }
               ],
-              "serviceWorker": true,
+              "serviceWorker": false,
               "ngswConfigPath": "apps/formas/ngsw-config.json"
             }
           }

@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { MiPerfilPageRoutingModule } from './mi-perfil-routing.module';
 
 import { MiPerfilPage } from './mi-perfil.page';
-import { PipesModule, FeaturesModule } from '@alliax/feathers-client';
+import { PipesModule, FeaturesModule, IonicComponentsModule } from '@alliax/feathers-client';
 
 @NgModule({
   imports: [
@@ -17,6 +17,7 @@ import { PipesModule, FeaturesModule } from '@alliax/feathers-client';
     MiPerfilPageRoutingModule,
     PipesModule,
     FeaturesModule,
+    IonicComponentsModule
   ],
   declarations: [MiPerfilPage],
 })

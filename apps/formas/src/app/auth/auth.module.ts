@@ -9,46 +9,48 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'login'
+        redirectTo: 'login',
       },
       {
         path: 'login',
         loadChildren: () =>
-          import('./login/login.module').then(m => m.LoginPageModule)
-      },
-      {
-        path: 'register',
-        loadChildren: () =>
-          import('./register/register.module').then(m => m.RegisterPageModule)
+          import('./login/login.module').then((m) => m.LoginPageModule),
       },
       {
         path: 'forgot-password',
         loadChildren: () =>
-          import('./forgot-password/forgot-password.module').then(m => m.ForgotPasswordPageModule)
+          import('./forgot-password/forgot-password.module').then(
+            (m) => m.ForgotPasswordPageModule
+          ),
       },
       {
         path: 'change-password',
         loadChildren: () =>
-          import('./change-password/change-password.module').then(m => m.ChangePasswordPageModule)
+          import('./change-password/change-password.module').then(
+            (m) => m.ChangePasswordPageModule
+          ),
       },
       {
         path: 'verify-account',
-        canActivate: [AuthGuard],
         loadChildren: () =>
-          import('./verify-account/verify-account.module').then(m => m.VerifyAccountPageModule)
+          import('./verify-account/verify-account.module').then(
+            (m) => m.VerifyAccountPageModule
+          ),
       },
       {
         path: 'not-verified',
         canActivate: [AuthGuard],
         loadChildren: () =>
-          import('./not-verified/not-verified.module').then(m => m.NotVerifiedPageModule)
-      }
-    ]
-  }
+          import('./not-verified/not-verified.module').then(
+            (m) => m.NotVerifiedPageModule
+          ),
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: []
+  exports: [],
 })
 export class AuthModule {}

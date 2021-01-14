@@ -1,31 +1,19 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-grid *ngIf="user$ | async as user">
-      <ion-row class="ion-justify-content-between ion-align-items-center">
-        <ion-col size="auto">
-          <ion-back-button
-            color="light"
-            defaultHref="/herramientas/dashboard"
-          ></ion-back-button>
-        </ion-col>
-        <ion-col size="auto">
-          <ion-avatar class="user">
-            <img
-              [src]="(user.foto) ? (user.foto | upload) : 'assets/img/no-profile.jpg'"
-            />
-          </ion-avatar>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-label>
-            <h1 class="ion-padding-top">
-              Mis solicitudes enviadas
-            </h1>
-          </ion-label>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button
+        color="light"
+        defaultHref="/herramientas/dashboard"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title> Mis solicitudes enviadas </ion-title>
+    <ion-buttons slot="end" *ngIf="user$ | async as user">
+      <ion-avatar class="user">
+        <img
+          [src]="(user.foto) ? (user.foto | upload) : 'assets/img/no-profile.jpg'"
+        />
+      </ion-avatar>
+    </ion-buttons>
   </ion-toolbar>
   <!-- <ion-toolbar color="primary">
     <ion-searchbar

@@ -5,7 +5,9 @@ export default {
   before: {
     all: [
       iff(
-        (context) => !context.path.includes('authentication'),
+        (context) =>
+          !context.path.includes('authentication') &&
+          !context.path.includes('users'),
         softDelete({
           removeData: async (context) => {
             return {

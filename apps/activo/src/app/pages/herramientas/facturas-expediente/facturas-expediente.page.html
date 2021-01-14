@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title> {{expediente?.SGTXT}} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <div class="ion-padding">
+    <h2>Documento contable: {{expediente.BELNR}}</h2>
+  </div>
+  <div class="ion-text-center ion-padding" *ngIf="!facturas">
+    <ion-spinner></ion-spinner>
+  </div>
+  <ion-item *ngIf="facturas && facturas.length === 0; else listadoFacturas">
+    <ion-label class="ion-text-wrap">
+      No se encontraron facturas para el documento contable {{expediente.BELNR}}
+      en la bóveda fiscal
+    </ion-label>
+  </ion-item>
+  <ng-template #listadoFacturas>
+    <ion-item
+      *ngFor="let factura of facturas"
+      (click)="verDocumento(factura)"
+      button
+      tappable
+    >
+      <ion-icon name="document-attach-outline" slot="start"></ion-icon>
+      <ion-label>{{factura.nombre}}</ion-label>
+    </ion-item>
+  </ng-template>
+</ion-content>

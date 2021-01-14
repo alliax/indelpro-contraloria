@@ -8,8 +8,14 @@
   "path": "",
   "paginate": {},
   "authManagement": {
-    "mailUrl": "http://localhost:4200",
-    "authUrl": "http://localhost:4200/auth"
+    "default": {
+      "mailUrl": "http://localhost:4200",
+      "authUrl": "http://localhost:4200/auth"
+    },
+    "formas": {
+      "mailUrl": "http://localhost:4200",
+      "authUrl": "http://localhost:4200/auth"
+    }
   },
   "socket": {
     "pingTimeout": 60000

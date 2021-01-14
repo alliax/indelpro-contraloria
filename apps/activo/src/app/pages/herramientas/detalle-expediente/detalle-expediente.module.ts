@@ -11,6 +11,8 @@ import { DetalleExpedientePage } from './detalle-expediente.page';
 import { ActivoUiModule, UiPipesModule } from '@indelpro-contraloria/ui';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { IonicComponentsModule, PipesModule } from '@alliax/feathers-client';
+import { HttpClientModule } from '@angular/common/http';
+import { FacturasExpedientePageModule } from '../facturas-expediente/facturas-expediente.module';
 
 @NgModule({
   imports: [
@@ -23,6 +25,7 @@ import { IonicComponentsModule, PipesModule } from '@alliax/feathers-client';
     ActivoUiModule,
     PipesModule,
     IonicComponentsModule,
+    FacturasExpedientePageModule,
   ],
   providers: [CurrencyPipe],
   declarations: [DetalleExpedientePage],

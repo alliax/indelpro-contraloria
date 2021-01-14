@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { SolicitudDetallePageRoutingModule } from './solicitud-detalle-routing.module';
 
 import { SolicitudDetallePage } from './solicitud-detalle.page';
-import { FormasUiModule } from '@indelpro-contraloria/ui';
+import { FormasUiModule, UiPipesModule } from '@indelpro-contraloria/ui';
 import { PipesModule } from '@alliax/feathers-client';
 
 @NgModule({
@@ -18,6 +18,7 @@ import { PipesModule } from '@alliax/feathers-client';
     SolicitudDetallePageRoutingModule,
     FormasUiModule,
     PipesModule,
+    UiPipesModule,
   ],
   declarations: [SolicitudDetallePage],
 })

@@ -24,8 +24,39 @@ export class MenuService {
       ],
     },
   ];
+  private menuAdmin = [
+    {
+      title: 'Administración',
+      role: 'formas-admin',
+      children: [
+        {
+          title: 'Usuarios',
+          icon: 'people-outline',
+          url: '/admin/usuarios',
+        },
+        {
+          title: 'Tipos de Solicitudes',
+          icon: 'people-outline',
+          url: '/admin/tipo-solicitudes',
+        },
+        {
+          title: 'Sistemas SAP',
+          icon: 'cog-outline',
+          url: '/admin/sistemas-sap',
+        },
+        {
+          title: 'Configuración SAP aplicación',
+          icon: 'cog-outline',
+          url: '/admin/sap-aplicacion',
+        },
+      ],
+    },
+  ];
   constructor() {}
   getMenu() {
     return this.menu;
+  }
+  getMenuAdmin() {
+    return this.menuAdmin;
   }
 }

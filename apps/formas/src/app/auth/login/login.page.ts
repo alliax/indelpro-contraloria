@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  LoadingController,
+  MenuController,
+  NavController,
+  ToastController,
+} from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AuthService } from '@alliax/feathers-client';
 import { FormasStateService } from '@indelpro-contraloria/data';
@@ -9,7 +14,7 @@ import { FormasStateService } from '@indelpro-contraloria/data';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage implements OnInit, OnDestroy {
   email: string;
   password: string;
   isVisible = false;
@@ -18,10 +23,14 @@ export class LoginPage implements OnInit {
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
     private authService: AuthService,
-    private formasState: FormasStateService
+    private menuCtrl: MenuController,
+    private navCtrl: NavController,
+    private formasStateService: FormasStateService
   ) {}
 
-  ngOnInit() {}
+  async ngOnDestroy() {}
+
+  async ngOnInit() {}
 
   async iniciarSesion() {
     const loading = await this.loadingCtrl.create({
@@ -29,28 +38,28 @@ export class LoginPage implements OnInit {
     });
     await loading.present();
 
-    this.authService
-      .login({
+    try {
+      await this.authService.login({
         strategy: 'local',
         email: this.email,
         password: this.password,
-      })
-      .then((user) => {
-        this.email = '';
-        this.password = '';
-        this.isVisible = false;
-        this.formasState.loadState();
-        this.router.navigateByUrl('/');
-      })
-      .catch(async (err) => {
-        const error = await this.toastCtrl.create({
+      });
+      this.email = '';
+      this.password = '';
+      this.isVisible = false;
+      await this.formasStateService.loadState();
+      await this.navCtrl.navigateRoot('/');
+    } catch (err) {
+      await (
+        await this.toastCtrl.create({
           message:
             'Ocurrió un error al iniciar sesión, por favor intenta de nuevo',
           duration: 4000,
           color: 'danger',
-        });
-        error.present();
-      })
-      .then(() => loading.dismiss());
+        })
+      ).present();
+    } finally {
+      await loading.dismiss();
+    }
   }
 }

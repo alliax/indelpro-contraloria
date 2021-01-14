@@ -3,3 +3,11 @@
   height: 30px;
   width: 30px;
 }
+
+.avatar {
+  padding: 15px;
+  img {
+    border-radius: 50%;
+    box-shadow: 0 0 5px var(--ion-color-dark);
+  }
+}

@@ -294,15 +294,8 @@
                 [summaryRow]="true"
                 [summaryPosition]="'bottom'"
                 [limit]="8"
+                (activate)="rowActivated($event)"
               >
-                <ng-template
-                  #cellTemplate
-                  let-row="row"
-                  let-value="value"
-                  let-i="index"
-                >
-                  templated {{value}}
-                </ng-template>
               </ngx-datatable>
               <ion-row class="ion-justify-content-center ion-padding-vertical">
                 <ion-col size="auto">

@@ -50,4 +50,12 @@ export * from './lib/state/formas/documentos/documento.model';
 export * from './lib/state/formas/documentos/documentos.query';
 export * from './lib/state/formas/documentos/documentos.service';
 
+export * from './lib/state/formas/sap/sap.model';
+export * from './lib/state/formas/sap/sap.query';
+export * from './lib/state/formas/sap/sap.service';
+
+export * from './lib/state/formas/configuracion/configuracion.model';
+export * from './lib/state/formas/configuracion/configuracion.query';
+export * from './lib/state/formas/configuracion/configuracion.service';
+
 export * from './lib/state/formas/formas-state.service';

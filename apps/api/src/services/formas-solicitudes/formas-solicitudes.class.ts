@@ -58,30 +58,36 @@ ZCS_SPMAIN_MOVIL_MULT
 export class FormasSolicitudes implements ServiceMethods<Data> {
   app: Application;
   options: ServiceOptions;
-  abapSystem: RfcConnectionParameters = {
-    user: 'EFRFC005',
-    passwd: 'EFMOVIL1',
-    client: '100',
-    sysnr: '00',
-    // ashost: '10.128.160.40', // PRD
-    ashost: '10.128.160.49',
-    lang: 'en',
-  };
+  abapSystem: any;
 
   constructor(options: ServiceOptions = {}, app: Application) {
     this.options = options;
     this.app = app;
   }
 
+  private async getSap(): Promise<RfcConnectionParameters> {
+    const configuracionActiva: any[] = (await this.app
+      .service(this.app.get('path') + 'formas/configuracion')
+      .find({
+        query: {
+          activo: true,
+        },
+        paginate: false,
+      })) as any[];
+    const sapSystem = await this.app
+      .service(this.app.get('path') + 'formas/sap')
+      .get(configuracionActiva[0].sapSrmId);
+    return sapSystem;
+  }
+
   async find(params?: Params): Promise<Data[] | Paginated<Data>> {
-    const userSap = params?.user?.profile?.userSap;
-    const variant = params?.user?.profile?.variant;
     try {
+      this.abapSystem = await this.getSap();
+      const userSap = params?.user?.profile?.userSap;
+      const variant = params?.user?.profile?.variant;
       const client: Client = new Client(this.abapSystem);
       await client.open();
-
       // User Memo IND113  // Lalo CSINFO_ENF
-
       const functionName = 'ZCS_GETINFO_SP';
       const pendientes = await client.call(functionName, {
         P_STATUS: 'PENDIENTES',
@@ -95,14 +101,22 @@ export class FormasSolicitudes implements ServiceMethods<Data> {
       });
       const registros: any[] = [
         ...(pendientes.INFO as any[]),
-        ...(enviadas.INFO as any[]),
+        /*...(enviadas.INFO as any[]),*/
       ];
       await client.close();
       for (let i = 0; i < registros.length; i++) {
         registros[i].IDWF = registros[i].IDWF.replace(/^(?!0$)0+/, '');
       }
 
-      return registros;
+      const solIndelpro = await this.app
+        .service(this.app.get('path') + 'formas/solicitudes-indelpro')
+        .find({ user: params?.user });
+
+      const solCompras = await this.app
+        .service(this.app.get('path') + 'formas/solicitudes-compras')
+        .find({ user: params?.user });
+
+      return [...registros, ...solIndelpro, ...solCompras];
     } catch (ex) {
       console.error(ex);
       throw ex;
@@ -110,20 +124,20 @@ export class FormasSolicitudes implements ServiceMethods<Data> {
   }
 
   async get(id: Id, params?: Params): Promise<Data> {
-    const object = params?.user?.profile?.object;
     try {
+      this.abapSystem = await this.getSap();
+      const object = params?.user?.profile?.object;
+      const proceso = params?.query?.proceso;
       const client: Client = new Client(this.abapSystem);
       await client.open();
       const functionName = 'ZXML_LEE_XML';
       const result = await client.call(functionName, {
         IDWF: id,
-        OBJETO: object,
+        OBJETO: `${object}${proceso}`,
       });
       await client.close();
       const parser = new xml2js.Parser({
         explicitArray: false,
-        // explicitChildren: true,
-        // mergeAttrs: true,
         trim: true,
         explicitRoot: false,
         emptyTag: null,
@@ -169,8 +183,9 @@ export class FormasSolicitudes implements ServiceMethods<Data> {
   }
 
   async update(id: string, data: Approve, params?: Params): Promise<Data> {
-    const { ACTION, STEP } = data;
     try {
+      this.abapSystem = await this.getSap();
+      const { ACTION, STEP } = data;
       const client: Client = new Client(this.abapSystem);
       await client.open();
       const functionName = 'ZCS_AUTORIZA_SP';

@@ -1,39 +1,71 @@
 <ion-header>
   <ion-toolbar color="secondary">
-    <ion-grid *ngIf="user$ | async as user">
-      <ion-row class="ion-justify-content-between ion-align-items-center">
-        <ion-col size="auto">
-          <ion-menu-button color="light"></ion-menu-button>
-        </ion-col>
-        <ion-col size="auto">
-          Mi Perfil
-        </ion-col>
-        <ion-col size="auto">
-          <ion-avatar class="user">
-            <img
-              [src]="(user.foto) ? (user.foto | upload) : 'assets/img/no-profile.jpg'"
-            />
-          </ion-avatar>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Mi perfil</ion-title>
+    <ion-buttons slot="end" *ngIf="user$ | async as user">
+      <ion-avatar class="user">
+        <img
+          [src]="(user.foto) ? (user.foto | upload) : 'assets/img/no-profile.jpg'"
+        />
+      </ion-avatar>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content>
-  <ion-grid *ngIf="user$ | async as user">
-    <ion-row class="ion-justify-content-center ion-align-items-center">
-      <ion-col size="8" size-md="3">
-        <ion-card>
+<ion-content color="light">
+  <ion-grid *ngIf="user$ | async as user" fixed>
+    <ion-row class="ion-justify-content-start ion-align-items-center">
+      <ion-col size="12" size-md="3">
+        <div class="ion-margin avatar">
           <img
             [src]="(user.foto) ? (user.foto | upload) : 'assets/img/no-profile.jpg'"
           />
+        </div>
+      </ion-col>
+      <ion-col size="12" size-md="9">
+        <h2 class="ion-no-margin">{{user.nombre}}</h2>
+        <p class="ion-no-margin">{{user.profile?.puesto}}</p>
+        <div>
+          <alliax-file-upload
+            [archivo]="file"
+            [iconName]="'camera-outline'"
+            [color]="'primary'"
+            [iconPosition]="'start'"
+            [label]="'Cambiar foto'"
+            (archivoCargado)="actualizarFoto($event)"
+            clearAfterSelect="true"
+          ></alliax-file-upload>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-start ion-align-items-start">
+      <ion-col size="4">
+        <ion-card>
+          <ion-card-header color="secondary">
+            <ion-card-title> Cambiar contraseña </ion-card-title>
+          </ion-card-header>
           <ion-item>
-            <ion-label>
-              <h2>{{user.nombre}}</h2>
-              <p>{{user.email}}</p>
-            </ion-label>
+            <ion-label position="stacked">Contraseña actual</ion-label>
+            <ion-input type="password" [(ngModel)]="form.password"></ion-input>
           </ion-item>
-          <alx-dark-mode-toggle></alx-dark-mode-toggle>
+          <ion-item>
+            <ion-label position="stacked">Nueva contraseña</ion-label>
+            <ion-input type="password" [(ngModel)]="form.newPass"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Confirmar contraseña</ion-label>
+            <ion-input
+              type="password"
+              [(ngModel)]="form.confirmPass"
+            ></ion-input>
+          </ion-item>
+          <div class="ion-text-center ion-padding-vertical">
+            <ion-button color="success" (click)="actualizarPassword()">
+              <ion-icon name="lock-closed-outline" slot="end"></ion-icon>
+              Cambiar contraseña
+            </ion-button>
+          </div>
         </ion-card>
       </ion-col>
     </ion-row>
