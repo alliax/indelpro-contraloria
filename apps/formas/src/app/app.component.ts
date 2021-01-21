@@ -40,7 +40,6 @@ export class AppComponent implements OnInit {
     try {
       await SplashScreen.show({});
       await this.initPlugins();
-      await this.authService.reAuthenticate();
       this.menu$ = this.menuService.getMenu();
       this.menuAdmin$ = this.user$.pipe(
         filter((val) => !!val),
@@ -50,7 +49,7 @@ export class AppComponent implements OnInit {
             : of([])
         )
       );
-
+      await this.authService.reAuthenticate();
       await this.formasStateService.loadState();
     } catch (err) {
       console.log('ngOnInit', err);
