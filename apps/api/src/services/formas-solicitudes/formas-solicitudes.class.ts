@@ -21,6 +21,7 @@ interface Approve {
   ACTION: string;
   STEP: string;
   USER: string;
+  PROCESO: string;
 }
 
 interface ServiceOptions {}
@@ -85,38 +86,46 @@ export class FormasSolicitudes implements ServiceMethods<Data> {
       this.abapSystem = await this.getSap();
       const userSap = params?.user?.profile?.userSap;
       const variant = params?.user?.profile?.variant;
-      const client: Client = new Client(this.abapSystem);
-      await client.open();
-      // User Memo IND113  // Lalo CSINFO_ENF
+      const registros: any[] = [];
       const functionName = 'ZCS_GETINFO_SP';
-      const pendientes = await client.call(functionName, {
-        P_STATUS: 'PENDIENTES',
-        P_VARIANT: variant,
-        P_USERID: userSap,
-      });
-      const enviadas = await client.call(functionName, {
-        P_STATUS: 'ENVIADO',
-        P_VARIANT: variant,
-        P_USERID: userSap,
-      });
-      const registros: any[] = [
-        ...(pendientes.INFO as any[]),
-        /*...(enviadas.INFO as any[]),*/
-      ];
-      await client.close();
-      for (let i = 0; i < registros.length; i++) {
-        registros[i].IDWF = registros[i].IDWF.replace(/^(?!0$)0+/, '');
+      const client: Client = new Client(this.abapSystem);
+
+      try {
+        await client.open();
+        const pendientes = await client.call(functionName, {
+          P_STATUS: 'PENDIENTES',
+          P_VARIANT: variant,
+          P_USERID: userSap,
+        });
+        registros.push(...(pendientes.INFO as any[]));
+        for (let i = 0; i < registros.length; i++) {
+          registros[i].IDWF = registros[i].IDWF.replace(/^(?!0$)0+/, '');
+        }
+      } catch (err) {
+        console.log('Error SAP SRM', err);
+      } finally {
+        await client.close();
       }
 
-      const solIndelpro = await this.app
-        .service(this.app.get('path') + 'formas/solicitudes-indelpro')
-        .find({ user: params?.user });
+      try {
+        const solIndelpro = await this.app
+          .service(this.app.get('path') + 'formas/solicitudes-indelpro')
+          .find({ user: params?.user });
+        registros.push(...solIndelpro);
+      } catch (err) {
+        console.log('Error SAP Indelpro', err);
+      }
 
-      const solCompras = await this.app
-        .service(this.app.get('path') + 'formas/solicitudes-compras')
-        .find({ user: params?.user });
+      try {
+        const solCompras = await this.app
+          .service(this.app.get('path') + 'formas/solicitudes-compras')
+          .find({ user: params?.user });
+        registros.push(...solCompras);
+      } catch (err) {
+        console.log('Error SAP Compras', err);
+      }
 
-      return [...registros, ...solIndelpro, ...solCompras];
+      return registros;
     } catch (ex) {
       console.error(ex);
       throw ex;
@@ -185,7 +194,7 @@ export class FormasSolicitudes implements ServiceMethods<Data> {
   async update(id: string, data: Approve, params?: Params): Promise<Data> {
     try {
       this.abapSystem = await this.getSap();
-      const { ACTION, STEP } = data;
+      const { ACTION, STEP, PROCESO } = data;
       const client: Client = new Client(this.abapSystem);
       await client.open();
       const functionName = 'ZCS_AUTORIZA_SP';
@@ -194,7 +203,7 @@ export class FormasSolicitudes implements ServiceMethods<Data> {
         IDWF: id,
         STEP: STEP.toString().padStart(2, '0'),
         USER: params?.user?.profile?.userSap || '',
-        OBJECT: params?.user?.profile?.object || '',
+        OBJECT: (params?.user?.profile?.object || '') + PROCESO,
       });
       await client.close();
       return result;

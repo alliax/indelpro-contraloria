@@ -59,22 +59,25 @@
             </ion-row>
           </ion-grid>
         </ion-toolbar>
-        <alliax-nav-menu
-          [menu]="menu"
-          bgColor="dark"
-          titleColor="tertiary"
-          mainColor="primary"
-          secondaryColor="light"
-        ></alliax-nav-menu>
-
-        <alliax-nav-menu
-          [menu]="menuAdmin"
-          bgColor="dark"
-          titleColor="tertiary"
-          mainColor="primary"
-          secondaryColor="light"
-          *ngIf="(user$ | async)?.role.includes('formas-admin')"
-        ></alliax-nav-menu>
+        <ng-container *ngIf="menu$ | async as menu">
+          <alliax-nav-menu
+            [menu]="menu"
+            bgColor="dark"
+            titleColor="tertiary"
+            mainColor="primary"
+            secondaryColor="light"
+          ></alliax-nav-menu>
+        </ng-container>
+        <ng-container *ngIf="menuAdmin$ | async as menuAdmin">
+          <alliax-nav-menu
+            [menu]="menuAdmin"
+            bgColor="dark"
+            titleColor="tertiary"
+            mainColor="primary"
+            secondaryColor="light"
+            *ngIf="(user$ | async)?.role.includes('formas-admin')"
+          ></alliax-nav-menu>
+        </ng-container>
       </ion-content>
       <ion-footer class="ion-no-border">
         <ion-toolbar color="dark">

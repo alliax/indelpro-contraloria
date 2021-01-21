@@ -13,7 +13,10 @@ import { environment } from '../environments/environment';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { RouteReuseStrategy } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import localeMX from '@angular/common/locales/es-MX';
+import { registerLocaleData } from '@angular/common';
 
+registerLocaleData(localeMX);
 @NgModule({
   declarations: [AppComponent],
   imports: [

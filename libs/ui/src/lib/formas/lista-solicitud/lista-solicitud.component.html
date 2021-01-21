@@ -1,29 +1,63 @@
-<ion-item-sliding #slidingItem>
-  <ion-item lines="full" (click)="detalle.emit(solicitud)" button tappable>
-    <ion-label class="ion-text-wrap">
-      <ion-text color="tertiary">
-        {{ solicitud.IDWFC }}
-      </ion-text>
-      <h2>{{ solicitud.TITLE }}</h2>
-      <p>{{ solicitud.REQNAME }}</p>
-    </ion-label>
-    <ion-note slot="end">
-      <small>{{ solicitud.ZDATE | sapDate | date: 'dd/MM/yyyy' }}</small>
-    </ion-note>
-  </ion-item>
-  <!--<ion-item-options side="end">
-    <ion-item-option color="danger">
-      <ion-icon name="close-circle-outline" slot="top" size="large"></ion-icon>
-      Rechazar
-    </ion-item-option>
-    &lt;!&ndash; <ion-item-option color="success" (click)="rechazar.emit(slidingItem)"> &ndash;&gt;
-    <ion-item-option color="success">
-      <ion-icon
-        name="checkmark-circle-outline"
-        slot="top"
-        size="large"
-      ></ion-icon>
-      Aprobar
-    </ion-item-option>
-  </ion-item-options>-->
-</ion-item-sliding>
+<ion-card (click)="detalle.emit(solicitud)" button tappable>
+  <div class="ion-padding-top">
+    <ion-row
+      class="ion-align-items-center ion-justify-content-around ion-margin-bottom"
+    >
+      <ion-col size="9">
+        <h5 class="ion-no-margin">
+          {{ solicitud.TITLE }}
+        </h5>
+        <span class="ion-text-capitalize estatus">
+          {{ solicitud.STATUS?.toLowerCase() }}
+        </span>
+      </ion-col>
+      <ion-col size="auto" size-md="auto">
+        <ion-badge color="primary">
+          <ion-label class="idwfc">{{
+            solicitud.IDWFC.substring(solicitud.IDWFC.lastIndexOf('00') + 2)
+          }}</ion-label>
+        </ion-badge>
+      </ion-col>
+    </ion-row>
+    <ion-row class="footer ion-align-items-center">
+      <ion-col size="6" size-md="auto" class="ion-text-center">
+        <ion-row class="ion-align-items-center ion-justify-content-center">
+          <ion-col size="auto">
+            <ion-icon name="person-circle-outline" color="medium"></ion-icon>
+          </ion-col>
+          <ion-col size="auto">
+            <ion-text color="medium" class="small-text">
+              Solicitante:
+            </ion-text>
+            <ion-text color="primary" class="small-text">
+              {{ solicitud.REQNAME.toLowerCase().split(' ')[0] }}
+            </ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col size="6" size-md="auto" class="ion-text-center">
+        <ion-text color="medium" class="small-text">
+          {{ solicitud.ZDATE | sapDate: 'MMM. d, yyyy' }}
+        </ion-text>
+      </ion-col>
+    </ion-row>
+  </div>
+  <!--<div class="ion-padding-vertical">
+      <ion-label class="ion-text-wrap">
+        <ion-text color="tertiary">
+          {{ solicitud.IDWFC }}
+        </ion-text>
+        <h2>{{ solicitud.TITLE }}</h2>
+      </ion-label>
+      <ion-chip color="medium">
+        <ion-icon name="person-circle-outline" size="small"></ion-icon>
+        <ion-label>
+          <ion-text color="secondary">
+            <p>
+              <small>{{ solicitud.REQNAME }}</small>
+            </p>
+          </ion-text>
+        </ion-label>
+      </ion-chip>
+    </div>-->
+</ion-card>

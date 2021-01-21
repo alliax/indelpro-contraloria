@@ -17,16 +17,24 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="light">
   <ng-container *ngIf="(loading$ | async) === false; else loading">
-    <indelpro-contraloria-lista-solicitud
-      *ngFor="let sol of solicitudes$ | async"
-      (detalle)="verDetalle($event)"
-      [solicitud]="sol"
-      (aprobar)="aprobar($event, sol)"
-    ></indelpro-contraloria-lista-solicitud>
+    <ion-grid>
+      <ion-row class="ion-justify-content-start">
+        <ion-col size="12" size-md="5">
+          <indelpro-contraloria-lista-solicitud
+            *ngFor="let sol of solicitudes$ | async"
+            (detalle)="verDetalle($event)"
+            [solicitud]="sol"
+            (aprobar)="aprobar($event, sol)"
+          ></indelpro-contraloria-lista-solicitud>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ng-container>
 </ion-content>
 <ng-template #loading>
-  <indelpro-contraloria-cargando-solicitudes></indelpro-contraloria-cargando-solicitudes>
+  <ion-grid fixed>
+    <indelpro-contraloria-cargando-solicitudes></indelpro-contraloria-cargando-solicitudes>
+  </ion-grid>
 </ng-template>

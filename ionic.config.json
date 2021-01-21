@@ -8,7 +8,9 @@
     },
     "formas": {
       "name": "formas",
-      "integrations": {},
+      "integrations": {
+        "capacitor": {}
+      },
       "type": "angular",
       "root": "apps/formas"
     }

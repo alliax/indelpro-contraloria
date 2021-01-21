@@ -18,27 +18,27 @@ export class FormasStateService {
   ) {}
 
   async loadState() {
-    await Promise.all([
-      this.tiposService.load(),
-      this.usuariosService.load(),
-      this.configuracionService.load(),
-      this.sapFormasService.load(),
-    ]);
-    await this.solicitudesService.load();
-    /*try {
-      const confActiva = this.configuracionQuery
-        .getAll()
-        .find((conf) => conf.activo === true);
-      if (confActiva) {
-        await this.cambiaSapSettings(confActiva._id);
-      }
-    } catch (err) {}*/
+    try {
+      await Promise.all([
+        this.tiposService.load(),
+        this.usuariosService.load(),
+        this.configuracionService.load(),
+        this.sapFormasService.load(),
+      ]);
+      await this.solicitudesService.load();
+    } catch (err) {
+      console.log('loadState error', err);
+    }
   }
 
   async cambiaSapSettings(sapId) {
-    await this.solicitudesService.reset();
-    await this.solicitudesService.load({
-      sapId,
-    });
+    try {
+      await this.solicitudesService.reset();
+      await this.solicitudesService.load({
+        sapId,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 }

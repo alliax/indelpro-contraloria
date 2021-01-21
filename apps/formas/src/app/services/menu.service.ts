@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class MenuService {
@@ -54,9 +55,9 @@ export class MenuService {
   ];
   constructor() {}
   getMenu() {
-    return this.menu;
+    return of(this.menu);
   }
   getMenuAdmin() {
-    return this.menuAdmin;
+    return of(this.menuAdmin);
   }
 }

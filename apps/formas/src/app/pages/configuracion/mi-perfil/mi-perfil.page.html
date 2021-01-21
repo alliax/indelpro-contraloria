@@ -15,15 +15,15 @@
 </ion-header>
 <ion-content color="light">
   <ion-grid *ngIf="user$ | async as user" fixed>
-    <ion-row class="ion-justify-content-start ion-align-items-center">
-      <ion-col size="12" size-md="3">
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+      <ion-col size="9" size-md="3">
         <div class="ion-margin avatar">
           <img
             [src]="(user.foto) ? (user.foto | upload) : 'assets/img/no-profile.jpg'"
           />
         </div>
       </ion-col>
-      <ion-col size="12" size-md="9">
+      <ion-col size="10" size-md="9" class="ion-text-center ion-text-md-start">
         <h2 class="ion-no-margin">{{user.nombre}}</h2>
         <p class="ion-no-margin">{{user.profile?.puesto}}</p>
         <div>
@@ -40,7 +40,7 @@
       </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-start ion-align-items-start">
-      <ion-col size="4">
+      <ion-col size="12" size-md="4">
         <ion-card>
           <ion-card-header color="secondary">
             <ion-card-title> Cambiar contraseña </ion-card-title>

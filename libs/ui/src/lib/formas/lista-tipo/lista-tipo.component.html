@@ -1,16 +1,20 @@
 <ion-item
   [lines]="tipo.total === 0 ? 'none' : 'inset'"
   detail
+  detailIcon="chevron-forward-sharp"
   button
   [disabled]="tipo.total === 0"
   [routerLink]="'/herramientas/solicitudes/' + tipo.grupo + '/' + tipo.clave"
 >
-  <ion-chip slot="start" [color]="tipo.total === 0 ? 'medium' : 'primary'">
+  <ion-badge slot="start" [color]="tipo.total === 0 ? 'medium' : 'primary'">
     {{ tipo.total }}
-  </ion-chip>
-  <ion-label [color]="tipo.total === 0 ? 'medium' : 'primary'">
-    <p>
+  </ion-badge>
+  <ion-label
+    [color]="tipo.total === 0 ? 'medium' : ''"
+    class="ion-text-wrap"
+  >
+    <h3>
       {{ tipo.nombre }}
-    </p>
+    </h3>
   </ion-label>
 </ion-item>

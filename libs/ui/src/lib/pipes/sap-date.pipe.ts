@@ -1,9 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 @Pipe({
   name: 'sapDate',
 })
 export class SapDatePipe implements PipeTransform {
+  constructor(private datePipe: DatePipe) {}
   transform(value: any, ...args: any[]): any {
     const fechaString =
       value.substring(0, 4) +
@@ -12,6 +14,6 @@ export class SapDatePipe implements PipeTransform {
       '-' +
       value.substring(6, 8);
 
-    return new Date(fechaString);
+    return this.datePipe.transform(new Date(fechaString), ...args);
   }
 }

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
-  FeathersService,
-  User,
   AuthQuery,
   BaseClass,
+  FeathersService,
+  User,
 } from '@alliax/feathers-client';
 import {
   Configuracion,
@@ -16,12 +16,16 @@ import {
 } from '@indelpro-contraloria/data';
 import { Observable } from 'rxjs';
 import {
-  ToastController,
-  LoadingController,
   AlertController,
+  LoadingController,
+  Platform,
+  ToastController,
 } from '@ionic/angular';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { take } from 'rxjs/operators';
+import { Browser } from '@capacitor/browser';
+import { Directory, Filesystem } from '@capacitor/filesystem';
+import { AppLauncher } from '@capacitor/app-launcher';
 
 @Component({
   selector: 'indelpro-contraloria-solicitud-detalle',
@@ -36,6 +40,8 @@ export class SolicitudDetallePage extends BaseClass implements OnInit {
   solicitudIndelpro: SolicitudDetalleIndelpro;
   solicitudCompras: SolicitudDetalleCompras;
   configuracionActiva: Configuracion;
+  pdfBase: SafeUrl;
+  esWeb: boolean = this.platform.is('desktop') || this.platform.is('mobileweb');
 
   constructor(
     private activated: ActivatedRoute,
@@ -47,7 +53,8 @@ export class SolicitudDetallePage extends BaseClass implements OnInit {
     protected router: Router,
     private solicitudesService: SolicitudesService,
     public sanitizer: DomSanitizer,
-    private configuracionQuery: ConfiguracionQuery
+    private configuracionQuery: ConfiguracionQuery,
+    private platform: Platform
   ) {
     super(loadingCtrl, toastCtrl, alertCtrl);
   }
@@ -87,9 +94,6 @@ export class SolicitudDetallePage extends BaseClass implements OnInit {
       } else {
         this.solicitud = solicitud;
       }
-      // console.log(this.solicitud);
-      // console.log(this.solicitudIndelpro);
-      // console.log(this.solicitudCompras);
     } catch (err) {
       console.log(err);
     } finally {
@@ -97,10 +101,46 @@ export class SolicitudDetallePage extends BaseClass implements OnInit {
     }
   }
 
+  convertBlobToBase64 = (blob) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onerror = reject;
+      reader.onload = () => {
+        resolve(reader.result);
+      };
+      reader.readAsDataURL(blob);
+    });
+
   async abrirPdf() {
     const arr = new Uint8Array(this.solicitudIndelpro.PDF);
     const blob = new Blob([arr], { type: 'application/pdf' });
-    window.open(URL.createObjectURL(blob));
+    if (this.platform.is('desktop') || this.platform.is('mobileweb')) {
+      const url = URL.createObjectURL(blob);
+      window.open(url);
+    } else {
+      try {
+        /*console.log(String(await this.convertBlobToBase64(blob)));
+        this.pdfBase = this.sanitizer.bypassSecurityTrustResourceUrl(
+          String(await this.convertBlobToBase64(blob))
+        );*/
+        /*await Filesystem.requestPermissions();
+        const writeResult = await Filesystem.writeFile({
+          path: `/pdf/${this.idwf}.pdf`,
+          data: String(await this.convertBlobToBase64(blob)).replace(
+            /(.*)base64,/gi,
+            ''
+          ),
+          directory: Directory.Data,
+          recursive: true,
+        });
+        console.log(writeResult.uri);
+        const launched = await AppLauncher.openUrl({
+          url: writeResult.uri,
+        });*/
+      } catch (err) {
+        console.log(err);
+      }
+    }
   }
 
   async abrirAdjunto(archivo) {
@@ -108,7 +148,14 @@ export class SolicitudDetallePage extends BaseClass implements OnInit {
     const urlArchivos = (
       await this.configuracionQuery.activa$.pipe(take(1)).toPromise()
     )?.url;
-    window.open(`${urlArchivos}${archivo}`);
+    try {
+      await Browser.open({
+        url: `${urlArchivos}${archivo}`,
+        windowName: this.idwf,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
   async rechazarIndelpro() {
     await super.showLoading();
@@ -136,7 +183,6 @@ export class SolicitudDetallePage extends BaseClass implements OnInit {
       await super.hideLoading();
     }
   }
-
   async aprobarIndelpro() {
     await super.showLoading();
     try {
@@ -164,7 +210,6 @@ export class SolicitudDetallePage extends BaseClass implements OnInit {
       await super.hideLoading();
     }
   }
-
   async rechazarCompras() {
     await super.showLoading();
     try {
@@ -190,7 +235,6 @@ export class SolicitudDetallePage extends BaseClass implements OnInit {
       await super.hideLoading();
     }
   }
-
   async aprobarCompras() {
     await super.showLoading();
     try {
@@ -217,52 +261,31 @@ export class SolicitudDetallePage extends BaseClass implements OnInit {
       await super.hideLoading();
     }
   }
-
   async rechazar() {
-    await super.showLoading();
-    this.feathersService
-      .service('formas-solicitudes')
-      .update(this.idwf, {
-        ACTION: 'R',
-        STEP: this.solicitud.config.step,
-      })
-      .then(async (val) => {
-        await this.solicitudesService.singleLoad();
-        await super.showToast({
-          message: 'La solicitud se rechazó exitosamente',
-          duration: 4000,
-          color: 'success',
-        });
-        this.router.navigateByUrl('/herramientas/dashboard');
-      })
-      .catch(
-        async (err) =>
-          await super.showToast({
-            message: 'Ocurrió un error al rechazar la solicitud',
-            duration: 4000,
-            color: 'danger',
-          })
-      )
-      .then(async () => {
-        await super.hideLoading();
-      });
+    await this.actualizarSolicitud({
+      ACTION: 'R',
+      STEP: this.solicitud.config.step,
+      PROCESO: this.proceso,
+    });
   }
   async aprobar() {
-    await this.actualizarSolicitud({});
+    await this.actualizarSolicitud({
+      ACTION: 'A',
+      STEP: this.solicitud.config.step,
+      PROCESO: this.proceso,
+    });
   }
-
   async actualizarSolicitud(data) {
     await super.showLoading();
     this.feathersService
       .service('formas-solicitudes')
-      .update(this.idwf, {
-        ACTION: 'A',
-        STEP: this.solicitud.config.step,
-      })
+      .update(this.idwf, data)
       .then(async (val) => {
         await this.solicitudesService.singleLoad();
         await super.showToast({
-          message: ' exitosamente',
+          message: `La solicitud se ${
+            data.ACTION === 'A' ? 'autorizó' : 'rechazó'
+          } con éxito`,
           duration: 4000,
           color: 'success',
         });
@@ -271,7 +294,9 @@ export class SolicitudDetallePage extends BaseClass implements OnInit {
       .catch(
         async (err) =>
           await super.showToast({
-            message: 'Ocurrió un error al aprobar la solicitud',
+            message: `Ocurrió un error al ${
+              data.ACTION === 'A' ? 'aprobar' : 'rechazar'
+            } la solicitud`,
             duration: 4000,
             color: 'danger',
           })

@@ -1,0 +1,24 @@
+{
+  "name": "indelpro-contraloria-formas",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build:android": "npx cap sync android",
+    "build:ios": "npx cap sync ios",
+    "run:android": "npx cap run android",
+    "run:ios": "npx cap run ios"
+  },
+  "dependencies": {
+    "@capacitor/android": "^3.0.0-beta.1",
+    "@capacitor/app": "^0.3.0",
+    "@capacitor/app-launcher": "^0.5.0",
+    "@capacitor/browser": "^0.4.0",
+    "@capacitor/cli": "^3.0.0-beta.1",
+    "@capacitor/core": "^3.0.0-beta.1",
+    "@capacitor/filesystem": "^0.3.0",
+    "@capacitor/ios": "^3.0.0-beta.1",
+    "@capacitor/splash-screen": "^0.3.0",
+    "@capacitor/status-bar": "^0.4.0"
+  }
+}

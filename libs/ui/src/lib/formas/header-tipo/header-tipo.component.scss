@@ -1,0 +1,8 @@
+:host {
+  ion-item {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 0 2px var(--ion-color-medium-tint);
+  }
+}

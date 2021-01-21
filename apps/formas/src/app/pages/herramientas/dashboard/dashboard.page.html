@@ -20,29 +20,25 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="light">
   <ion-refresher slot="fixed" (ionRefresh)="update($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ng-container *ngIf="(loading$ | async) === false; else loading">
-    <ion-card
-      color="light"
-      button
-      class="solicitud"
-      *ngIf="(solicitudes$ | async)?.length > 0"
-    >
+    <div *ngIf="(solicitudes$ | async)?.length > 0">
       <indelpro-contraloria-lista-solicitud
         *ngFor="let sol of solicitudes$ | async"
         [routerLink]="'/herramientas/solicitud/' + sol.IDWF + '/' + sol.TYPE"
         [solicitud]="sol"
       ></indelpro-contraloria-lista-solicitud>
-    </ion-card>
+    </div>
     <indelpro-contraloria-header-tipo
       icono="file-tray-full-outline"
       titulo="Solicitudes pendientes de autorizar"
       [total]="solicitudesQuery.totalPendientes$ | async"
-      colorIcono="secondary"
+      colorIcono="primary"
       (click)="pendientesVisible = !pendientesVisible"
+      style="position: sticky; top: 0"
     ></indelpro-contraloria-header-tipo>
     <indelpro-contraloria-lista-tipo
       *ngFor="let tipo of pendientesPorTipo$ | async"
@@ -64,13 +60,6 @@
   </ng-container>
 
   <ng-template #loading>
-    <ion-card>
-      <ion-card-content class="ion-text-center">
-        <div class="ion-text-center ion-margin-bottom">
-          Cargando tus solicitudes
-        </div>
-        <ion-spinner></ion-spinner>
-      </ion-card-content>
-    </ion-card>
+    <indelpro-contraloria-cargando-solicitudes></indelpro-contraloria-cargando-solicitudes>
   </ng-template>
 </ion-content>

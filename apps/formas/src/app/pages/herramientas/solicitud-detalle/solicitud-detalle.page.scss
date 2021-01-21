@@ -3,6 +3,18 @@
   height: 30px;
   width: 30px;
 }
+
+ion-card {
+  border-radius: 20px;
+}
+
+.info-principal {
+  .titulo {
+    font-weight: bolder;
+    padding: 4px 2px;
+  }
+}
+
 .solicitud-indelpro {
   &::ng-deep {
     table {

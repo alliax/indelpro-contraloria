@@ -46,6 +46,7 @@ function createSolicitud(params: Partial<Solicitud>) {
   let HTML = params.HTML || '';
   const { PDF } = params;
   HTML = HTML.replace(/\<img.*line2.jpg\"\>/gim, '');
+  HTML = HTML.replace(/\<img.*line.jpg\"\>/gim, '');
   return {
     HTML,
     PDF,
