@@ -19,294 +19,290 @@
 
 <ion-content color="light">
   <ng-container *ngIf="solicitud; else solIndelpro">
-    <ion-card class="info-principal">
-      <ion-item lines="none">
-        <ion-label class="ion-text-wrap">
-          <h2>{{solicitud.title}}</h2>
-        </ion-label>
-        <ion-badge slot="start" *ngIf="this.proceso && this.idwf">
-          {{this.proceso}}{{this.idwf}}
-        </ion-badge>
-      </ion-item>
-      <ion-card-content>
-        <p *ngIf="solicitud.submitDate">
-          Creado el
-          <ion-text color="secondary" class="requester">
-            {{(solicitud.submitDate) | date:'d \'de\' MMMM \'de
-            \'yyyy':'CST':'es-MX'}} </ion-text
-          >, por
-          <ion-text color="secondary" class="ion-text-capitalize">
-            {{solicitud?.requester?.description.toLowerCase()}}
-            ({{solicitud.requester?.account}})
-          </ion-text>
-        </p>
-      </ion-card-content>
+    <div class="info-principal">
+      <ion-card>
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h2>{{solicitud.title}}</h2>
+          </ion-label>
+          <ion-badge slot="start" *ngIf="this.proceso && this.idwf">
+            {{this.proceso}}{{this.idwf}}
+          </ion-badge>
+        </ion-item>
+        <ion-card-content>
+          <p *ngIf="solicitud.submitDate">
+            Creada el
+            <ion-text color="secondary" class="requester">
+              {{(solicitud.submitDate) | date:'d \'de\' MMMM \'de
+              \'yyyy':'CST':'es-MX'}}</ion-text
+            >, por
+            <ion-text color="secondary" class="ion-text-capitalize">
+              {{solicitud?.requester?.description.toLowerCase()}}
+              ({{solicitud.requester?.account}})
+            </ion-text>
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    <ion-card class="datos-adicionales">
+      <ng-container [ngSwitch]="proceso">
+        <ng-container *ngSwitchCase="'LC'">
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Cliente</h2>
+              <p>{{solicitud?.deudor?.description}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Plazo</h2>
+              <p>{{solicitud?.condicionPago?.description}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Términos del crédito</h2>
+              <p>{{solicitud?.termCredito}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Importe asegurado</h2>
+              <p>{{solicitud?.importeAsegurado | currency}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Límite de crédito</h2>
+              <p>{{solicitud?.limiteCredito | currency}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Moneda</h2>
+              <p>USD</p>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>País</h2>
+              <p>{{solicitud?.pais}}</p>
+            </ion-label>
+          </ion-item>
+        </ng-container>
+        <ng-container *ngSwitchCase="'GV'">
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Destino</h2>
+              <p>{{solicitud?.destiny?.description}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Lugar</h2>
+              <p>{{solicitud?.place }}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Monto</h2>
+              <p>
+                {{(solicitud?.amountDollar ? solicitud?.amountDollar :
+                solicitud?.amountPesos) | currency}}
+                {{((solicitud?.amountDollar) ? 'USD' : 'MXN')}}
+              </p>
+            </ion-label>
+          </ion-item>
+        </ng-container>
+        <ng-container *ngSwitchCase="'AC'">
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Cliente</h2>
+              <p>{{solicitud?.deudor?.description}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Tipo de nota</h2>
+              <p>{{solicitud?.tipoNota?.description}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Motivo</h2>
+              <p>{{solicitud?.motivoNota?.description }}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Monto</h2>
+              <p>{{solicitud?.monto | currency}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Moneda</h2>
+              <p>USD</p>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Justificación</h2>
+              <p>{{solicitud?.leyendaNota}}</p>
+            </ion-label>
+          </ion-item>
+        </ng-container>
+        <ng-container *ngSwitchCase="'CG'">
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Importe</h2>
+              <p>{{solicitud?.invoices?.totalInvoices | currency}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Moneda</h2>
+              <p>{{solicitud?.payments?.pay?.currency?.description }}</p>
+            </ion-label>
+          </ion-item>
+        </ng-container>
+        <ng-container *ngSwitchCase="'CL'">
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Movimiento</h2>
+              <p>{{solicitud?.tipoMovimiento?.description}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Tipo de cliente</h2>
+              <p>{{solicitud?.tipoCliente?.description }}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Condiciones de Pago</h2>
+              <p>{{solicitud?.condPago?.description}}</p>
+            </ion-label>
+          </ion-item>
+        </ng-container>
+        <ng-container *ngSwitchCase="'PR'">
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Movimiento</h2>
+              <p>{{solicitud?.tipoMovimiento?.description}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Tipo de proveedor</h2>
+              <p>{{solicitud?.tipoProveedor?.description }}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Condiciones de Pago</h2>
+              <p>{{solicitud?.condicionPago?.description}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Proveedor</h2>
+              <p>{{solicitud.rfc}} - {{solicitud?.razonSoc}}</p>
+            </ion-label>
+          </ion-item>
+        </ng-container>
+        <ng-container *ngSwitchCase="'PV'">
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Importe</h2>
+              <p>{{solicitud.importe | currency}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Moneda</h2>
+              <p>{{solicitud?.currency?.description }}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Justificacion</h2>
+              <p>{{solicitud?.justificacion}}</p>
+            </ion-label>
+          </ion-item>
+        </ng-container>
+        <ng-container *ngSwitchCase="'SP'">
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Rubro</h2>
+              <p>{{solicitud?.rubro?.description }}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Proveedor</h2>
+              <p>{{solicitud?.supplier?.description}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Importe</h2>
+              <p>{{solicitud?.totalAmount | currency}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Moneda</h2>
+              <p>{{solicitud?.currency?.description}}</p>
+            </ion-label>
+          </ion-item>
+        </ng-container>
+        <ng-container *ngSwitchCase="'FO'">
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Empresa</h2>
+              <p>{{solicitud.company?.description}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Monto</h2>
+              <p>{{solicitud?.monto | currency}} USD</p>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2>Justificacion</h2>
+              <p>{{solicitud?.justificacion}}</p>
+            </ion-label>
+          </ion-item>
+        </ng-container>
+      </ng-container>
     </ion-card>
-    <ng-container [ngSwitch]="proceso">
-      <ng-container *ngSwitchCase="'LC'">
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Cliente</h2>
-            <p>{{solicitud?.deudor?.description}}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Plazo</h2>
-            <p>{{solicitud?.condicionPago?.description}}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Términos del crédito</h2>
-            <p>{{solicitud?.termCredito}}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Importe asegurado</h2>
-            <p>{{solicitud?.importeAsegurado | currency}}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Límite de crédito</h2>
-            <p>{{solicitud?.limiteCredito | currency}}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Moneda</h2>
-            <p>USD</p>
-          </ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>País</h2>
-            <p>{{solicitud?.pais}}</p>
-          </ion-label>
-        </ion-item>
-      </ng-container>
-      <ng-container *ngSwitchCase="'GV'">
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Destino</h2>
-            <p>{{solicitud?.destiny?.description}}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Lugar</h2>
-            <p>{{solicitud?.place }}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Monto</h2>
-            <p>
-              {{(solicitud?.amountDollar ? solicitud?.amountDollar :
-              solicitud?.amountPesos) | currency}} {{((solicitud?.amountDollar)
-              ? 'USD' : 'MXN')}}
-            </p>
-          </ion-label>
-        </ion-item>
-      </ng-container>
-      <ng-container *ngSwitchCase="'AC'">
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Cliente</h2>
-            <p>{{solicitud?.deudor?.description}}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Tipo de nota</h2>
-            <p>{{solicitud?.tipoNota?.description}}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Motivo</h2>
-            <p>{{solicitud?.motivoNota?.description }}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Monto</h2>
-            <p>{{solicitud?.monto | currency}}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Moneda</h2>
-            <p>USD</p>
-          </ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Justificación</h2>
-            <p>{{solicitud?.leyendaNota}}</p>
-          </ion-label>
-        </ion-item>
-      </ng-container>
-      <ng-container *ngSwitchCase="'CG'">
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Importe</h2>
-            <p>{{solicitud?.invoices?.totalInvoices | currency}}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Moneda</h2>
-            <p>{{solicitud?.payments?.pay?.currency?.description }}</p>
-          </ion-label>
-        </ion-item>
-      </ng-container>
-      <ng-container *ngSwitchCase="'CL'">
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Movimiento</h2>
-            <p>{{solicitud?.tipoMovimiento?.description}}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Tipo de cliente</h2>
-            <p>{{solicitud?.tipoCliente?.description }}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Condiciones de Pago</h2>
-            <p>{{solicitud?.condPago?.description}}</p>
-          </ion-label>
-        </ion-item>
-      </ng-container>
-      <ng-container *ngSwitchCase="'PR'">
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Movimiento</h2>
-            <p>{{solicitud?.tipoMovimiento?.description}}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Tipo de proveedor</h2>
-            <p>{{solicitud?.tipoProveedor?.description }}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Condiciones de Pago</h2>
-            <p>{{solicitud?.condicionPago?.description}}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Proveedor</h2>
-            <p>{{solicitud.rfc}} - {{solicitud?.razonSoc}}</p>
-          </ion-label>
-        </ion-item>
-      </ng-container>
-      <ng-container *ngSwitchCase="'PV'">
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Importe</h2>
-            <p>{{solicitud.importe | currency}}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Moneda</h2>
-            <p>{{solicitud?.currency?.description }}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Justificacion</h2>
-            <p>{{solicitud?.justificacion}}</p>
-          </ion-label>
-        </ion-item>
-      </ng-container>
-      <ng-container *ngSwitchCase="'SP'">
-        <!--<ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Documento</h2>
-            <p>{{solicitud.importe}}</p>
-          </ion-label>
-        </ion-item>-->
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Rubro</h2>
-            <p>{{solicitud?.rubro?.description }}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Proveedor</h2>
-            <p>{{solicitud?.supplier?.description}}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Importe</h2>
-            <p>{{solicitud?.totalAmount | currency}}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Moneda</h2>
-            <p>{{solicitud?.currency?.description}}</p>
-          </ion-label>
-        </ion-item>
-      </ng-container>
-      <ng-container *ngSwitchCase="'FO'">
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Empresa</h2>
-            <p>{{solicitud.company?.description}}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Monto</h2>
-            <p>{{solicitud?.monto | currency}} USD</p>
-          </ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2>Justificacion</h2>
-            <p>{{solicitud?.justificacion}}</p>
-          </ion-label>
-        </ion-item>
-      </ng-container>
-    </ng-container>
-    <div *ngIf="solicitud?.files">
-      <ion-item lines="none">
-        <ion-label class="ion-text-wrap">
-          <h2>Archivos adjuntos</h2>
-        </ion-label>
-      </ion-item>
+    <ion-card class="archivos-adjuntos" *ngIf="solicitud?.files">
       <ion-grid>
         <ion-row class="ion-justify-content-start ion-align-items-center">
           <ion-col
             size="auto"
             *ngFor="let file of (solicitud.files | objToArr)"
           >
-            <ion-button
+            <ion-item
+              detail="true"
+              detailIcon="chevron-forward-sharp"
               (click)="abrirAdjunto(file.physicalName)"
-              size="small"
-              target="_blank"
+              lines="none"
             >
               <ion-icon name="document-attach-outline" slot="start"></ion-icon>
-              {{file.realName}}
-            </ion-button>
+              <ion-label class="ion-text-wrap ion-padding-end">
+                {{file.realName}}
+              </ion-label>
+            </ion-item>
           </ion-col>
         </ion-row>
       </ion-grid>
-    </div>
-    <ion-card *ngIf="solicitud && solicitud.approvalFlow">
+    </ion-card>
+    <ion-card class="firmas" *ngIf="solicitud && solicitud.approvalFlow">
       <ion-item *ngFor="let aprobador of solicitud.approvalFlow" lines="none">
         <ion-chip
           [color]="aprobador.isRol ? 'primary' : 'secondary'"
@@ -354,7 +350,7 @@
   </ng-container>
 </ng-template>
 <ng-template #solCompras>
-  <ion-grid fixed>
+  <ion-grid fixed *ngIf="solicitudCompras">
     <ion-row class="ion-justify-content-center">
       <ion-col size="12" size-md="8">
         <div

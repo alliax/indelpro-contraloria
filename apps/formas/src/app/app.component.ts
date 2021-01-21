@@ -1,6 +1,6 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { AuthQuery, AuthService, NavMenu, User } from '@alliax/feathers-client';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, MenuController, Platform } from '@ionic/angular';
 import { MenuService } from './services/menu.service';
@@ -9,6 +9,7 @@ import { App } from '@capacitor/app';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { StatusBar, Style } from '@capacitor/status-bar';
 import { Filesystem } from '@capacitor/filesystem';
+import { filter, switchMap, take, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'indelpro-contraloria-root',
@@ -41,7 +42,15 @@ export class AppComponent implements OnInit {
       await this.initPlugins();
       await this.authService.reAuthenticate();
       this.menu$ = this.menuService.getMenu();
-      this.menuAdmin$ = this.menuService.getMenuAdmin();
+      this.menuAdmin$ = this.user$.pipe(
+        filter((val) => !!val),
+        switchMap((val) =>
+          val.role.includes('formas-admin')
+            ? this.menuService.getMenuAdmin()
+            : of([])
+        )
+      );
+
       await this.formasStateService.loadState();
     } catch (err) {
       console.log('ngOnInit', err);

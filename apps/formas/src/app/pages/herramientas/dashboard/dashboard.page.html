@@ -38,7 +38,6 @@
       [total]="solicitudesQuery.totalPendientes$ | async"
       colorIcono="primary"
       (click)="pendientesVisible = !pendientesVisible"
-      style="position: sticky; top: 0"
     ></indelpro-contraloria-header-tipo>
     <indelpro-contraloria-lista-tipo
       *ngFor="let tipo of pendientesPorTipo$ | async"
