@@ -336,6 +336,11 @@
                 "input": "node_modules/ionicons/dist/ionicons/svg",
                 "output": "./svg"
               },
+              {
+                "glob": "**/*",
+                "input": "apps/formas/src/.well-known",
+                "output": ".well-known"
+              },
               "apps/formas/src/manifest.webmanifest"
             ],
             "styles": [
