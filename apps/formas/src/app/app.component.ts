@@ -1,6 +1,6 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { AuthQuery, AuthService, NavMenu, User } from '@alliax/feathers-client';
-import { Observable, of } from 'rxjs';
+import { combineLatest, from, merge, Observable, of } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, MenuController, Platform } from '@ionic/angular';
 import { MenuService } from './services/menu.service';
@@ -9,7 +9,16 @@ import { App } from '@capacitor/app';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { StatusBar, Style } from '@capacitor/status-bar';
 import { Filesystem } from '@capacitor/filesystem';
-import { filter, switchMap, take, tap } from 'rxjs/operators';
+import {
+  combineAll,
+  filter,
+  map,
+  mergeMap,
+  skipUntil,
+  switchMap,
+  take,
+  tap,
+} from 'rxjs/operators';
 
 @Component({
   selector: 'indelpro-contraloria-root',
@@ -20,8 +29,15 @@ export class AppComponent implements OnInit {
   user$: Observable<User> = this.authQuery.selectUser$;
   shouldShowMenu$: Observable<boolean> = this.authQuery
     .shouldDisplayMemberContent$;
-  menu$: Observable<NavMenu[]>;
-  menuAdmin$: Observable<NavMenu[]>;
+  menu$: Observable<NavMenu[]> = this.menuService.getMenu();
+  menuAdmin$: Observable<NavMenu[]> = this.authQuery.selectUser$.pipe(
+    filter((user) => !!user),
+    switchMap((val) =>
+      val.role.includes('formas-admin')
+        ? this.menuService.getMenuAdmin()
+        : of(null)
+    )
+  );
   isWeb: boolean = this.platform.is('desktop');
   constructor(
     private authService: AuthService,
@@ -40,15 +56,6 @@ export class AppComponent implements OnInit {
     try {
       await SplashScreen.show({});
       await this.initPlugins();
-      this.menu$ = this.menuService.getMenu();
-      this.menuAdmin$ = this.user$.pipe(
-        filter((val) => !!val),
-        switchMap((val) =>
-          val.role.includes('formas-admin')
-            ? this.menuService.getMenuAdmin()
-            : of([])
-        )
-      );
       await this.authService.reAuthenticate();
       await this.formasStateService.loadState();
     } catch (err) {
