@@ -6,7 +6,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ObjToArrPipe implements PipeTransform {
   transform(value: any, ...args: any[]): Array<any> {
     if (Array.isArray(value)) return value;
-
-    return [...Object.values(value)];
+    return [value];
   }
 }
