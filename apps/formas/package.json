@@ -1,9 +1,10 @@
 {
   "name": "indelpro-contraloria-formas",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "license": "MIT",
   "private": true,
   "scripts": {
+    "build": "npx cap sync --deployment",
     "build:android": "npx cap sync android",
     "build:ios": "npx cap sync ios",
     "run:android": "npx cap run android",
