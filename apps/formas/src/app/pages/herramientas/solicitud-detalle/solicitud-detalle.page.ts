@@ -24,8 +24,6 @@ import {
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { take } from 'rxjs/operators';
 import { Browser } from '@capacitor/browser';
-import { Directory, Filesystem } from '@capacitor/filesystem';
-import { AppLauncher } from '@capacitor/app-launcher';
 
 @Component({
   selector: 'indelpro-contraloria-solicitud-detalle',
@@ -118,12 +116,12 @@ export class SolicitudDetallePage extends BaseClass implements OnInit {
       const url = URL.createObjectURL(blob);
       window.open(url);
     } else {
-      try {
-        /*console.log(String(await this.convertBlobToBase64(blob)));
+      /*try {
+        console.log(String(await this.convertBlobToBase64(blob)));
         this.pdfBase = this.sanitizer.bypassSecurityTrustResourceUrl(
           String(await this.convertBlobToBase64(blob))
-        );*/
-        /*await Filesystem.requestPermissions();
+        );
+        await Filesystem.requestPermissions();
         const writeResult = await Filesystem.writeFile({
           path: `/pdf/${this.idwf}.pdf`,
           data: String(await this.convertBlobToBase64(blob)).replace(
@@ -133,13 +131,12 @@ export class SolicitudDetallePage extends BaseClass implements OnInit {
           directory: Directory.Data,
           recursive: true,
         });
-        console.log(writeResult.uri);
         const launched = await AppLauncher.openUrl({
           url: writeResult.uri,
-        });*/
+        });
       } catch (err) {
         console.log(err);
-      }
+      }*/
     }
   }
 
@@ -158,6 +155,8 @@ export class SolicitudDetallePage extends BaseClass implements OnInit {
     }
   }
   async rechazarIndelpro() {
+    const confirmacion = await this.confirmar('rechazar');
+    if (confirmacion !== true) return;
     await super.showLoading();
     try {
       const respuesta = await this.feathersService
@@ -184,6 +183,8 @@ export class SolicitudDetallePage extends BaseClass implements OnInit {
     }
   }
   async aprobarIndelpro() {
+    const confirmacion = await this.confirmar('aprobar');
+    if (confirmacion !== true) return;
     await super.showLoading();
     try {
       const respuesta = await this.feathersService
@@ -211,6 +212,8 @@ export class SolicitudDetallePage extends BaseClass implements OnInit {
     }
   }
   async rechazarCompras() {
+    const confirmacion = await this.confirmar('rechazar');
+    if (confirmacion !== true) return;
     await super.showLoading();
     try {
       const respuesta = await this.feathersService
@@ -236,6 +239,8 @@ export class SolicitudDetallePage extends BaseClass implements OnInit {
     }
   }
   async aprobarCompras() {
+    const confirmacion = await this.confirmar('aprobar');
+    if (confirmacion !== true) return;
     await super.showLoading();
     try {
       const respuesta = await this.feathersService
@@ -276,6 +281,10 @@ export class SolicitudDetallePage extends BaseClass implements OnInit {
     });
   }
   async actualizarSolicitud(data) {
+    const confirmacion = await this.confirmar(
+      data.ACTION === 'A' ? 'aprobar' : 'rechazar'
+    );
+    if (confirmacion !== true) return;
     await super.showLoading();
     this.feathersService
       .service('formas-solicitudes')
@@ -304,5 +313,26 @@ export class SolicitudDetallePage extends BaseClass implements OnInit {
       .then(async () => {
         await super.hideLoading();
       });
+  }
+
+  async confirmar(accion: string): Promise<boolean> {
+    return new Promise(async (resolve, reject) => {
+      const confirmacion: HTMLIonAlertElement = await this.alertCtrl.create({
+        header: `Confirmación de acción`,
+        message: `¿Deseas ${accion} la solicitud?`,
+        buttons: [
+          {
+            text: 'No',
+            role: 'cancel',
+            handler: () => resolve(false),
+          },
+          {
+            text: 'Sí',
+            handler: () => resolve(true),
+          },
+        ],
+      });
+      await confirmacion.present();
+    });
   }
 }
