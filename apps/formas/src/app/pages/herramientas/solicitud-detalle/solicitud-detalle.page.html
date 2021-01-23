@@ -44,8 +44,8 @@
         </ion-card-content>
       </ion-card>
     </div>
-    <ion-card class="datos-adicionales">
-      <ng-container [ngSwitch]="proceso">
+    <ng-container [ngSwitch]="proceso">
+      <ion-card class="datos-adicionales">
         <ng-container *ngSwitchCase="'LC'">
           <ion-item lines="none">
             <ion-label class="ion-text-wrap">
@@ -278,14 +278,21 @@
             </ion-label>
           </ion-item>
         </ng-container>
-      </ng-container>
-    </ion-card>
+        <ng-container *ngSwitchDefault>
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap ion-text-center ion-text-md-start">
+              <h2>Solicitud sin datos adicionales</h2>
+            </ion-label>
+          </ion-item>
+        </ng-container>
+      </ion-card>
+    </ng-container>
     <ion-card class="archivos-adjuntos" *ngIf="solicitud?.files">
       <ion-grid>
         <ion-row class="ion-justify-content-start ion-align-items-center">
           <ion-col
             size="auto"
-            *ngFor="let file of (solicitud.files | objToArr)"
+            *ngFor="let file of (solicitud.files?.file | objToArr)"
           >
             <ion-item
               detail="true"
@@ -305,25 +312,25 @@
     <ion-card class="firmas" *ngIf="solicitud && solicitud.approvalFlow">
       <ion-item *ngFor="let aprobador of solicitud.approvalFlow" lines="none">
         <ion-chip
-          [color]="aprobador.isRol ? 'primary' : 'secondary'"
+          [color]="aprobador.approvalStatus === 'P' ? 'primary' : 'secondary'"
           slot="start"
         >
           <ion-label>{{aprobador.step}}</ion-label>
           <ion-icon
-            [name]="aprobador.isRol ? 'person-circle-outline' : 'people-circle-outline'"
+            [name]="aprobador.isRol ? 'people-circle-outline' : 'person-circle-outline'"
           ></ion-icon>
         </ion-chip>
 
         <ion-label
           class="ion-text-wrap"
-          [color]="aprobador.isRol ? 'primary' : 'secondary'"
+          [color]="aprobador.approvalStatus === 'P' ? 'primary' : 'secondary'"
         >
           <p>{{aprobador.userName}}</p>
         </ion-label>
         <ion-icon
           slot="end"
-          [name]="aprobador.approvalStatus === 'P' ? 'radio-button-on-outline' : (aprobador.approvalStatus === 'A' ? 'checkmark-circle-outline' : 'radio-button-off-outline')"
-          color="secondary"
+          [name]="aprobador.approvalStatus === 'P' ? 'create-outline' : (aprobador.approvalStatus === 'A' ? 'checkmark-circle-outline' : 'radio-button-off-outline')"
+          [color]="aprobador.approvalStatus === 'P' ? 'primary' : 'secondary'"
         ></ion-icon>
       </ion-item>
     </ion-card>
