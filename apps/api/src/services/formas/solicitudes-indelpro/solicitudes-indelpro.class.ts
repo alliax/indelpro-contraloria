@@ -160,7 +160,7 @@ export class SolicitudesIndelpro
         PROCESO: proceso,
         ID: id,
         DECISION: decision,
-        USER_AUTORIZA: 'INDFI32',
+        USER_AUTORIZA: userSap,
       });
       return sapResponse;
     } catch (ex) {
