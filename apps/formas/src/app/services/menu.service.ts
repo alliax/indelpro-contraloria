@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { NavMenu } from '@alliax/feathers-client';
 
 @Injectable({ providedIn: 'root' })
 export class MenuService {
-  private menu = [
+  private menu: NavMenu[] = [
     {
       title: 'Herramientas',
       children: [
@@ -25,10 +26,9 @@ export class MenuService {
       ],
     },
   ];
-  private menuAdmin = [
+  private menuAdmin: NavMenu[] = [
     {
       title: 'Administración',
-      role: 'formas-admin',
       children: [
         {
           title: 'Usuarios',
@@ -54,10 +54,10 @@ export class MenuService {
     },
   ];
   constructor() {}
-  getMenu() {
+  getMenu(): Observable<NavMenu[]> {
     return of(this.menu);
   }
-  getMenuAdmin() {
+  getMenuAdmin(): Observable<NavMenu[]> {
     return of(this.menuAdmin);
   }
 }
