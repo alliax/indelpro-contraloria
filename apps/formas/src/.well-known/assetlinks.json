@@ -1,0 +1,5 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target" : { "namespace": "android_app", "package_name": "com.indelpro.formas",
+    "sha256_cert_fingerprints": ["7F:0F:94:F4:47:EE:70:1E:C2:09:35:E6:83:28:C8:D8:8F:4E:9E:ED:6E:C1:E3:7D:40:35:0B:1B:30:83:EA:EB"] }
+}]
