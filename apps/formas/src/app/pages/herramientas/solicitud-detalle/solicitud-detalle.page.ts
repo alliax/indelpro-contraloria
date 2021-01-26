@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   AuthQuery,
@@ -14,7 +14,7 @@ import {
   SolicitudDetalleIndelpro,
   SolicitudesService,
 } from '@indelpro-contraloria/data';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import {
   AlertController,
   LoadingController,
@@ -22,21 +22,34 @@ import {
   ToastController,
 } from '@ionic/angular';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { take } from 'rxjs/operators';
+import { take, tap } from 'rxjs/operators';
 import { Browser } from '@capacitor/browser';
 
 @Component({
   selector: 'indelpro-contraloria-solicitud-detalle',
   templateUrl: './solicitud-detalle.page.html',
   styleUrls: ['./solicitud-detalle.page.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SolicitudDetallePage extends BaseClass implements OnInit {
   user$: Observable<User> = this.authQuery.selectUser$;
   idwf: string;
   proceso: string;
+
   solicitud: SolicitudDetalle;
   solicitudIndelpro: SolicitudDetalleIndelpro;
   solicitudCompras: SolicitudDetalleCompras;
+
+  solicitud$: BehaviorSubject<SolicitudDetalle> = new BehaviorSubject<SolicitudDetalle>(
+    null
+  );
+  solicitudIndelpro$: BehaviorSubject<SolicitudDetalleIndelpro> = new BehaviorSubject<SolicitudDetalleIndelpro>(
+    null
+  );
+  solicitudCompras$: BehaviorSubject<SolicitudDetalleCompras> = new BehaviorSubject<SolicitudDetalleCompras>(
+    null
+  );
+
   configuracionActiva: Configuracion;
   pdfBase: SafeUrl;
   esWeb: boolean = this.platform.is('desktop') || this.platform.is('mobileweb');
@@ -55,6 +68,7 @@ export class SolicitudDetallePage extends BaseClass implements OnInit {
     private platform: Platform
   ) {
     super(loadingCtrl, toastCtrl, alertCtrl);
+    this.solicitudCompras$.pipe(tap((val) => console.log(val)));
   }
 
   async ngOnInit() {
@@ -81,16 +95,31 @@ export class SolicitudDetallePage extends BaseClass implements OnInit {
           const solicitudCompras = await this.feathersService
             .service('formas/solicitudes-compras')
             .get(this.idwf);
-          this.solicitudCompras = solicitudCompras;
+
+          solicitudCompras.HTML = solicitudCompras.HTML
+            /*.replace(
+            /<img.*[^>]+>/gim,
+            ''
+          )*/
+            .replace(/<style.*\/style>/gim, '')
+            .replace(/rel="stylesheet"/gim, '')
+            .replace(/<br>/gi, '')
+            .replace(/colspan=5/gim, '')
+            /*.replace(
+              /<colgroup>.*[^/]colgroup>/gim,
+              '<colgroup><col width="0"><col width="80%"><col class="legend2" width="0"><col width="60%"></colgroup>'
+            )*/
+            .replace(/Worflow lanzado/gim, '');
+          this.solicitudCompras$.next(solicitudCompras);
         } else {
-          this.solicitudIndelpro = solicitudIndelpro;
-          this.solicitudIndelpro.HTML = this.solicitudIndelpro.HTML.replace(
-            /(<style[\w\W]+style>)/g,
+          solicitudIndelpro.HTML = solicitudIndelpro.HTML.replace(
+            /<style.*\/style>/gim,
             ''
           );
+          this.solicitudIndelpro$.next(solicitudIndelpro);
         }
       } else {
-        this.solicitud = solicitud;
+        this.solicitud$.next(solicitud);
       }
     } catch (err) {
       console.log(err);

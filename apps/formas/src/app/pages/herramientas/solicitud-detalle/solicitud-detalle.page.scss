@@ -9,7 +9,6 @@ ion-card {
 }
 
 .info-principal {
-
   .titulo {
     font-weight: bolder;
     padding: 4px 2px;
@@ -43,12 +42,24 @@ ion-card {
 
 .solicitud-indelpro {
   &::ng-deep {
+    border-radius: 25px;
+    background: RGBA(var(--ion-color-medium-rgb), 0.1);
+    box-shadow: 0 0 2px var(--ion-color-medium-tint);
+    padding: 20px 15px;
+    margin: 15px auto;
+    display: block;
+    width: 95%;
+
     table {
       width: 100% !important;
 
+      tr {
+        border: 0 !important;
+      }
+
       img {
-        width: 75px;
-        height: 75px;
+        width: 50px;
+        height: 50px;
         margin-right: 25px;
       }
     }
@@ -56,6 +67,75 @@ ion-card {
       tr {
         margin-bottom: 8px;
       }
+    }
+  }
+}
+
+.solicitud-compras {
+  &::ng-deep {
+    font-size: 0.9rem;
+    background: white;
+    font-family: var(--ion-font-family);
+
+    .header {
+      font-weight: bolder;
+      text-align: center;
+      font-size: 1rem;
+      margin: 10px auto;
+    }
+
+    #Content {
+      margin-top: 15px;
+      &:first-child {
+        box-shadow: 0 0 2px var(--ion-color-light-shade);
+      }
+    }
+
+    td,
+    th {
+      padding: initial;
+      text-align: left;
+    }
+    th {
+      color: var(--ion-color-primary-shade);
+    }
+    .box,
+    .gral {
+      border-radius: 25px;
+      background: var(--ion-color-light);
+      box-shadow: 0 0 2px var(--ion-color-light-shade);
+      padding: 20px 15px;
+      margin: 15px auto;
+      display: block;
+      width: 95%;
+    }
+    table.data {
+      margin-top: 15px;
+      tr {
+        float: left;
+        width: 100%;
+        &:first-child {
+          width: 30%;
+        }
+      }
+      td,
+      th {
+        float: left;
+        width: 100%;
+      }
+      th {
+        padding: 0 4px;
+        display: none;
+      }
+      #total {
+        width: 100%;
+        &:first-child {
+          margin-top: 40px;
+        }
+      }
+    }
+    #footnote {
+      display: none;
     }
   }
 }

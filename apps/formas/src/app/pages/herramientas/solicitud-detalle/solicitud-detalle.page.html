@@ -18,7 +18,7 @@
 </ion-header>
 
 <ion-content color="light">
-  <ng-container *ngIf="solicitud; else solIndelpro">
+  <ng-container *ngIf="solicitud$ | async as solicitud; else solIndelpro">
     <div class="info-principal">
       <ion-card>
         <ion-item lines="none">
@@ -337,7 +337,9 @@
   </ng-container>
 </ion-content>
 <ng-template #solIndelpro>
-  <ng-container *ngIf="solicitudIndelpro; else solCompras">
+  <ng-container
+    *ngIf="solicitudIndelpro$ | async as solicitudIndelpro; else solCompras"
+  >
     <ion-grid>
       <ion-row class="ion-align-items-center ion-justify-content-center">
         <ion-col size="auto">
@@ -357,19 +359,19 @@
   </ng-container>
 </ng-template>
 <ng-template #solCompras>
-  <ion-grid fixed *ngIf="solicitudCompras">
+  <ion-grid fixed *ngIf="solicitudCompras$ | async as solicitudCompras">
     <ion-row class="ion-justify-content-center">
       <ion-col size="12" size-md="8">
         <div
           [innerHTML]="sanitizer.bypassSecurityTrustHtml(solicitudCompras?.HTML)"
-          class="ion-padding-horizontal ion-margin-vertical solicitud-compras"
+          class="solicitud-compras"
         ></div>
       </ion-col>
     </ion-row>
   </ion-grid>
 </ng-template>
 <ion-footer>
-  <ion-toolbar *ngIf="solicitud">
+  <ion-toolbar *ngIf="solicitud$ | async">
     <div class="ion-text-center ion-text-md-end">
       <ion-button
         color="danger"
@@ -389,7 +391,7 @@
       </ion-button>
     </div>
   </ion-toolbar>
-  <ion-toolbar *ngIf="solicitudIndelpro">
+  <ion-toolbar *ngIf="solicitudIndelpro$ | async">
     <div class="ion-text-center ion-text-md-end">
       <ion-button
         color="danger"
@@ -409,7 +411,7 @@
       </ion-button>
     </div>
   </ion-toolbar>
-  <ion-toolbar *ngIf="solicitudCompras">
+  <ion-toolbar *ngIf="solicitudCompras$ | async">
     <div class="ion-text-center ion-text-md-end">
       <ion-button
         color="danger"
