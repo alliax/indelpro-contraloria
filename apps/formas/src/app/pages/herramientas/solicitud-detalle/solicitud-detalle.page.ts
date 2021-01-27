@@ -295,17 +295,17 @@ export class SolicitudDetallePage extends BaseClass implements OnInit {
       await super.hideLoading();
     }
   }
-  async rechazar() {
+  async rechazar(solicitud) {
     await this.actualizarSolicitud({
       ACTION: 'R',
-      STEP: this.solicitud.config.step,
+      STEP: solicitud.config.step,
       PROCESO: this.proceso,
     });
   }
-  async aprobar() {
+  async aprobar(solicitud) {
     await this.actualizarSolicitud({
       ACTION: 'A',
-      STEP: this.solicitud.config.step,
+      STEP: solicitud.config.step,
       PROCESO: this.proceso,
     });
   }
