@@ -14,7 +14,9 @@
       <ion-col size="auto" size-md="auto">
         <ion-badge color="primary">
           <ion-label class="idwfc">{{
-            solicitud.IDWFC.substring(solicitud.IDWFC.lastIndexOf('00') + 2)
+            solicitud.IDWFC.lastIndexOf('00') > -1
+              ? solicitud.IDWFC.substring(solicitud.IDWFC.lastIndexOf('00') + 2)
+              : solicitud.IDWFC
           }}</ion-label>
         </ion-badge>
       </ion-col>
