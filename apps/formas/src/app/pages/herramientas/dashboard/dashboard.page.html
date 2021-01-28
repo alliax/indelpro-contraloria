@@ -25,13 +25,16 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ng-container *ngIf="(loading$ | async) === false; else loading">
-    <div *ngIf="(solicitudes$ | async)?.length > 0">
-      <indelpro-contraloria-lista-solicitud
-        *ngFor="let sol of solicitudes$ | async"
-        [routerLink]="'/herramientas/solicitud/' + sol.IDWF + '/' + sol.TYPE"
-        [solicitud]="sol"
-      ></indelpro-contraloria-lista-solicitud>
-    </div>
+    <ion-grid *ngIf="(solicitudes$ | async)?.length > 0">
+      <ion-row *ngFor="let sol of solicitudes$ | async">
+        <ion-col size="12">
+          <indelpro-contraloria-lista-solicitud
+            [routerLink]="'/herramientas/solicitud/' + sol.IDWF + '/' + sol.TYPE"
+            [solicitud]="sol"
+          ></indelpro-contraloria-lista-solicitud>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
     <indelpro-contraloria-header-tipo
       icono="file-tray-full-outline"
       titulo="Solicitudes pendientes de autorizar"
