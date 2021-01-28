@@ -1,23 +1,24 @@
-<ion-card (click)="detalle.emit(solicitud)" button tappable>
+<ion-card
+  (click)="detalle.emit(solicitud)"
+  button
+  tappable
+  class="ion-no-margin ion-margin-bottom"
+>
   <div class="ion-padding-top">
     <ion-row
       class="ion-align-items-center ion-justify-content-around ion-margin-bottom"
     >
-      <ion-col size="8">
-        <h5 class="ion-no-margin">
+      <ion-col size="6">
+        <h6 class="ion-no-margin">
           {{ solicitud.TITLE }}
-        </h5>
+        </h6>
         <span class="ion-text-capitalize estatus">
           {{ solicitud.STATUS?.toLowerCase() }}
         </span>
       </ion-col>
       <ion-col size="auto" size-md="auto">
         <ion-badge color="primary">
-          <ion-label class="idwfc">{{
-            solicitud.IDWFC.lastIndexOf('00') > -1
-              ? solicitud.IDWFC.substring(solicitud.IDWFC.lastIndexOf('00') + 2)
-              : solicitud.IDWFC
-          }}</ion-label>
+          <ion-label class="idwfc">{{ solicitud.IDWFC }}</ion-label>
         </ion-badge>
       </ion-col>
     </ion-row>
