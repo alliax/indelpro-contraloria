@@ -45,6 +45,10 @@ function createSolicitud(solicitud: SolicitudCompra) {
   html = html.replace(/Para autorizar.*pulsadores:/gms, '');
   html = html.replace(/Para ver esta.*<\/a>\./gms, '');
   html = html.replace(/<!--#.*BEGIN.*END#-->/gms, '');
+  html = html.substring(
+    html.indexOf('<DIV id=Content>'),
+    html.length - html.indexOf('<DIV id=Content>')
+  );
   return {
     HTML: html,
   } as SolicitudCompraHtml;
