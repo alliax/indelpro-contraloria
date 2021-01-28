@@ -150,7 +150,7 @@ export class SolicitudesIndelpro
     if (!id) throw new Error('ID missing');
     try {
       this.indelproSAP = await this.getSap();
-      const userSap = params?.user?.profile?.userSap;
+      const userSap = params?.user?.profile?.userSapIndelpro;
       const proceso = data?.proceso;
       const decision = data?.decision;
       const client: Client = new Client(this.indelproSAP);
