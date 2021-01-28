@@ -371,12 +371,12 @@
   </ion-grid>
 </ng-template>
 <ion-footer>
-  <ion-toolbar *ngIf="solicitud$ | async">
+  <ion-toolbar *ngIf="solicitud$ | async as solicitud">
     <div class="ion-text-center ion-text-md-end">
       <ion-button
         color="danger"
         class="ion-margin-horizontal"
-        (click)="rechazar()"
+        (click)="rechazar(solicitud)"
       >
         <ion-icon name="close-circle-outline" slot="start"></ion-icon>
         Rechazar
@@ -384,7 +384,7 @@
       <ion-button
         color="success"
         class="ion-margin-horizontal"
-        (click)="aprobar()"
+        (click)="aprobar(solicitud)"
       >
         <ion-icon name="checkmark-circle-outline" slot="start"></ion-icon>
         Aprobar
