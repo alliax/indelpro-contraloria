@@ -6,6 +6,7 @@
 
 ion-card {
   border-radius: 20px;
+  margin: 8px;
 }
 
 .info-principal {
@@ -43,13 +44,26 @@ ion-card {
 .solicitud-indelpro {
   &::ng-deep {
     border-radius: 25px;
-    background: RGBA(var(--ion-color-medium-rgb), 0.1);
+    background: white;
     box-shadow: 0 0 2px var(--ion-color-medium-tint);
     padding: 20px 15px;
     margin: 15px auto;
     display: block;
     width: 95%;
 
+    h1 {
+      font-size: 0.9rem;
+    }
+    h2 {
+      font-size: 0.8rem;
+    }
+
+    #date {
+      font-size: 0.7rem;
+    }
+    em {
+      font-size: 0.7rem;
+    }
     table {
       width: 100% !important;
 
@@ -58,9 +72,10 @@ ion-card {
       }
 
       img {
-        width: 50px;
-        height: 50px;
-        margin-right: 25px;
+        width: 35px;
+        height: 35px;
+        margin-top: 5px;
+        margin-right: 55px;
       }
     }
     table#pos {
@@ -74,7 +89,7 @@ ion-card {
 .solicitud-compras {
   &::ng-deep {
     font-size: 0.9rem;
-    background: white;
+    background: var(--ion-color-light);
     font-family: var(--ion-font-family);
 
     .header {
@@ -86,9 +101,9 @@ ion-card {
 
     #Content {
       margin-top: 15px;
-      &:first-child {
+      /*&:first-child {
         box-shadow: 0 0 2px var(--ion-color-light-shade);
-      }
+      }*/
     }
 
     td,
@@ -98,11 +113,14 @@ ion-card {
     }
     th {
       color: var(--ion-color-primary-shade);
+      font-weight: bolder;
+      padding-bottom: 10px;
+      font-size: 1rem;
     }
     .box,
     .gral {
       border-radius: 25px;
-      background: var(--ion-color-light);
+      background: white;
       box-shadow: 0 0 2px var(--ion-color-light-shade);
       padding: 20px 15px;
       margin: 15px auto;
