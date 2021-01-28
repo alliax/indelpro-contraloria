@@ -1,4 +1,4 @@
-  import {
+import {
   Id,
   NullableId,
   Paginated,
@@ -99,7 +99,7 @@ export class SolicitudesCompras
         DESTINO: null,
         DOCUMENT: null,
         IDWF: registro.WI_ID,
-        IDWFC: registro.WI_ID,
+        IDWFC: registro.OBJECT_ID,
         OBJECT: registro.OBJID,
         REQNAME: registro.REQ_NAME,
         STATUS: 'PENDIENTE',
