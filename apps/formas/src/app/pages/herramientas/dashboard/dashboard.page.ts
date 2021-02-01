@@ -9,6 +9,7 @@ import {
 } from '@indelpro-contraloria/data';
 import { Observable } from 'rxjs';
 import { AuthQuery, User } from '@alliax/feathers-client';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'indelpro-contraloria-dashboard',
@@ -34,14 +35,38 @@ export class DashboardPage implements OnInit {
     private authQuery: AuthQuery,
     private solicitudesService: SolicitudesService,
     private tiposQuery: TiposQuery,
-    private tiposService: TiposService
+    private tiposService: TiposService,
+    private toastCtrl: ToastController
   ) {}
+
   ngOnInit() {}
 
-  update(event) {
-    this.solicitudesService.singleLoad().then(() => event.target.complete());
+  async update(event) {
+    try {
+      await this.solicitudesService.singleLoad();
+      await (
+        await this.toastCtrl.create({
+          message:
+            'Se actualizaron exitosamente las solicitudes pendientes de aprobar',
+          duration: 4500,
+          color: 'success',
+        })
+      ).present();
+    } catch (err) {
+      await (
+        await this.toastCtrl.create({
+          message: 'Ocurrió un error al actualizar las solicitudes',
+          duration: 4500,
+          color: 'danger',
+        })
+      ).present();
+      console.log(err);
+    } finally {
+      event.target.complete();
+    }
   }
-  buscar(event) {
-    this.solicitudesService.setBusqueda(event.target.value);
+
+  async buscar(event) {
+    await this.solicitudesService.setBusqueda(event.target.value);
   }
 }
