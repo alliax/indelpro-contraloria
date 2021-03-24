@@ -19,11 +19,10 @@
 
 <ion-content color="light">
   <ng-container *ngIf="(loading$ | async) === false; else loading">
-    <ion-grid>
+    <ion-grid fixed>
       <ion-row class="ion-justify-content-start">
-        <ion-col size="12" size-md="5">
+        <ion-col size="12" size-md="4" *ngFor="let sol of solicitudes$ | async">
           <indelpro-contraloria-lista-solicitud
-            *ngFor="let sol of solicitudes$ | async"
             (detalle)="verDetalle($event)"
             [solicitud]="sol"
             (aprobar)="aprobar($event, sol)"

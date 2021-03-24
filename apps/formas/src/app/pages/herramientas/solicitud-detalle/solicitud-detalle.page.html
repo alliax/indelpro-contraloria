@@ -288,7 +288,7 @@
       </ion-card>
     </ng-container>
     <ion-card class="archivos-adjuntos" *ngIf="solicitud?.files">
-      <ion-grid>
+      <ion-grid fixed>
         <ion-row class="ion-justify-content-start ion-align-items-center">
           <ion-col
             size="auto"
@@ -340,7 +340,7 @@
   <ng-container
     *ngIf="solicitudIndelpro$ | async as solicitudIndelpro; else solCompras"
   >
-    <ion-grid>
+    <ion-grid fixed>
       <ion-row class="ion-align-items-center ion-justify-content-center">
         <ion-col size="auto">
           <ng-container *ngIf="solicitudIndelpro?.PDF && esWeb">
