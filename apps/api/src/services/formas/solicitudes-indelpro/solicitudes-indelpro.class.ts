@@ -93,7 +93,6 @@ export class SolicitudesIndelpro
         USER_AUTORIZA: userSap,
       });
       const registros: Pendientes[] = [...(pendientes.PENDING_LIST as any[])];
-
       return registros.map((registro) => ({
         AMOUNT: null,
         AMOUNTUSD: null,
@@ -156,6 +155,7 @@ export class SolicitudesIndelpro
       const client: Client = new Client(this.indelproSAP);
       await client.open();
       const functionName = 'ZAUTORIZACION_WF';
+
       const sapResponse = await client.call(functionName, {
         PROCESO: proceso,
         ID: id,

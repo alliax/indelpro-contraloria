@@ -61,7 +61,6 @@ export class SolicitudesQuery extends QueryEntity<SolicitudesState> {
     this.tipos.selectAll(),
     this.propias$,
   ]).pipe(
-    tap((val) => console.log(val)),
     map((tipos: [Tipo[], Solicitud[]]) =>
       tipos[0].map((tipo: Tipo) => ({
         nombre: tipo.nombre,
