@@ -176,6 +176,14 @@ export class FormasSolicitudes implements ServiceMethods<Data> {
                 return [...newValue.approver];
               }
               break;
+            case '/form/createDate':
+            case '/form/submitDate':
+              if (newValue) {
+                try {
+                  const dArr = newValue.split('/');
+                  return `${dArr[2]}/${dArr[1]}/${dArr[0]}`;
+                } catch (err) {}
+              }
           }
           return newValue;
         },
