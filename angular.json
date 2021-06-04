@@ -23,7 +23,7 @@
             "main": "apps/activo/src/main.ts",
             "polyfills": "apps/activo/src/polyfills.ts",
             "tsConfig": "apps/activo/tsconfig.app.json",
-            "aot": true,
+            "inlineStyleLanguage": "scss",
             "assets": [
               "apps/activo/src/favicon.ico",
               {
@@ -50,19 +50,6 @@
           },
           "configurations": {
             "production": {
-              "fileReplacements": [
-                {
-                  "replace": "apps/activo/src/environments/environment.ts",
-                  "with": "apps/activo/src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -75,22 +62,40 @@
                   "maximumError": "10kb"
                 }
               ],
-              "serviceWorker": false,
-              "ngswConfigPath": "apps/activo/ngsw-config.json"
+              "fileReplacements": [
+                {
+                  "replace": "apps/activo/src/environments/environment.ts",
+                  "with": "apps/activo/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all",
+              "serviceWorker": true
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "activo:build",
-            "proxyConfig": "apps/activo/proxy.conf.json"
+            "browserTarget": "activo:build"
           },
           "configurations": {
             "production": {
               "browserTarget": "activo:build:production"
+            },
+            "development": {
+              "browserTarget": "activo:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -355,20 +360,6 @@
           },
           "configurations": {
             "production": {
-              "fileReplacements": [
-                {
-                  "replace": "apps/formas/src/environments/environment.ts",
-                  "with": "apps/formas/src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -381,25 +372,40 @@
                   "maximumError": "10kb"
                 }
               ],
-              "serviceWorker": false,
-              "ngswConfigPath": "apps/formas/ngsw-config.json"
+              "fileReplacements": [
+                {
+                  "replace": "apps/formas/src/environments/environment.ts",
+                  "with": "apps/formas/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all",
+              "serviceWorker": true
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "formas:build",
-            "proxyConfig": "apps/formas/proxy.conf.json"
+            "browserTarget": "formas:build"
           },
           "configurations": {
             "production": {
               "browserTarget": "formas:build:production"
             },
-            "ci": {
-              "progress": false
+            "development": {
+              "browserTarget": "formas:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
