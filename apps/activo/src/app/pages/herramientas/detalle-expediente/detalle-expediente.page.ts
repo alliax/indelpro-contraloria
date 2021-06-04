@@ -358,19 +358,19 @@ export class DetalleExpedientePage
     );
 
     const blob = new Blob([...csvData], {
-      type: 'text/csv',
+      type: 'text/csv;charset=utf-8',
     });
     const url = window.URL.createObjectURL(blob);
 
     if (navigator.msSaveOrOpenBlob) {
       navigator.msSaveBlob(
         blob,
-        `DetalleExpediente-${new Date().toLocaleDateString()}`
+        `DetalleExpediente-${new Date().toLocaleDateString()}.csv`
       );
     } else {
       const a = document.createElement('a');
       a.href = url;
-      a.download = `DetalleExpediente-${new Date().toLocaleDateString()}`;
+      a.download = `DetalleExpediente-${new Date().toLocaleDateString()}.csv`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);

@@ -134,6 +134,7 @@ export class ExpedientesSap implements ServiceMethods<Data> {
         });
       return actualizado;
     } catch (err) {
+      console.log(err);
       throw new Error(err);
     }
   }
