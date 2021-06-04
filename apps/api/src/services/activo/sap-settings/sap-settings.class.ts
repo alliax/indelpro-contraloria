@@ -1,7 +1,8 @@
 import { Service, MongooseServiceOptions } from 'feathers-mongoose';
 import { Application } from '../../../declarations';
+import { RfcConnectionParameters } from 'node-rfc';
 
-export interface SapSettings {
+export interface SapSettings extends RfcConnectionParameters {
   _id: string;
   nombre: string;
   ashost: string;
