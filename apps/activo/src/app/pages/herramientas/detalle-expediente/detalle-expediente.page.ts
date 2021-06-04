@@ -43,7 +43,8 @@ import { FacturasExpedientePage } from '../facturas-expediente/facturas-expedien
 })
 export class DetalleExpedientePage
   extends DataEntryClass<Expediente, ExpedientesService>
-  implements OnInit {
+  implements OnInit
+{
   @ViewChild('fotografias') fotografias: HTMLIonSlidesElement;
   @ViewChild('archivosAdjuntos') archivosAdjuntos: TemplateRef<any>;
   detalleVisible = false;
@@ -52,9 +53,9 @@ export class DetalleExpedientePage
   actualizandoSap = false;
   columns: TableColumn[];
 
-  foto: File;
-  autorizacion: File;
-  capitalizacion: File;
+  fotosSubir: File[];
+  autorizacion: File[];
+  capitalizacion: File[];
 
   ubicaciones$ = this.ubicacionesQuery.agrupadas$;
 
@@ -64,9 +65,7 @@ export class DetalleExpedientePage
 
   cargando$: Observable<boolean> = this.expedientesQuery.selectLoading();
 
-  expediente$: Observable<
-    Expediente
-  > = this.expedientesQuery
+  expediente$: Observable<Expediente> = this.expedientesQuery
     .selectActive()
     .pipe(filter((expediente) => !!expediente));
 
@@ -303,21 +302,25 @@ export class DetalleExpedientePage
   async subirFoto(expediente: Expediente) {
     try {
       const actualizar = JSON.parse(JSON.stringify(expediente));
-      actualizar.file = this.foto;
-      const uploaded = await super.upload(actualizar, null);
-      const adjunto = await this.feathersService
-        .service('activo/adjuntos')
-        .create({
-          nombre: this.foto.name,
-          archivo: uploaded.id,
-          expedienteId: expediente._id,
-        } as Adjunto);
-      if (!actualizar.fotosId) {
-        actualizar.fotosId = [];
+
+      for (const foto of this.fotosSubir) {
+        actualizar.file = foto;
+        const uploaded = await super.upload(actualizar, null);
+        const adjunto = await this.feathersService
+          .service('activo/adjuntos')
+          .create({
+            nombre: foto.name,
+            archivo: uploaded.id,
+            expedienteId: expediente._id,
+          } as Adjunto);
+
+        if (!actualizar.fotosId) {
+          actualizar.fotosId = [];
+        }
+        actualizar.fotosId.push(adjunto._id);
+        delete actualizar.file;
       }
-      actualizar.fotosId.push(adjunto._id);
-      delete actualizar.file;
-      delete this.foto;
+      this.fotosSubir = [];
       return super.update(actualizar);
     } catch (err) {
       console.log(err);
@@ -327,11 +330,9 @@ export class DetalleExpedientePage
   async slideNext() {
     await this.fotografias.slideNext();
   }
-
   async slideBack() {
     await this.fotografias.slidePrev();
   }
-
   async descargarDetalle(detalles: ExpedienteDet[]) {
     const csvData = await json2csvAsync(
       detalles.map((detalle: ExpedienteDet) => ({
@@ -376,7 +377,6 @@ export class DetalleExpedientePage
     }
     window.URL.revokeObjectURL(url);
   }
-
   async borrarAutorizacion(expediente, autorizacion) {
     const alerta = await this.alertCtrl.create({
       header: 'Eliminar archivo de autorización de proyecto',
@@ -392,9 +392,10 @@ export class DetalleExpedientePage
             const actualizar: Expediente = JSON.parse(
               JSON.stringify(expediente)
             );
-            actualizar.autorizacionProyectosId = actualizar.autorizacionProyectosId.filter(
-              (autorizacionId) => autorizacionId !== autorizacion._id
-            );
+            actualizar.autorizacionProyectosId =
+              actualizar.autorizacionProyectosId.filter(
+                (autorizacionId) => autorizacionId !== autorizacion._id
+              );
             await super.update(actualizar);
             const resp = await this.feathersService
               .service('activo/adjuntos')
@@ -405,31 +406,32 @@ export class DetalleExpedientePage
     });
     alerta.present();
   }
-
   async subirAutorizacion(expediente: Expediente) {
     try {
       const actualizar = JSON.parse(JSON.stringify(expediente));
-      actualizar.file = this.autorizacion;
-      const uploaded = await super.upload(actualizar, null);
-      const adjunto = await this.feathersService
-        .service('activo/adjuntos')
-        .create({
-          nombre: this.autorizacion.name,
-          archivo: uploaded.id,
-          expedienteId: expediente._id,
-        } as Adjunto);
-      if (!actualizar.autorizacionProyectosId) {
-        actualizar.autorizacionProyectosId = [];
+
+      for (const archivo of this.autorizacion) {
+        actualizar.file = archivo;
+        const uploaded = await super.upload(actualizar, null);
+        const adjunto = await this.feathersService
+          .service('activo/adjuntos')
+          .create({
+            nombre: archivo.name,
+            archivo: uploaded.id,
+            expedienteId: expediente._id,
+          } as Adjunto);
+        if (!actualizar.autorizacionProyectosId) {
+          actualizar.autorizacionProyectosId = [];
+        }
+        actualizar.autorizacionProyectosId.push(adjunto._id);
+        delete actualizar.file;
       }
-      actualizar.autorizacionProyectosId.push(adjunto._id);
-      delete actualizar.file;
-      delete this.autorizacion;
+      this.autorizacion = [];
       return super.update(actualizar);
     } catch (err) {
       console.log(err);
     }
   }
-
   async borrarCapitalizacion(expediente, capitalizacion) {
     const alerta = await this.alertCtrl.create({
       header: 'Eliminar archivo de autorización de capitalización',
@@ -445,9 +447,10 @@ export class DetalleExpedientePage
             const actualizar: Expediente = JSON.parse(
               JSON.stringify(expediente)
             );
-            actualizar.capitalizacionProyectosId = actualizar.capitalizacionProyectosId.filter(
-              (capitalizacionId) => capitalizacionId !== capitalizacion._id
-            );
+            actualizar.capitalizacionProyectosId =
+              actualizar.capitalizacionProyectosId.filter(
+                (capitalizacionId) => capitalizacionId !== capitalizacion._id
+              );
             await super.update(actualizar);
             const resp = await this.feathersService
               .service('activo/adjuntos')
@@ -458,25 +461,27 @@ export class DetalleExpedientePage
     });
     alerta.present();
   }
-
   async subirCapitalizacion(expediente: Expediente) {
     try {
       const actualizar = JSON.parse(JSON.stringify(expediente));
-      actualizar.file = this.capitalizacion;
-      const uploaded = await super.upload(actualizar, null);
-      const adjunto = await this.feathersService
-        .service('activo/adjuntos')
-        .create({
-          nombre: this.capitalizacion.name,
-          archivo: uploaded.id,
-          expedienteId: expediente._id,
-        } as Adjunto);
-      if (!actualizar.capitalizacionProyectosId) {
-        actualizar.capitalizacionProyectosId = [];
+
+      for (const archivo of this.capitalizacion) {
+        actualizar.file = archivo;
+        const uploaded = await super.upload(actualizar, null);
+        const adjunto = await this.feathersService
+          .service('activo/adjuntos')
+          .create({
+            nombre: archivo.name,
+            archivo: uploaded.id,
+            expedienteId: expediente._id,
+          } as Adjunto);
+        if (!actualizar.capitalizacionProyectosId) {
+          actualizar.capitalizacionProyectosId = [];
+        }
+        actualizar.capitalizacionProyectosId.push(adjunto._id);
+        delete actualizar.file;
       }
-      actualizar.capitalizacionProyectosId.push(adjunto._id);
-      delete actualizar.file;
-      delete this.capitalizacion;
+      this.capitalizacion = [];
       return super.update(actualizar);
     } catch (err) {
       console.log(err);

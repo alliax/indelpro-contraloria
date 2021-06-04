@@ -51,7 +51,7 @@ export class DetalleActivosPage implements OnInit {
     );
 
     const blob = new Blob([...csvData], {
-      type: 'text/csv',
+      type: 'text/csv;charset=utf-8',
     });
     const url = window.URL.createObjectURL(blob);
 
@@ -60,14 +60,14 @@ export class DetalleActivosPage implements OnInit {
         blob,
         `listadoActivos-${grupo.tipoActivo?.claveSap}-${
           grupo.tipoActivo?.nombre
-        }-${new Date().toLocaleDateString()}`
+        }-${new Date().toLocaleDateString()}.csv`
       );
     } else {
       const a = document.createElement('a');
       a.href = url;
       a.download = `listadoActivos-${grupo.tipoActivo?.claveSap}-${
         grupo.tipoActivo?.nombre
-      }-${new Date().toLocaleDateString()}`;
+      }-${new Date().toLocaleDateString()}.csv`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);

@@ -128,22 +128,27 @@
           </ng-template>
           <ion-card *ngIf="expediente$ | async as expediente">
             <ion-card-header>
-              <ion-card-subtitle>
-                Selecciona una fotografía para cargar
-              </ion-card-subtitle>
+              <ion-card-subtitle> Carga de fotografías </ion-card-subtitle>
             </ion-card-header>
             <ion-card-content class="ion-text-center">
               <alliax-file-upload
-                [archivo]="foto"
-                (archivoCargado)="foto = $event"
+                [label]="'Selecciona las fotografías'"
+                [iconName]="'images-outline'"
+                iconPosition="end"
+                [archivos]="fotosSubir"
+                (archivosCargados)="fotosSubir = $event"
+                [multiple]="true"
               ></alliax-file-upload>
-              <div class="ion-padding" *ngIf="foto">
+              <div
+                class="ion-padding"
+                *ngIf="fotosSubir && fotosSubir.length > 0"
+              >
                 <ion-button
                   color="success"
                   expand="block"
                   (click)="subirFoto(expediente)"
                 >
-                  Subir fotografía
+                  Subir fotografía(s)
                 </ion-button>
               </div>
             </ion-card-content>
@@ -230,18 +235,26 @@
               </ion-item>
               <div class="ion-padding ion-text-center">
                 <ion-label>
-                  <h2>Subir archivo de autorización</h2>
+                  <h2>Subir archivos de autorización</h2>
                 </ion-label>
+
                 <alliax-file-upload
-                  [archivo]="autorizacion"
-                  (archivoCargado)="autorizacion = $event"
+                  [label]="'Selecciona los archivos'"
+                  [iconName]="'document-text-outline'"
+                  iconPosition="end"
+                  [archivos]="autorizacion"
+                  (archivosCargados)="autorizacion = $event"
+                  [multiple]="true"
                 ></alliax-file-upload>
-                <div class="ion-padding" *ngIf="autorizacion">
+                <div
+                  class="ion-padding ion-text-center"
+                  *ngIf="autorizacion && autorizacion.length > 0"
+                >
                   <ion-button
                     color="success"
                     (click)="subirAutorizacion(expediente)"
                   >
-                    Subir archivo
+                    Subir archivo(s)
                   </ion-button>
                 </div>
               </div>
@@ -392,18 +405,26 @@
               </ion-item>
               <div class="ion-padding ion-text-center">
                 <ion-label>
-                  <h2>Subir archivo de capitalización</h2>
+                  <h2>Subir archivos de capitalización</h2>
                 </ion-label>
+
                 <alliax-file-upload
-                  [archivo]="capitalizacion"
-                  (archivoCargado)="capitalizacion = $event"
+                  [label]="'Selecciona los archivos'"
+                  [iconName]="'document-text-outline'"
+                  iconPosition="end"
+                  [archivos]="capitalizacion"
+                  (archivosCargados)="capitalizacion = $event"
+                  [multiple]="true"
                 ></alliax-file-upload>
-                <div class="ion-padding" *ngIf="capitalizacion">
+                <div
+                  class="ion-padding ion-text-center"
+                  *ngIf="capitalizacion && capitalizacion.length > 0"
+                >
                   <ion-button
                     color="success"
                     (click)="subirCapitalizacion(expediente)"
                   >
-                    Subir archivo
+                    Subir archivo(s)
                   </ion-button>
                 </div>
               </div>
