@@ -32,7 +32,6 @@ export class UbicacionesPage
         )
       )
     );*/
-  model = createUbicacion({});
   fields = [
     {
       key: '_id',
@@ -105,7 +104,8 @@ export class UbicacionesPage
       toastCtrl,
       alertCtrl,
       ubicacionesService,
-      feathersService
+      feathersService,
+      createUbicacion
     );
   }
 

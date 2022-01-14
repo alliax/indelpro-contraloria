@@ -21,7 +21,7 @@ export interface ActivosState extends EntityState<Activo>, ActiveState {
 }
 
 @Injectable({ providedIn: 'root' })
-@StoreConfig({ name: 'activos', idKey: '_id' })
+@StoreConfig({ name: 'activos', idKey: '_id', resettable: true })
 export class ActivosStore extends EntityStore<ActivosState> {
   constructor() {
     super({

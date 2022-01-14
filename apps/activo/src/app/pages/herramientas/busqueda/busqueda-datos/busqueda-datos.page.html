@@ -16,7 +16,7 @@
   </div>
   <ng-template #listado>
     <ng-container *ngIf="(porDatos$ | async).length > 0; else sinDatos">
-      <ion-virtual-scroll [items]="porDatos$ | async " approxItemHeight="120px">
+      <ion-virtual-scroll [items]="porDatos$ | async " approxItemHeight="40px">
         <div *virtualItem="let item;let i = index">
           <indelpro-contraloria-expediente-lista-elemento
             [expediente]="item"

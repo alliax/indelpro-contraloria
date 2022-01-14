@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import {
   Activo,
+  createExpediente,
   Expediente,
   ExpedienteActRel,
   ExpedienteDet,
@@ -65,7 +66,7 @@ export class DetalleExpedientePage
 
   cargando$: Observable<boolean> = this.expedientesQuery.selectLoading();
 
-  expediente$: Observable<Expediente> = this.expedientesQuery
+  expediente$: Observable<Expediente | undefined> = this.expedientesQuery
     .selectActive()
     .pipe(filter((expediente) => !!expediente));
 
@@ -121,7 +122,8 @@ export class DetalleExpedientePage
       toastCtrl,
       alertCtrl,
       expedientesService,
-      feathersService
+      feathersService,
+      createExpediente
     );
   }
 
@@ -247,6 +249,7 @@ export class DetalleExpedientePage
         })
       ).present();
     } catch (err) {
+      console.log(err);
       await (
         await this.toastCtrl.create({
           message: 'Ocurrió un error al actualizar el expedientes desde SAP',

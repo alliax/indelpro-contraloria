@@ -192,7 +192,7 @@ export class SolicitudDetallePage extends BaseClass implements OnInit {
         .service('formas/solicitudes-indelpro')
         .update(this.idwf, {
           proceso: this.proceso,
-          decision: 'R',
+          decision: 'D',
         });
       await this.solicitudesService.singleLoad();
       await super.showToast({
@@ -240,6 +240,8 @@ export class SolicitudDetallePage extends BaseClass implements OnInit {
       await super.hideLoading();
     }
   }
+
+
   async rechazarCompras() {
     const confirmacion = await this.confirmar('rechazar');
     if (confirmacion !== true) return;
@@ -297,7 +299,7 @@ export class SolicitudDetallePage extends BaseClass implements OnInit {
   }
   async rechazar(solicitud) {
     await this.actualizarSolicitud({
-      ACTION: 'R',
+      ACTION: 'D',
       STEP: solicitud.config.step,
       PROCESO: this.proceso,
     });

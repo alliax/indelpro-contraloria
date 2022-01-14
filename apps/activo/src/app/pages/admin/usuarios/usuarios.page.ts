@@ -21,10 +21,9 @@ import { tap } from 'rxjs/operators';
 })
 export class UsuariosPage
   extends DataEntryClass<Usuario, UsuariosService>
-  implements OnInit {
-  registros$ = this.usuariosQuery
-    .selectAll()
-  model = createUsuario({});
+  implements OnInit
+{
+  registros$ = this.usuariosQuery.selectAll();
   fields = [
     {
       key: '_id',
@@ -103,7 +102,14 @@ export class UsuariosPage
     private usuariosQuery: UsuariosQuery,
     private usuariosService: UsuariosService
   ) {
-    super(loadingCtrl, toastCtrl, alertCtrl, usuariosService, feathersService);
+    super(
+      loadingCtrl,
+      toastCtrl,
+      alertCtrl,
+      usuariosService,
+      feathersService,
+      createUsuario
+    );
   }
 
   ngOnInit() {}

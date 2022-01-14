@@ -1,12 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import {
   Activo,
   ActivosQuery,
   Expediente,
   ExpedientesQuery,
 } from '@indelpro-contraloria/data';
-import { map, tap } from 'rxjs/operators';
+import {
+  combineLatest,
+  filter,
+  map,
+  merge,
+  switchMap,
+  tap,
+  withLatestFrom,
+} from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -15,38 +23,30 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./busqueda-datos.page.scss'],
 })
 export class BusquedaDatosPage implements OnInit {
-  porDatos$: Observable<Expediente[]> = this.expedientesQuery.selectAll().pipe(
-    map((expedientes: Expediente[]) => {
-      const query: {
-        activo: null;
-        sai: null;
-        desde: null;
-        hasta: null;
-      } = JSON.parse(this.activated.snapshot.queryParamMap.get('query'));
-
-      return expedientes
-        .filter((expediente: Expediente) =>
-          query.activo ? expediente.ANLN1.includes(query.activo) : true
-        ) // ANLN1 activo
-        .filter((expediente: Expediente) =>
-          query.sai ? expediente.PROJK.includes(query.sai) : true
-        ) // PROJK SAI
-        .filter((expediente: Expediente) =>
-          query.desde
-            ? new Date(expediente.AKTIV).valueOf() >=
-              new Date(query.desde).valueOf()
-            : true
-        ) // AKTIV desde
-        .filter((expediente: Expediente) =>
-          query.hasta
-            ? new Date(expediente.AKTIV).valueOf() <=
-              new Date(query.hasta).valueOf()
-            : true
-        ) // AKTIV hasta
-        .sort(
-          (a, b) => new Date(b.AKTIV).valueOf() - new Date(a.AKTIV).valueOf()
-        );
-    })
+  porDatos$: Observable<Expediente[]> = this.activated.queryParamMap.pipe(
+    map((paramMap) => paramMap.get('query')),
+    map((query) => JSON.parse(query)),
+    switchMap((query) =>
+      this.expedientesQuery.selectAll().pipe(
+        /*tap((val) => console.log(query)),
+        tap((val) => console.log(val)),*/
+        map((expedientes) => {
+          return expedientes.filter(
+            (expediente) =>
+              (query.activo ? expediente.ANLN1.includes(query.activo) : true) &&
+              (query.sai ? expediente.PROJK.includes(query.sai) : true) &&
+              (query.desde
+                ? new Date(expediente.AKTIV).valueOf() >=
+                  new Date(query.desde).valueOf()
+                : true) &&
+              (query.hasta
+                ? new Date(expediente.AKTIV).valueOf() <=
+                  new Date(query.hasta).valueOf()
+                : true)
+          );
+        })
+      )
+    )
   );
 
   loading$: Observable<boolean> = this.expedientesQuery.selectLoading();

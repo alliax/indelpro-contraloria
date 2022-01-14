@@ -12,10 +12,12 @@ export class ExpedientesQuery extends QueryEntity<ExpedientesState> {
   ultimaActualizacion$ = this.select((state) => state.ui.ultimaActualizacion);
   activo$ = this.select((state) => state.ui.activo);
   total$: Observable<number> = this.selectCount();
+
   ordenados$: Observable<Expediente[]> = this.selectAll().pipe(
     map((listado) =>
       listado.sort(
-        (a, b) => new Date(b.AKTIV).valueOf() - new Date(a.AKTIV).valueOf()
+        /*(a, b) => new Date(b.AKTIV).valueOf() - new Date(a.AKTIV).valueOf()*/
+        (a, b) => a.PROJK.localeCompare(b.PROJK)
       )
     )
   );

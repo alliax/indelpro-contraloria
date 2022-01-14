@@ -28,7 +28,6 @@ export default function (app: Application) {
   app.configure(UsersService);
   app.configure(MailerService);
   app.configure(UploadsService);
-
   app.configure(() => AuthManagementService(app, customNotifier));
 
   app.configure(expedientes);

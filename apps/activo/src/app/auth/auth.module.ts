@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from '@alliax/feathers-client';
+import { IsLoggedInGuard } from '@alliax/feathers-client';
 
 const routes: Routes = [
   {
@@ -37,7 +37,7 @@ const routes: Routes = [
       },
       {
         path: 'verify-account',
-        canActivate: [AuthGuard],
+        canActivate: [IsLoggedInGuard],
         loadChildren: () =>
           import('./verify-account/verify-account.module').then(
             m => m.VerifyAccountPageModule
@@ -45,7 +45,7 @@ const routes: Routes = [
       },
       {
         path: 'not-verified',
-        canActivate: [AuthGuard],
+        canActivate: [IsLoggedInGuard],
         loadChildren: () =>
           import('./not-verified/not-verified.module').then(
             m => m.NotVerifiedPageModule

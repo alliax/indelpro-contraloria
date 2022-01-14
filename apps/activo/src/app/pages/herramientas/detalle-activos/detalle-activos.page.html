@@ -26,7 +26,7 @@
 <ion-content>
   <ng-container>
     <ion-virtual-scroll [items]="filtrados$ | async" approxItemHeight="120px">
-      <ion-item *virtualItem="let item;let i = index">
+      <ion-item *virtualItem="let item;let i = index" tappable (click)="abrirExpediente(item)">
         <ion-chip color="secondary" slot="start"> {{i+1}} </ion-chip>
         <ion-label class="ion-text-wrap">
           <ion-text color="tertiary">

@@ -4,5 +4,5 @@ export const environment = {
   rootPath: 'indelpro/api',
   socketPath: '/indelpro/api/socket.io/',
   storageKey: 'indelpro_contraloria_api_prd',
-  bovedaAPI: 'https://alxdvtrack.alfabw.alface.com.mx/BovedaFiscal/restful/',
+  bovedaAPI: 'https://alxfacturas.alfabw.alface.com.mx/BovedaFiscal/restful/',
 };

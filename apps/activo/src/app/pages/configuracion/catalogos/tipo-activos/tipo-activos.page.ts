@@ -23,9 +23,9 @@ import {
 })
 export class TipoActivosPage
   extends DataEntryClass<TipoActivo, TipoActivosService>
-  implements OnInit {
+  implements OnInit
+{
   registros$ = this.tipoActivosQuery.selectAll();
-  model = createTipoActivo({});
   fields = [
     {
       key: '_id',
@@ -88,7 +88,8 @@ export class TipoActivosPage
       toastCtrl,
       alertCtrl,
       tipoActivosService,
-      feathersService
+      feathersService,
+      createTipoActivo
     );
   }
 

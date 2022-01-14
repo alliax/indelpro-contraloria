@@ -1,12 +1,13 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { combineLatest, Observable } from 'rxjs';
 import {
+  Activo,
   ActivosQuery,
   ActivosService,
   ExpedientesQuery,
   GrupoActivo,
   TipoActivo,
-  TipoActivosQuery,
+  TipoActivosQuery
 } from '@indelpro-contraloria/data';
 import { map } from 'rxjs/operators';
 import { ModalController } from '@ionic/angular';
@@ -37,27 +38,25 @@ export class DashboardPage implements OnInit {
       const tipos = values[1];
       const fecha = values[2];
 
-      return tipos.map((tipo) => ({
-        tipoActivo: { ...tipo },
-        valor: activos
-          .filter(
-            (activo) =>
-              activo.ANLKL.toString() === tipo.claveSap &&
-              new Date(activo.AKTIV).valueOf() <= new Date(fecha).valueOf()
-          )
-          .map((activo) => activo.KANSW)
-          .reduce((acc, curr) => (acc += curr), 0),
-        registros: activos.filter(
-          (activo) =>
-            activo.ANLKL.toString() === tipo.claveSap &&
-            new Date(activo.AKTIV).valueOf() <= new Date(fecha).valueOf()
-        ),
-        activos: activos.filter(
-          (activo) =>
-            activo.ANLKL.toString() === tipo.claveSap &&
-            new Date(activo.AKTIV).valueOf() <= new Date(fecha).valueOf()
-        ).length,
-      }));
+      return tipos.map((tipo) => {
+        console.log(activos);
+
+        const filtrados = activos.filter((activo) =>
+          tipo.claveSap === 'PROCESO'
+            ? !activo.ANLKL
+            : activo.ANLKL.toString() === tipo.claveSap &&
+              new Date(activo.AKTIV).valueOf() <=
+                new Date(String(fecha)).valueOf()
+        );
+        return {
+          tipoActivo: { ...tipo },
+          valor: filtrados
+            .map((activo) => activo.KANSW)
+            .reduce((acc, curr) => (acc += curr), 0),
+          registros: filtrados,
+          activos: filtrados.length,
+        };
+      });
     })
   );
   agrupadoValor$ = this.dashboard$.pipe(

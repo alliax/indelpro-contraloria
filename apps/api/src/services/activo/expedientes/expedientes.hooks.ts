@@ -59,7 +59,14 @@ export default {
 
   after: {
     all: [fastJoin(postResolvers)],
-    find: [],
+    find: [
+      async (context: any) => {
+        context.result = context.result.filter(
+          (registro: any) =>
+            !registro.PROJK.includes('-') && registro.PROJK.includes('E/')
+        );
+      },
+    ],
     get: [],
     create: [],
     update: [],

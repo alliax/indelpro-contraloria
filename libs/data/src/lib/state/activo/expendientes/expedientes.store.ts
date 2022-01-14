@@ -4,7 +4,7 @@ import {
   EntityState,
   ActiveState,
   EntityStore,
-  StoreConfig
+  StoreConfig,
 } from '@datorama/akita';
 
 export interface ExpedientesState extends EntityState<Expediente>, ActiveState {
@@ -12,20 +12,20 @@ export interface ExpedientesState extends EntityState<Expediente>, ActiveState {
     page?: number;
     limit?: number;
     ultimaActualizacion?: number;
-    activo?: Expediente
+    activo?: Expediente;
   };
 }
 
 @Injectable({ providedIn: 'root' })
-@StoreConfig({ name: 'expedientes', idKey: '_id' })
+@StoreConfig({ name: 'expedientes', idKey: '_id', resettable: true })
 export class ExpedientesStore extends EntityStore<ExpedientesState> {
   constructor() {
     super({
       ui: {
         page: 1,
         limit: 10,
-        ultimaActualizacion: 0
-      }
+        ultimaActualizacion: 0,
+      },
     });
   }
 }

@@ -20,11 +20,11 @@ import { map } from 'rxjs/operators';
 })
 export class GrupoUbicacionesPage
   extends DataEntryClass<GrupoUbicacion, GrupoUbicacionesService>
-  implements OnInit {
+  implements OnInit
+{
   registros$ = this.grupoUbicacionesQuery
     .selectAll()
     .pipe(map((grupos) => grupos.sort((a, b) => a.orden - b.orden)));
-  model = createGrupoUbicacion({});
   fields = [
     {
       key: '_id',
@@ -75,7 +75,8 @@ export class GrupoUbicacionesPage
       toastCtrl,
       alertCtrl,
       grupoUbicacionesService,
-      feathersService
+      feathersService,
+      createGrupoUbicacion
     );
   }
 

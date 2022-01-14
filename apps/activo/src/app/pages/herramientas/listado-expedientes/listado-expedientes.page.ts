@@ -7,7 +7,12 @@ import {
   ExpedientesQuery,
   GrupoActivo,
 } from '@indelpro-contraloria/data';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatest,
+  firstValueFrom,
+  Observable,
+} from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 
 @Component({
@@ -41,9 +46,7 @@ export class ListadoExpedientesPage implements OnInit {
     )
   );
 
-  totalExpedientes$: Observable<
-    number
-  > = this.expedientesQuery
+  totalExpedientes$: Observable<number> = this.expedientesQuery
     .selectCount()
     .pipe(map((val) => Math.ceil(val / 10)));
   paginaActual$: Observable<number> = this.expedientesQuery.select(
@@ -65,5 +68,17 @@ export class ListadoExpedientesPage implements OnInit {
   }
   regresarPagina() {
     this.expedientesService.cambiarPagina(-1);
+  }
+
+  async cambiarPagina(pagina) {
+    await this.expedientesService.setPage(pagina);
+  }
+  async irInicioPagina() {
+    this.expedientesService.setPage(1);
+  }
+  async irFinPagina() {
+    const total = await firstValueFrom(this.expedientesQuery.total$);
+    const limit = await firstValueFrom(this.expedientesQuery.limit$);
+    this.expedientesService.setPage(Math.ceil(total / limit));
   }
 }

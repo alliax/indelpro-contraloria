@@ -1,9 +1,20 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Activo, GrupoActivo } from '@indelpro-contraloria/data';
-import { ModalController } from '@ionic/angular';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {
+  Activo,
+  Expediente,
+  ExpedientesQuery,
+  GrupoActivo,
+} from '@indelpro-contraloria/data';
+import { ModalController, ToastController } from '@ionic/angular';
+import {
+  BehaviorSubject,
+  combineLatest,
+  firstValueFrom,
+  Observable,
+} from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { json2csvAsync } from 'json-2-csv';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'indelpro-contraloria-detalle-activos',
@@ -30,10 +41,49 @@ export class DetalleActivosPage implements OnInit {
     )
   );
 
-  constructor(public modalCtrl: ModalController) {}
+  constructor(
+    public modalCtrl: ModalController,
+    private router: Router,
+    private expedientesQuery: ExpedientesQuery,
+    private toastCtrl: ToastController
+  ) {}
 
   ngOnInit() {
     this.grupoActual.next(this.grupo);
+  }
+
+  async abrirExpediente(activo: Activo) {
+    try {
+      const expedienteSeleccionado = await firstValueFrom(
+        this.expedientesQuery.selectAll().pipe(
+          tap((val) =>
+            console.log(val.filter((exp) => exp.ACT_REL.length > 0))
+          ),
+          map((expedientes: Expediente[]) =>
+            expedientes.filter(
+              (expediente: Expediente) =>
+                expediente.ANLN1.trim() === activo.ANLN1.trim() ||
+                expediente.ACT_REL.includes({
+                  ANLN1: activo.ANLN1,
+                  TXT50: activo.TXT50,
+                })
+            )
+          ),
+          map((expedientes) => (expedientes.length > 0 ? expedientes[0] : null))
+        )
+      );
+      await this.router.navigateByUrl(
+        `/herramientas/listado-expedientes/${expedienteSeleccionado._id}`
+      );
+      await this.modalCtrl.dismiss();
+    } catch (err) {
+      const error = await this.toastCtrl.create({
+        message: 'El activo seleccionado no tiene un expediente en el sistema.',
+        color: 'danger',
+        duration: 4500,
+      });
+      await error.present();
+    }
   }
 
   async descargarExcel(grupo: GrupoActivo) {

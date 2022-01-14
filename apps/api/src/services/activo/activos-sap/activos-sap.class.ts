@@ -28,15 +28,6 @@ interface ServiceOptions {}
 export class ActivosSap implements ServiceMethods<Data> {
   app: Application;
   options: ServiceOptions;
-  /*abapSystem: RfcConnectionParameters = {
-    user: 'prgr05',
-    passwd: 'Passindqas#19',
-    ashost: '10.241.0.9',
-    client: '100',
-    sysid: 'DES',
-    sysnr: '00',
-    lang: 'es',
-  };*/
 
   constructor(options: ServiceOptions = {}, app: Application) {
     this.options = options;
@@ -60,17 +51,45 @@ export class ActivosSap implements ServiceMethods<Data> {
       const WBS_RESULT = await client.call(functionName, {
         P_BUKRS: 'IN10',
       });
-      const registros = WBS_RESULT.TANLA as any[];
+      const registros = <any[]>WBS_RESULT.TANLA;
       await client.close();
       await this.app
         .service((this.app.get('path') + 'activos') as 'activos')
-        .remove(null, {
+        ._remove(null, {
           disableSoftDelete: true,
           sapId: sapActivo[0]._id,
         });
+      const registrosEditados = registros.map((registro) => {
+        registro.sapId = sapActivo[0]._id;
+        try {
+          const fecha = new Date(
+            registro.AKTIV.substring(0, 4) +
+              '-' +
+              registro.AKTIV.substring(4, 6) +
+              '-' +
+              registro.AKTIV.substring(6, 8)
+          );
+          registro.AKTIV = fecha.toISOString();
+        } catch (err) {
+          delete registro.AKTIV;
+        }
+        return registro;
+      });
+      await this.app
+        .service((this.app.get('path') + 'activos') as 'activos')
+        ._create(registrosEditados);
 
-      const creados: any[] = [];
-      for (let i = 0; i < registros.length; i++) {
+      return registrosEditados;
+
+      /*const expedientes = (
+        await this.app
+          .service((this.app.get('path') + 'expedientes') as 'expedientes')
+          .find({})
+      ).filter(
+        (registro: any) =>
+          !registro.PROJK.includes('-') && registro.PROJK.includes('E/')
+      );*/
+      /*for (let i = 0; i < registros.length; i++) {
         const registro = registros[i];
         registro.sapId = sapActivo[0]._id;
         try {
@@ -91,7 +110,7 @@ export class ActivosSap implements ServiceMethods<Data> {
         creados.push(creado);
       }
 
-      return creados;
+      return creados;*/
     } catch (ex) {
       console.error(ex);
       throw ex;

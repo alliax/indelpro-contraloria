@@ -21,7 +21,6 @@ import {
 export class SapPage extends DataEntryClass<Sap, SapService> implements OnInit {
   registros$ = this.sapQuery.selectAll();
   sapActivo$ = this.sapQuery.$activa;
-  model = createSap({});
   fields = [
     {
       key: '_id',
@@ -178,7 +177,7 @@ export class SapPage extends DataEntryClass<Sap, SapService> implements OnInit {
     private sapService: SapService,
     private stateService: StateService
   ) {
-    super(loadingCtrl, toastCtrl, alertCtrl, sapService, feathersService);
+    super(loadingCtrl, toastCtrl, alertCtrl, sapService, feathersService, createSap);
   }
 
   ngOnInit() {}

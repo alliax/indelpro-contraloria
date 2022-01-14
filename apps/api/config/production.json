@@ -27,8 +27,7 @@
     "apiUrl": "https://servicios.alliax.com/indelpro/api"
   },
   "socket": {
-    "path": "/indelpro/api/socket.io",
-    "transports": ["polling"]
+    "path": "/indelpro/api/socket.io"
   },
   "smtp": {
     "host": "140.140.61.94",

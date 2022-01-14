@@ -58,6 +58,44 @@
         <ion-row class="ion-justify-content-center ion-align-items-center">
           <ion-col size="auto">
             <ion-button
+              color="secondary"
+              (click)="irInicioPagina()"
+              shape="round"
+              size="small"
+              [disabled]="(paginaActual$ | async) === 1"
+            >
+              &lt;&lt;
+            </ion-button>
+          </ion-col>
+          <ion-col size="auto">
+            <ion-button
+              color="secondary"
+              (click)="regresarPagina()"
+              shape="round"
+              size="small"
+              [disabled]="(paginaActual$ | async) === 1"
+            >
+              &lt;
+            </ion-button>
+          </ion-col>
+
+          <ng-container *ngIf="paginaActual$ | async as paginaActual">
+            <ng-container>
+              <ion-col
+                size="auto"
+                *ngFor="let i of [3,2,1]"
+                (click)="cambiarPagina(paginaActual < 4 ? 4 - i : paginaActual - i)"
+                [hidden]="paginaActual < 5 - i"
+              >
+                <ion-button shape="round" size="small">
+                  {{ paginaActual < 4 ? 4 - i : paginaActual - i}}
+                </ion-button>
+              </ion-col>
+            </ng-container>
+          </ng-container>
+
+          <!--<ion-col size="auto">
+            <ion-button
               (click)="regresarPagina()"
               shape="round"
               size="small"
@@ -65,14 +103,53 @@
             >
               <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
             </ion-button>
+          </ion-col>-->
+          <ion-col size="auto">
+            <ion-button shape="round" color="tertiary" size="small"
+              >{{paginaActual$ | async}}</ion-button
+            >
+          </ion-col>
+
+          <ng-container *ngIf="paginaActual$ | async as paginaActual">
+            <ng-container *ngIf="totalExpedientes$ | async as totalExpedientes">
+              <ion-col
+                size="auto"
+                *ngFor="let i of [1,2,3]"
+                (click)="cambiarPagina(paginaActual + i)"
+                [hidden]="paginaActual + i > totalExpedientes"
+              >
+                <ion-button shape="round" size="small">
+                  {{ paginaActual + i}}
+                </ion-button>
+              </ion-col>
+            </ng-container>
+          </ng-container>
+
+          <ion-col size="auto">
+            <ion-button
+              (click)="avanzarPagina()"
+              color="secondary"
+              shape="round"
+              size="small"
+              [disabled]="(paginaActual$ | async) === (totalExpedientes$ | async)"
+            >
+              &gt;
+            </ion-button>
           </ion-col>
           <ion-col size="auto">
-            <ion-chip>
-              {{(paginaActual$ | async)}} / {{(totalExpedientes$ | async) |
-              number:'1.0-0'}}
-            </ion-chip>
+            <ion-button
+              color="secondary"
+              (click)="irFinPagina()"
+              shape="round"
+              size="small"
+              [disabled]="(paginaActual$ | async) === (totalExpedientes$ | async)"
+            >
+              <!--{{(totalExpedientes$ | async) | number:'1.0-0'}}-->
+              &gt;&gt;
+            </ion-button>
           </ion-col>
-          <ion-col size="auto">
+
+          <!--<ion-col size="auto">
             <ion-button
               (click)="avanzarPagina()"
               shape="round"
@@ -84,47 +161,40 @@
                 slot="icon-only"
               ></ion-icon>
             </ion-button>
-          </ion-col>
+          </ion-col>-->
         </ion-row>
         <ion-row>
           <ion-col>
             <ion-card>
+              <ion-row class="ion-text-center">
+                <ion-col size="2">
+                  <h6>
+                    <strong>
+                      <ion-text color="primary">SAI</ion-text>
+                    </strong>
+                  </h6>
+                </ion-col>
+                <ion-col size="7">
+                  <h6>
+                    <strong>
+                      <ion-text color="primary">Nombre de SAI</ion-text>
+                    </strong>
+                  </h6>
+                </ion-col>
+                <ion-col size="3">
+                  <h6>
+                    <strong>
+                      <ion-text color="primary">Fecha Capitalización</ion-text>
+                    </strong>
+                  </h6>
+                </ion-col>
+              </ion-row>
+
               <indelpro-contraloria-expediente-lista-elemento
                 *ngFor="let expediente of expedientes"
                 [expediente]="expediente"
               ></indelpro-contraloria-expediente-lista-elemento>
             </ion-card>
-          </ion-col>
-        </ion-row>
-        <ion-row class="ion-justify-content-center ion-align-items-center">
-          <ion-col size="auto">
-            <ion-button
-              (click)="regresarPagina()"
-              shape="round"
-              size="small"
-              [disabled]="(paginaActual$ | async) === 1"
-            >
-              <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
-            </ion-button>
-          </ion-col>
-          <ion-col size="auto">
-            <ion-chip>
-              {{(paginaActual$ | async)}} / {{(totalExpedientes$ | async) |
-              number:'1.0-0'}}
-            </ion-chip>
-          </ion-col>
-          <ion-col size="auto">
-            <ion-button
-              (click)="avanzarPagina()"
-              shape="round"
-              size="small"
-              [disabled]="(paginaActual$ | async) === (totalExpedientes$ | async)"
-            >
-              <ion-icon
-                name="chevron-forward-outline"
-                slot="icon-only"
-              ></ion-icon>
-            </ion-button>
           </ion-col>
         </ion-row>
       </ng-template>

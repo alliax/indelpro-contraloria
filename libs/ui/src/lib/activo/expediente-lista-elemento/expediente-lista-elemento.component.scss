@@ -1,0 +1,8 @@
+ion-row {
+  border-bottom: 1px solid var(--ion-color-light);
+  transition: background-color 100ms linear;
+  &:hover {
+    --background: var(--ion-color-light-tint);
+    background: var(--ion-color-light-tint);
+  }
+}

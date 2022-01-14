@@ -46,7 +46,6 @@ export class ExpedientesSap implements ServiceMethods<Data> {
           },
           paginate: false,
         })) as SapSettings[];
-
       const client: Client = new Client(sapActivo[0]);
       await client.open();
       const functionName = 'ZCS_EXTRACT_WBS_2';
@@ -56,10 +55,15 @@ export class ExpedientesSap implements ServiceMethods<Data> {
       const registros = WBS_RESULT.TWBS as any[];
       await client.close();
 
+      const registrosFiltrados = registros.filter(
+        (registro) =>
+          !registro.PROJK.includes('-') && registro.PROJK.includes('E/')
+      );
+
       const pendientesCrear: any = [];
 
-      for (let i = 0; i < registros.length; i++) {
-        const registro = registros[i];
+      for (let i = 0; i < registrosFiltrados.length; i++) {
+        const registro = registrosFiltrados[i];
         registro.sapId = sapActivo[0]._id;
         try {
           const fecha = new Date(
@@ -75,7 +79,7 @@ export class ExpedientesSap implements ServiceMethods<Data> {
         }
         const existe = await this.app
           .service((this.app.get('path') + 'expedientes') as 'expedientes')
-          .find({
+          ._find({
             query: {
               PROJK: registro.PROJK,
               sapId: sapActivo[0]._id,
@@ -88,18 +92,16 @@ export class ExpedientesSap implements ServiceMethods<Data> {
           try {
             await this.app
               .service((this.app.get('path') + 'expedientes') as 'expedientes')
-              .patch(existe[0]._id, registro);
+              ._patch(existe[0]._id, registro);
           } catch (err) {}
         }
       }
-
       try {
         await this.app
           .service((this.app.get('path') + 'expedientes') as 'expedientes')
-          .create(pendientesCrear);
+          ._create(pendientesCrear);
       } catch (err) {}
-
-      return registros;
+      return registrosFiltrados;
     } catch (ex) {
       console.error(ex);
       throw ex;

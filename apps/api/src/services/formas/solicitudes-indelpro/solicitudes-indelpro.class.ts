@@ -159,7 +159,7 @@ export class SolicitudesIndelpro
       const sapResponse = await client.call(functionName, {
         PROCESO: proceso,
         ID: id,
-        DECISION: decision,
+        DECISION: decision === 'R' ? 'D' : decision,
         USER_AUTORIZA: userSap,
       });
       return sapResponse;

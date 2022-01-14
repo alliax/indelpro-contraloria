@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
-import { AuthGuard, VerifyGuard } from '@alliax/feathers-client';
+import { IsLoggedInGuard, IsVerifiedGuard } from '@alliax/feathers-client';
 
 const routes: Routes = [
   {
@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    canActivate: [AuthGuard, VerifyGuard],
+    canActivate: [IsLoggedInGuard, IsVerifiedGuard],
     loadChildren: () =>
       import('./pages/herramientas/dashboard/dashboard.module').then(
         (m) => m.DashboardPageModule
@@ -18,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: 'herramientas',
-    canActivate: [AuthGuard, VerifyGuard],
+    canActivate: [IsLoggedInGuard, IsVerifiedGuard],
     children: [
       {
         path: '',
@@ -90,7 +90,7 @@ const routes: Routes = [
   },
   {
     path: 'configuracion',
-    canActivate: [AuthGuard, VerifyGuard],
+    canActivate: [IsLoggedInGuard, IsVerifiedGuard],
     children: [
       {
         path: '',
@@ -141,7 +141,7 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    canActivate: [AuthGuard, VerifyGuard],
+    canActivate: [IsLoggedInGuard, IsVerifiedGuard],
     children: [
       {
         path: '',

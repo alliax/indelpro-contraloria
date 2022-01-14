@@ -207,7 +207,7 @@ export class FormasSolicitudes implements ServiceMethods<Data> {
       await client.open();
       const functionName = 'ZCS_AUTORIZA_SP';
       const result = await client.call(functionName, {
-        ACTION,
+        ACTION: ACTION === 'R' ? 'D' : ACTION,
         IDWF: id,
         STEP: STEP.toString().padStart(2, '0'),
         USER: params?.user?.profile?.userSap || '',
